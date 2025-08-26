@@ -1,0 +1,26 @@
+column_index,suggested_header,manual_header,notes,row_1_preview,row_2_preview,row_3_preview,row_4_preview,row_5_preview,row_6_preview
+1,state,state,Geographic location,nan,State or outlying part,nan,1,Continental U.S,Alabama
+2,institutions_count,institutions_reporting,Number of institutions reporting,institutions,of porting,Number,2,690,25
+3,to_men_3,faculty_male,Faculty - Male (Full-time basis),TO,(REDUCED FULL-,,Men,3,"87,990","1,215"
+4,faculty_full_time_male,faculty_female,Faculty - Female (Full-time basis),(REDUCED FULL-,TIME BASIS),Women,4,"35,687",702
+5,regular_sion_men_5,regular_session_male,Students - Regular Session Male,nan,"Regular sion,",Men,5,"803,893",10.066
+6,session_1937_38_women_6,regular_session_female,Students - Regular Session Female 1937-38,nan,ses- 1937-38,Women,6,"547,012","7,751"
+7,summer_sion_men_7,summer_session_male,Students - Summer Session Male,nan,"Summer sion,",Men,7,"158,794","3,892"
+8,session_1937_women_8,summer_session_female,Students - Summer Session Female 1937,nan,ses- 1937,Women,8,"271,070","7,385"
+9,faculty_male_male,freshmen_total,Freshmen (first year college work),nan,of fall women,week men and,9,"1,036,270","14,165"
+10,faculty_male_freshmen_male,freshmen_male,Freshmen - Male,nan,(first work),Freshmen college and women,10,"353,926","5,470"
+11,faculty_male_male_1,undergrad_arts_sciences_male,Undergraduate Arts & Sciences - Male,nan,nan,Men,11,"374,147","3,757"
+12,arts_and_undergraduate_uate_women_12,undergrad_arts_sciences_female,Undergraduate Arts & Sciences - Female,Arts and,Undergrad-,Women,12,"315,143","3,808"
+13,sciences_men_13,grad_arts_sciences_male,Graduate Arts & Sciences - Male,sciences,uate,Men,13,"29,065",76
+14,graduate_women_14,grad_arts_sciences_female,Graduate Arts & Sciences - Female,nan,Graduate,Women,14,"19,852",54
+15,faculty_male_male_2,undergrad_professional_male,Undergraduate Professional Schools - Male,Professional,Undergrad-,Men,15,"381,203","6,235"
+16,professional_undergraduate_uate_women_16,undergrad_professional_female,Undergraduate Professional Schools - Female,schools,uate,Women,16,"199,981","3,898"
+17,schools_men_17,grad_professional_male,Graduate Professional Schools - Male,nan,Graduate,Men,17,"26,789",53
+18,graduate_women_18,grad_professional_female,Graduate Professional Schools - Female,nan,nan,Women,18,"15,095",12
+19,reate_first_men_19,bachelors_male,Bachelor's Degrees - Male,Baccalau-,reate first,Men,19,"97,678","1,257"
+20,baccalaureate_and_professional_fessional_women_29,bachelors_female,Bachelor's Degrees - Female,Master's including,and pro-,Women,29,"67,265","1,027"
+21,masters_degrees_male,masters_male,Master's Degrees - Male,nan,fessional,Men,21,"13,400",78
+22,ing_women_22,masters_female,Master's Degrees - Female,nan,advanced engineer-,Women,22,"8,228",53
+23,doctor_s_men_28,doctorate_male,Doctorate Degrees - Male,nan,ing,Men,28,"2,502",nan
+24,faculty_male_male_3,doctorate_female,Doctorate Degrees - Female,nan,Doctor's,Women,21,430,nan
+25,faculty_male_male_4,honorary_total,Honorary Degrees,nan,nan,Honorary.,25,"1,500",29
