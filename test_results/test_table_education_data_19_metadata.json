@@ -1,0 +1,41 @@
+{
+  "extraction_date": "2025-08-25T16:56:43.566387",
+  "rows": 25,
+  "columns": 25,
+  "column_types": {
+    "": "other",
+    "re-": "other",
+    "FACULTY": "year",
+    "RESIDENT": "geography",
+    "COLLEGE": "geography",
+    "ENROLLMENTS": "geography",
+    "DEGREES": "geography"
+  },
+  "original_columns": [
+    "",
+    "re-",
+    "",
+    "FACULTY",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "RESIDENT",
+    "COLLEGE",
+    "",
+    "ENROLLMENTS",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "DEGREES",
+    "",
+    "",
+    ""
+  ]
+}

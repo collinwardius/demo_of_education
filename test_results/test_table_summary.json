@@ -1,0 +1,12 @@
+{
+  "file": "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/cleaned_scans/test_table.pdf",
+  "total_blocks": 1981,
+  "tables_found": 1,
+  "text_lines": 608,
+  "output_files": [
+    "test_table_full_response.json",
+    "test_table_raw_text.txt",
+    "test_table_table.csv",
+    "test_table_table_with_headers.csv"
+  ]
+}
