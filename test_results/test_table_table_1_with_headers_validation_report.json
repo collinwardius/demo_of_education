@@ -1,0 +1,26 @@
+{
+  "summary": {
+    "total_rows": 25,
+    "flagged_rows": 1,
+    "needs_review": 1,
+    "average_confidence": 0.988,
+    "review_percentage": 4.0
+  },
+  "flag_breakdown": {
+    "high_missing_data": 1
+  },
+  "validation_details": [
+    [
+      "test_table_table_1_with_headers",
+      1,
+      "high_missing_data"
+    ]
+  ],
+  "review_priority": [
+    {
+      "_source_document": "test_table_table_1_with_headers",
+      "_confidence_score": 0.7,
+      "_validation_flags": "high_missing_data"
+    }
+  ]
+}

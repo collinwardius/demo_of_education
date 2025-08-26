@@ -1,0 +1,1248 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Data Review Interface - Historical Education Data</title>
+            
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-stats {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2196f3;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        
+        .data-table th {
+            background-color: #f0f0f0;
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .data-table td {
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .needs-review {
+            background-color: #ffebee !important;
+        }
+        
+        .low-confidence {
+            background-color: #fff3e0 !important;
+        }
+        
+        .validation-cell {
+            max-width: 200px;
+            word-wrap: break-word;
+            font-size: 10px;
+        }
+        
+        .confidence-score {
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .confidence-high { color: #4caf50; }
+        .confidence-medium { color: #ff9800; }
+        .confidence-low { color: #f44336; }
+        
+        .editable {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 2px 4px;
+            min-width: 60px;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        
+        .editable:focus {
+            outline: 2px solid #2196f3;
+            background-color: #e3f2fd;
+        }
+        
+        .save-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 5px;
+        }
+        
+        .save-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .export-btn {
+            background-color: #2196f3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 5px;
+        }
+        
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .legend {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .filter-controls {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        
+        .filter-btn {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+        }
+        
+        .filter-btn.active {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        @media print {
+            .save-btn, .export-btn, .filter-controls { display: none; }
+            body { margin: 0; }
+        }
+        </style>
+        
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Historical Education Data Review</h1>
+                    <p><strong>Document:</strong> test_table_table_1_with_headers</p>
+                    <p><strong>Generated:</strong> 2025-08-25 17:26:37</p>
+                </div>
+                
+                <div class="instructions">
+                    <h3>📋 Instructions for Research Assistants</h3>
+                    <ul>
+                        <li><strong>Red rows</strong> need review (low confidence or validation flags)</li>
+                        <li><strong>Yellow rows</strong> have medium confidence - check if time permits</li>
+                        <li><strong>Click on any cell</strong> to edit the data directly</li>
+                        <li><strong>Save frequently</strong> using the Save button</li>
+                        <li><strong>Pay special attention to:</strong> Number formatting, state names, missing data</li>
+                        <li><strong>Common issues:</strong> OCR errors (O→0, l→1), decimal points in large numbers</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-stats">
+                    <h3>📊 Data Quality Summary</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-value">25</div>
+                            <div>Total Rows</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">1</div>
+                            <div>Need Review</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">4.0%</div>
+                            <div>Review Rate</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">98.8%</div>
+                            <div>Avg Confidence</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="legend">
+                    <strong>Legend:</strong>
+                    <span class="legend-item needs-review">High Priority Review</span>
+                    <span class="legend-item low-confidence">Medium Priority Review</span>
+                    <span class="legend-item" style="background-color: white;">Clean Data</span>
+                </div>
+                
+                <div class="filter-controls">
+                    <strong>View:</strong>
+                    <button class="filter-btn active" onclick="filterRows('all')">All Rows</button>
+                    <button class="filter-btn" onclick="filterRows('review')">Needs Review Only</button>
+                    <button class="filter-btn" onclick="filterRows('clean')">Clean Data Only</button>
+                    <button class="filter-btn" onclick="filterRows('flagged')">Flagged Only</button>
+                </div>
+                
+                
+                
+                <div style="overflow-x: auto;">
+                    <table class="data-table" id="dataTable">
+<thead><tr>
+<th> Needs Review</th>
+<th> Confidence Score</th>
+<th> Validation Flags</th>
+<th>Unnamed 0</th>
+<th>Re</th>
+<th>Unnamed 2</th>
+<th>Faculty</th>
+<th>Unnamed 4</th>
+<th>Unnamed 5</th>
+<th>Unnamed 6</th>
+<th>Unnamed 7</th>
+<th>Unnamed 8</th>
+<th>Resident</th>
+<th>College</th>
+<th>Unnamed 11</th>
+<th>Enrollments</th>
+<th>Unnamed 13</th>
+<th>Unnamed 14</th>
+<th>Unnamed 15</th>
+<th>Unnamed 16</th>
+<th>Unnamed 17</th>
+<th>Unnamed 18</th>
+<th>Unnamed 19</th>
+<th>Unnamed 20</th>
+<th>Degrees</th>
+<th>Unnamed 22</th>
+<th>Unnamed 23</th>
+<th>Unnamed 24</th>
+<th> Source Document</th>
+<th> Cleaning Date</th>
+</tr></thead>
+<tbody>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="institutions" data-row="0" data-col="re"></td>
+<td><input type="text" class="editable" value="TO" data-row="0" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="(REDUCED FULL-" data-row="0" data-col="faculty"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="year of men" data-row="0" data-col="resident"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="college"></td>
+<td><input type="text" class="editable" value="Arts and" data-row="0" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="sciences" data-row="0" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="Proprofessional" data-row="0" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="schools" data-row="0" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="Baccalaureate" data-row="0" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="Master's including" data-row="0" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="0" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="and" data-row="0" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="needs-review" data-needs-review="True" data-confidence="0.7">
+<td class="meta-cell">True</td>
+<td class="confidence-score confidence-medium">70.0%</td>
+<td class="validation-cell">high_missing_data</td>
+<td><input type="text" class="editable" value="State or outlying part" data-row="1" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="of porting" data-row="1" data-col="re"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="TIME BASIS)" data-row="1" data-col="faculty"></td>
+<td><input type="text" class="editable" value="Regular sion," data-row="1" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="193738" data-row="1" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="Summer sion," data-row="1" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="1937" data-row="1" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="of fall women" data-row="1" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="(first work)" data-row="1" data-col="resident"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="college"></td>
+<td><input type="text" class="editable" value="Undergradate ate" data-row="1" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="Gradate" data-row="1" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="Undergradate ate" data-row="1" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="Gradate" data-row="1" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="reate first" data-row="1" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="and proprofessional professional" data-row="1" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="advanced engineering" data-row="1" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="ing" data-row="1" data-col="degrees"></td>
+<td><input type="text" class="editable" value="Doctor's" data-row="1" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="1" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="men women" data-row="1" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="" data-row="2" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="Number" data-row="2" data-col="re"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="faculty"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="week men and" data-row="2" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="Freshmen college and women" data-row="2" data-col="resident"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="college"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="degrees"></td>
+<td><input type="text" class="editable" value="Men" data-row="2" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="Women" data-row="2" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="." data-row="2" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="1" data-row="3" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="2" data-row="3" data-col="re"></td>
+<td><input type="text" class="editable" value="3" data-row="3" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="4" data-row="3" data-col="faculty"></td>
+<td><input type="text" class="editable" value="5" data-row="3" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="6" data-row="3" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="7" data-row="3" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="8" data-row="3" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="9" data-row="3" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="10" data-row="3" data-col="resident"></td>
+<td><input type="text" class="editable" value="11" data-row="3" data-col="college"></td>
+<td><input type="text" class="editable" value="12" data-row="3" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="13" data-row="3" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="14" data-row="3" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="15" data-row="3" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="16" data-row="3" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="17" data-row="3" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="18" data-row="3" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="19" data-row="3" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="29" data-row="3" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="21" data-row="3" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="22" data-row="3" data-col="degrees"></td>
+<td><input type="text" class="editable" value="28" data-row="3" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="21" data-row="3" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="25" data-row="3" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="." data-row="4" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="690" data-row="4" data-col="re"></td>
+<td><input type="text" class="editable" value="87,990" data-row="4" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="35,687" data-row="4" data-col="faculty"></td>
+<td><input type="text" class="editable" value="803,893" data-row="4" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="547,012" data-row="4" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="158,794" data-row="4" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="271,070" data-row="4" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="1,036,270" data-row="4" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="353,926" data-row="4" data-col="resident"></td>
+<td><input type="text" class="editable" value="374,147" data-row="4" data-col="college"></td>
+<td><input type="text" class="editable" value="315,143" data-row="4" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="29,065" data-row="4" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="19,852" data-row="4" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="381,203" data-row="4" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="199,981" data-row="4" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="26,789" data-row="4" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="15,095" data-row="4" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="97,678" data-row="4" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="67,265" data-row="4" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="13,400" data-row="4" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="8,228" data-row="4" data-col="degrees"></td>
+<td><input type="text" class="editable" value="2,502" data-row="4" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="430" data-row="4" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="1,500" data-row="4" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Alabama" data-row="5" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="25" data-row="5" data-col="re"></td>
+<td><input type="text" class="editable" value="1,215" data-row="5" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="702" data-row="5" data-col="faculty"></td>
+<td><input type="text" class="editable" value="10,066" data-row="5" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="7,751" data-row="5" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="3,892" data-row="5" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="7,385" data-row="5" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="14,165" data-row="5" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="5,470" data-row="5" data-col="resident"></td>
+<td><input type="text" class="editable" value="3,757" data-row="5" data-col="college"></td>
+<td><input type="text" class="editable" value="3,808" data-row="5" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="76" data-row="5" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="54" data-row="5" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="6,235" data-row="5" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,898" data-row="5" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="53" data-row="5" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="12" data-row="5" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,257" data-row="5" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,027" data-row="5" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="78" data-row="5" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="53" data-row="5" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="5" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="5" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="29" data-row="5" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Arizona" data-row="6" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="5" data-row="6" data-col="re"></td>
+<td><input type="text" class="editable" value="292" data-row="6" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="124" data-row="6" data-col="faculty"></td>
+<td><input type="text" class="editable" value="3,180" data-row="6" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="2,224" data-row="6" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="529" data-row="6" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="994" data-row="6" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="4,734" data-row="6" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="1,725" data-row="6" data-col="resident"></td>
+<td><input type="text" class="editable" value="1,368" data-row="6" data-col="college"></td>
+<td><input type="text" class="editable" value="953" data-row="6" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="43" data-row="6" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="40" data-row="6" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="1,665" data-row="6" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,139" data-row="6" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="104" data-row="6" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="92" data-row="6" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="315" data-row="6" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="301" data-row="6" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="47" data-row="6" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="25" data-row="6" data-col="degrees"></td>
+<td><input type="text" class="editable" value="3" data-row="6" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="6" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="3" data-row="6" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Arkansas" data-row="7" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="23" data-row="7" data-col="re"></td>
+<td><input type="text" class="editable" value="739" data-row="7" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="423" data-row="7" data-col="faculty"></td>
+<td><input type="text" class="editable" value="5,558" data-row="7" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="4,005" data-row="7" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="1,532" data-row="7" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="2,708" data-row="7" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="8,342" data-row="7" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="3,860" data-row="7" data-col="resident"></td>
+<td><input type="text" class="editable" value="3,161" data-row="7" data-col="college"></td>
+<td><input type="text" class="editable" value="2,689" data-row="7" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="18" data-row="7" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="8" data-row="7" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="2,431" data-row="7" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,325" data-row="7" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="11" data-row="7" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="6" data-row="7" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="690" data-row="7" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="417" data-row="7" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="24" data-row="7" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="17" data-row="7" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="7" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="7" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="12" data-row="7" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="California" data-row="8" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="102" data-row="8" data-col="re"></td>
+<td><input type="text" class="editable" value="6,379" data-row="8" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="2,370" data-row="8" data-col="faculty"></td>
+<td><input type="text" class="editable" value="57,170" data-row="8" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="41,479" data-row="8" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="7,751" data-row="8" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="12,224" data-row="8" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="72,436" data-row="8" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="33,320" data-row="8" data-col="resident"></td>
+<td><input type="text" class="editable" value="37,901" data-row="8" data-col="college"></td>
+<td><input type="text" class="editable" value="32,752" data-row="8" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="2,280" data-row="8" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="1,650" data-row="8" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="15,438" data-row="8" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="6,136" data-row="8" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="1,787" data-row="8" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="966" data-row="8" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="5,471" data-row="8" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="4,165" data-row="8" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="655" data-row="8" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="411" data-row="8" data-col="degrees"></td>
+<td><input type="text" class="editable" value="174" data-row="8" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="27" data-row="8" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="50" data-row="8" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Colorado" data-row="9" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="17" data-row="9" data-col="re"></td>
+<td><input type="text" class="editable" value="956" data-row="9" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="394" data-row="9" data-col="faculty"></td>
+<td><input type="text" class="editable" value="9,165" data-row="9" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="6,262" data-row="9" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="3,606" data-row="9" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="6,606" data-row="9" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="11,926" data-row="9" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="4,610" data-row="9" data-col="resident"></td>
+<td><input type="text" class="editable" value="3,274" data-row="9" data-col="college"></td>
+<td><input type="text" class="editable" value="3,644" data-row="9" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="321" data-row="9" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="300" data-row="9" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="5,818" data-row="9" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,001" data-row="9" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="462" data-row="9" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="296" data-row="9" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,073" data-row="9" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="800" data-row="9" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="308" data-row="9" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="157" data-row="9" data-col="degrees"></td>
+<td><input type="text" class="editable" value="16" data-row="9" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="2" data-row="9" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="13" data-row="9" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Connecticut" data-row="10" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="24" data-row="10" data-col="re"></td>
+<td><input type="text" class="editable" value="258" data-row="10" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="539" data-row="10" data-col="faculty"></td>
+<td><input type="text" class="editable" value="7,881" data-row="10" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="3,411" data-row="10" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="143" data-row="10" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="724" data-row="10" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="5,423" data-row="10" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="4,998" data-row="10" data-col="resident"></td>
+<td><input type="text" class="editable" value="5,349" data-row="10" data-col="college"></td>
+<td><input type="text" class="editable" value="1,579" data-row="10" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="545" data-row="10" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="141" data-row="10" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="1,828" data-row="10" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,512" data-row="10" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="189" data-row="10" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="167" data-row="10" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,308" data-row="10" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="602" data-row="10" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="84" data-row="10" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="69" data-row="10" data-col="degrees"></td>
+<td><input type="text" class="editable" value="104" data-row="10" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="20" data-row="10" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="37" data-row="10" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Delaware" data-row="11" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="3" data-row="11" data-col="re"></td>
+<td><input type="text" class="editable" value="120" data-row="11" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="44" data-row="11" data-col="faculty"></td>
+<td><input type="text" class="editable" value="585" data-row="11" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="396" data-row="11" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="127" data-row="11" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="227" data-row="11" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="897" data-row="11" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="289" data-row="11" data-col="resident"></td>
+<td><input type="text" class="editable" value="292" data-row="11" data-col="college"></td>
+<td><input type="text" class="editable" value="244" data-row="11" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="4" data-row="11" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="1" data-row="11" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="289" data-row="11" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="151" data-row="11" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="" data-row="11" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="" data-row="11" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="88" data-row="11" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="63" data-row="11" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="4" data-row="11" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="2" data-row="11" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="11" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="11" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="4" data-row="11" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="District of Co- lumbia" data-row="12" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="21" data-row="12" data-col="re"></td>
+<td><input type="text" class="editable" value="245" data-row="12" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="400" data-row="12" data-col="faculty"></td>
+<td><input type="text" class="editable" value="13,713" data-row="12" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="7,639" data-row="12" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="2,201" data-row="12" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="2,240" data-row="12" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="17,365" data-row="12" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="3,169" data-row="12" data-col="resident"></td>
+<td><input type="text" class="editable" value="4,660" data-row="12" data-col="college"></td>
+<td><input type="text" class="editable" value="4,050" data-row="12" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="870" data-row="12" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="719" data-row="12" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="7,453" data-row="12" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="2,609" data-row="12" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="741" data-row="12" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="274" data-row="12" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,669" data-row="12" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="710" data-row="12" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="306" data-row="12" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="185" data-row="12" data-col="degrees"></td>
+<td><input type="text" class="editable" value="63" data-row="12" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="23" data-row="12" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="19" data-row="12" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Florida" data-row="13" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="14" data-row="13" data-col="re"></td>
+<td><input type="text" class="editable" value="749" data-row="13" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="371" data-row="13" data-col="faculty"></td>
+<td><input type="text" class="editable" value="5,891" data-row="13" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="5.309" data-row="13" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="1,534" data-row="13" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="4,384" data-row="13" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="9,470" data-row="13" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="359" data-row="13" data-col="resident"></td>
+<td><input type="text" class="editable" value="4,319" data-row="13" data-col="college"></td>
+<td><input type="text" class="editable" value="4,132" data-row="13" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="68" data-row="13" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="30" data-row="13" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="1,401" data-row="13" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,134" data-row="13" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="105" data-row="13" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="14" data-row="13" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="721" data-row="13" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="816" data-row="13" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="37" data-row="13" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="23" data-row="13" data-col="degrees"></td>
+<td><input type="text" class="editable" value="3" data-row="13" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="13" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="21" data-row="13" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Georgia" data-row="14" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="47" data-row="14" data-col="re"></td>
+<td><input type="text" class="editable" value="1,343" data-row="14" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="805" data-row="14" data-col="faculty"></td>
+<td><input type="text" class="editable" value="11,395" data-row="14" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="9,420" data-row="14" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="2,560" data-row="14" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="6,184" data-row="14" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="18,131" data-row="14" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="7,329" data-row="14" data-col="resident"></td>
+<td><input type="text" class="editable" value="5,576" data-row="14" data-col="college"></td>
+<td><input type="text" class="editable" value="7,933" data-row="14" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="164" data-row="14" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="145" data-row="14" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="5,592" data-row="14" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,327" data-row="14" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="80" data-row="14" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="15" data-row="14" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,489" data-row="14" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,264" data-row="14" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="113" data-row="14" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="98" data-row="14" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="14" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="14" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="24" data-row="14" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Idaho" data-row="15" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="9" data-row="15" data-col="re"></td>
+<td><input type="text" class="editable" value="360" data-row="15" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="129" data-row="15" data-col="faculty"></td>
+<td><input type="text" class="editable" value="3,625" data-row="15" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="2,123" data-row="15" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="489" data-row="15" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="892" data-row="15" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="5,317" data-row="15" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="2,171" data-row="15" data-col="resident"></td>
+<td><input type="text" class="editable" value="1,398" data-row="15" data-col="college"></td>
+<td><input type="text" class="editable" value="219" data-row="15" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="53" data-row="15" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="29" data-row="15" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="2,119" data-row="15" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="864" data-row="15" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="55" data-row="15" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="11" data-row="15" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="380" data-row="15" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="165" data-row="15" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="67" data-row="15" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="16" data-row="15" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="15" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="15" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="6" data-row="15" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Illinois" data-row="16" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="90" data-row="16" data-col="re"></td>
+<td><input type="text" class="editable" value="5.215" data-row="16" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="1,964" data-row="16" data-col="faculty"></td>
+<td><input type="text" class="editable" value="59,886" data-row="16" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="38,580" data-row="16" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="10,852" data-row="16" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="16,857" data-row="16" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="73,968" data-row="16" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="19,956" data-row="16" data-col="resident"></td>
+<td><input type="text" class="editable" value="24,890" data-row="16" data-col="college"></td>
+<td><input type="text" class="editable" value="21,151" data-row="16" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="3,298" data-row="16" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="3,050" data-row="16" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="30,659" data-row="16" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="14,451" data-row="16" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="1,467" data-row="16" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="504" data-row="16" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="6,556" data-row="16" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="3,888" data-row="16" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="1,047" data-row="16" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="770" data-row="16" data-col="degrees"></td>
+<td><input type="text" class="editable" value="270" data-row="16" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="37" data-row="16" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="69" data-row="16" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Indiana" data-row="17" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="38" data-row="17" data-col="re"></td>
+<td><input type="text" class="editable" value="2,224" data-row="17" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="741" data-row="17" data-col="faculty"></td>
+<td><input type="text" class="editable" value="20,572" data-row="17" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="9,986" data-row="17" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="4,450" data-row="17" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="6,309" data-row="17" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="23,319" data-row="17" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="9,347" data-row="17" data-col="resident"></td>
+<td><input type="text" class="editable" value="6,794" data-row="17" data-col="college"></td>
+<td><input type="text" class="editable" value="4,937" data-row="17" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="477" data-row="17" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="251" data-row="17" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="12,960" data-row="17" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="4,787" data-row="17" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="362" data-row="17" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="111" data-row="17" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="3,031" data-row="17" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,394" data-row="17" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="389" data-row="17" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="145" data-row="17" data-col="degrees"></td>
+<td><input type="text" class="editable" value="40" data-row="17" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="5" data-row="17" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="63" data-row="17" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Iowa" data-row="18" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="66" data-row="18" data-col="re"></td>
+<td><input type="text" class="editable" value="1,995" data-row="18" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="948" data-row="18" data-col="faculty"></td>
+<td><input type="text" class="editable" value="16,137" data-row="18" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="11,192" data-row="18" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="2.00" data-row="18" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="5,923" data-row="18" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="23,133" data-row="18" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="8,164" data-row="18" data-col="resident"></td>
+<td><input type="text" class="editable" value="8,333" data-row="18" data-col="college"></td>
+<td><input type="text" class="editable" value="6.799" data-row="18" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="1,092" data-row="18" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="493" data-row="18" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="6,483" data-row="18" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,754" data-row="18" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="319" data-row="18" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="164" data-row="18" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="2,169" data-row="18" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,375" data-row="18" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="419" data-row="18" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="200" data-row="18" data-col="degrees"></td>
+<td><input type="text" class="editable" value="120" data-row="18" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="19" data-row="18" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="44" data-row="18" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Kansas" data-row="19" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="43" data-row="19" data-col="re"></td>
+<td><input type="text" class="editable" value="1,422" data-row="19" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="726" data-row="19" data-col="faculty"></td>
+<td><input type="text" class="editable" value="14,456" data-row="19" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="10,094" data-row="19" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="2,097" data-row="19" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="5,340" data-row="19" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="22,017" data-row="19" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="8,154" data-row="19" data-col="resident"></td>
+<td><input type="text" class="editable" value="8,308" data-row="19" data-col="college"></td>
+<td><input type="text" class="editable" value="6,641" data-row="19" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="277" data-row="19" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="121" data-row="19" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="5,785" data-row="19" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,230" data-row="19" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="370" data-row="19" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="193" data-row="19" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,800" data-row="19" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,206" data-row="19" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="238" data-row="19" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="96" data-row="19" data-col="degrees"></td>
+<td><input type="text" class="editable" value="13" data-row="19" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="1" data-row="19" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="31" data-row="19" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Kentucky" data-row="20" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="36" data-row="20" data-col="re"></td>
+<td><input type="text" class="editable" value="1,145" data-row="20" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="723" data-row="20" data-col="faculty"></td>
+<td><input type="text" class="editable" value="10,468" data-row="20" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="9,529" data-row="20" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="3,195" data-row="20" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="6,097" data-row="20" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="14,551" data-row="20" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="5,126" data-row="20" data-col="resident"></td>
+<td><input type="text" class="editable" value="4,836" data-row="20" data-col="college"></td>
+<td><input type="text" class="editable" value="6,019" data-row="20" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="260" data-row="20" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="261" data-row="20" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="5,215" data-row="20" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,173" data-row="20" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="173" data-row="20" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="85" data-row="20" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,410" data-row="20" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,241" data-row="20" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="162" data-row="20" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="51" data-row="20" data-col="degrees"></td>
+<td><input type="text" class="editable" value="20" data-row="20" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="20" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="10" data-row="20" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Louisiana" data-row="21" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="21" data-row="21" data-col="re"></td>
+<td><input type="text" class="editable" value="1,383" data-row="21" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="658" data-row="21" data-col="faculty"></td>
+<td><input type="text" class="editable" value="12,962" data-row="21" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="8,851" data-row="21" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="3,862" data-row="21" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="6,130" data-row="21" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="14,648" data-row="21" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="5,575" data-row="21" data-col="resident"></td>
+<td><input type="text" class="editable" value="6,477" data-row="21" data-col="college"></td>
+<td><input type="text" class="editable" value="4,637" data-row="21" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="276" data-row="21" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="220" data-row="21" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="5,672" data-row="21" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="3,869" data-row="21" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="537" data-row="21" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="94" data-row="21" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,577" data-row="21" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="1,180" data-row="21" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="167" data-row="21" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="88" data-row="21" data-col="degrees"></td>
+<td><input type="text" class="editable" value="10" data-row="21" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="3" data-row="21" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="28" data-row="21" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Maine" data-row="22" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="15" data-row="22" data-col="re"></td>
+<td><input type="text" class="editable" value="436" data-row="22" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="265" data-row="22" data-col="faculty"></td>
+<td><input type="text" class="editable" value="3,053" data-row="22" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="2,253" data-row="22" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="372" data-row="22" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="755" data-row="22" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="4,780" data-row="22" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="1,792" data-row="22" data-col="resident"></td>
+<td><input type="text" class="editable" value="1,476" data-row="22" data-col="college"></td>
+<td><input type="text" class="editable" value="256" data-row="22" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="11" data-row="22" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="8" data-row="22" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="1,239" data-row="22" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="983" data-row="22" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="27" data-row="22" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="6" data-row="22" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="523" data-row="22" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="270" data-row="22" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="36" data-row="22" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="10" data-row="22" data-col="degrees"></td>
+<td><input type="text" class="editable" value="" data-row="22" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="" data-row="22" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="33" data-row="22" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Maryland" data-row="23" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="28" data-row="23" data-col="re"></td>
+<td><input type="text" class="editable" value="1,430" data-row="23" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="637" data-row="23" data-col="faculty"></td>
+<td><input type="text" class="editable" value="9,526" data-row="23" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="5,839" data-row="23" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="941" data-row="23" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="1,740" data-row="23" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="9,205" data-row="23" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="3,937" data-row="23" data-col="resident"></td>
+<td><input type="text" class="editable" value="4,834" data-row="23" data-col="college"></td>
+<td><input type="text" class="editable" value="3,883" data-row="23" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="411" data-row="23" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="135" data-row="23" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="3,797" data-row="23" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="1,679" data-row="23" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="491" data-row="23" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="112" data-row="23" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="1,242" data-row="23" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="772" data-row="23" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="110" data-row="23" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="30" data-row="23" data-col="degrees"></td>
+<td><input type="text" class="editable" value="91" data-row="23" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="9" data-row="23" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="20" data-row="23" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+<tr class="" data-needs-review="False" data-confidence="1.0">
+<td class="meta-cell">False</td>
+<td class="confidence-score confidence-high">100.0%</td>
+<td class="validation-cell"></td>
+<td><input type="text" class="editable" value="Massachusetts" data-row="24" data-col="unnamed 0"></td>
+<td><input type="text" class="editable" value="65" data-row="24" data-col="re"></td>
+<td><input type="text" class="editable" value="4,890" data-row="24" data-col="unnamed 2"></td>
+<td><input type="text" class="editable" value="1,607" data-row="24" data-col="faculty"></td>
+<td><input type="text" class="editable" value="36,797" data-row="24" data-col="unnamed 4"></td>
+<td><input type="text" class="editable" value="20,119" data-row="24" data-col="unnamed 5"></td>
+<td><input type="text" class="editable" value="4,494" data-row="24" data-col="unnamed 6"></td>
+<td><input type="text" class="editable" value="4,028" data-row="24" data-col="unnamed 7"></td>
+<td><input type="text" class="editable" value="42,836" data-row="24" data-col="unnamed 8"></td>
+<td><input type="text" class="editable" value="12,736" data-row="24" data-col="resident"></td>
+<td><input type="text" class="editable" value="12,081" data-row="24" data-col="college"></td>
+<td><input type="text" class="editable" value="11,255" data-row="24" data-col="unnamed 11"></td>
+<td><input type="text" class="editable" value="1,674" data-row="24" data-col="enrollments"></td>
+<td><input type="text" class="editable" value="897" data-row="24" data-col="unnamed 13"></td>
+<td><input type="text" class="editable" value="2,427" data-row="24" data-col="unnamed 14"></td>
+<td><input type="text" class="editable" value="7,515" data-row="24" data-col="unnamed 15"></td>
+<td><input type="text" class="editable" value="1,713" data-row="24" data-col="unnamed 16"></td>
+<td><input type="text" class="editable" value="352" data-row="24" data-col="unnamed 17"></td>
+<td><input type="text" class="editable" value="5,465" data-row="24" data-col="unnamed 18"></td>
+<td><input type="text" class="editable" value="3,163" data-row="24" data-col="unnamed 19"></td>
+<td><input type="text" class="editable" value="802" data-row="24" data-col="unnamed 20"></td>
+<td><input type="text" class="editable" value="448" data-row="24" data-col="degrees"></td>
+<td><input type="text" class="editable" value="235" data-row="24" data-col="unnamed 22"></td>
+<td><input type="text" class="editable" value="27" data-row="24" data-col="unnamed 23"></td>
+<td><input type="text" class="editable" value="92" data-row="24" data-col="unnamed 24"></td>
+<td class="meta-cell">test_table_table_1_with_headers</td>
+<td class="meta-cell">2025-08-25T17:24:48.601930</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <button class="save-btn" onclick="saveData()">💾 Save Changes</button>
+                    <button class="export-btn" onclick="exportData()">📤 Export CSV</button>
+                    <button class="export-btn" onclick="window.print()">🖨️ Print</button>
+                </div>
+                
+                <div id="save-status" style="margin-top: 10px; padding: 10px; display: none;"></div>
+            </div>
+            
+            
+        <script>
+        let changedCells = {};
+        
+        // Track changes to editable cells
+        document.addEventListener('DOMContentLoaded', function() {
+            const editableCells = document.querySelectorAll('.editable');
+            editableCells.forEach(cell => {
+                cell.addEventListener('input', function() {
+                    const row = this.dataset.row;
+                    const col = this.dataset.col;
+                    const key = row + '_' + col;
+                    changedCells[key] = {
+                        row: parseInt(row),
+                        column: col,
+                        oldValue: this.defaultValue,
+                        newValue: this.value
+                    };
+                    
+                    // Highlight changed cells
+                    this.style.backgroundColor = '#e8f5e8';
+                    this.style.borderColor = '#4caf50';
+                });
+            });
+        });
+        
+        // Filter rows based on review status
+        function filterRows(filter) {
+            const table = document.getElementById('dataTable');
+            const rows = table.querySelectorAll('tbody tr');
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            rows.forEach(row => {
+                const needsReview = row.dataset.needsReview === 'true';
+                const confidence = parseFloat(row.dataset.confidence);
+                const hasFlags = row.querySelector('.validation-cell').textContent.trim() !== '';
+                
+                let show = false;
+                switch(filter) {
+                    case 'all':
+                        show = true;
+                        break;
+                    case 'review':
+                        show = needsReview;
+                        break;
+                    case 'clean':
+                        show = !needsReview && confidence >= 0.9;
+                        break;
+                    case 'flagged':
+                        show = hasFlags;
+                        break;
+                }
+                
+                row.style.display = show ? '' : 'none';
+            });
+        }
+        
+        // Save changes
+        function saveData() {
+            const statusDiv = document.getElementById('save-status');
+            
+            if (Object.keys(changedCells).length === 0) {
+                statusDiv.innerHTML = '<div style="color: #ff9800;">No changes to save.</div>';
+                statusDiv.style.display = 'block';
+                setTimeout(() => statusDiv.style.display = 'none', 3000);
+                return;
+            }
+            
+            // Create CSV data
+            const changes = Object.values(changedCells);
+            const csvData = 'Row,Column,Old Value,New Value,Timestamp\n' + 
+                          changes.map(c => `${c.row},"${c.column}","${c.oldValue}","${c.newValue}","${new Date().toISOString()}"`).join('\n');
+            
+            // Save to localStorage
+            const saveKey = 'textract_review_' + new Date().getTime();
+            localStorage.setItem(saveKey, csvData);
+            
+            // Download changes file
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'review_changes_' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            statusDiv.innerHTML = '<div style="color: #4caf50;">✅ Changes saved! Download started.</div>';
+            statusDiv.style.display = 'block';
+            setTimeout(() => statusDiv.style.display = 'none', 5000);
+            
+            // Reset changed cells tracking
+            changedCells = {};
+            document.querySelectorAll('.editable').forEach(cell => {
+                cell.style.backgroundColor = '';
+                cell.style.borderColor = '';
+                cell.defaultValue = cell.value;
+            });
+        }
+        
+        // Export current data as CSV
+        function exportData() {
+            const table = document.getElementById('dataTable');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            
+            let csvContent = '';
+            
+            // Header row
+            const headers = Array.from(rows[0].querySelectorAll('th')).map(th => th.textContent);
+            csvContent += headers.map(h => `"${h}"`).join(',') + '\n';
+            
+            // Data rows
+            rows.slice(1).forEach(row => {
+                const cells = Array.from(row.querySelectorAll('td'));
+                const rowData = cells.map(cell => {
+                    const input = cell.querySelector('.editable');
+                    const value = input ? input.value : cell.textContent;
+                    return `"${value.replace(/"/g, '""')}"`;
+                });
+                csvContent += rowData.join(',') + '\n';
+            });
+            
+            // Download CSV
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reviewed_data_' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            const statusDiv = document.getElementById('save-status');
+            statusDiv.innerHTML = '<div style="color: #2196f3;">📤 Data exported successfully!</div>';
+            statusDiv.style.display = 'block';
+            setTimeout(() => statusDiv.style.display = 'none', 3000);
+        }
+        </script>
+        
+        </body>
+        </html>
+        
