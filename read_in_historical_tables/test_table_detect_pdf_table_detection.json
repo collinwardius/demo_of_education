@@ -1,0 +1,20 @@
+{
+  "pdf_path": "/Users/cjwardius/Documents/GitHub/demo_of_education/test_table_finder/test_table_detect_pdf.pdf",
+  "pdf_name": "test_table_detect_pdf.pdf",
+  "total_pages": 6,
+  "timestamp": "2025-08-27T15:51:51.437761",
+  "pages_with_tables": [
+    {
+      "page_number": 6,
+      "table_count": 1,
+      "textract_confidence": "high"
+    }
+  ],
+  "summary": {
+    "total_pages_with_tables": 1,
+    "page_numbers": [
+      6
+    ],
+    "detection_success": true
+  }
+}
