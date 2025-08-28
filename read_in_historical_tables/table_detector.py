@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Simple PDF Table Detection using Amazon Textract
-Reads PDF and identifies which pages contain tables
+PDF Table Detection and Rotation using Amazon Textract
+Detects tables in PDF pages and rotates them 90 degrees for optimal extraction
 """
 
 import sys
@@ -12,27 +12,13 @@ import json
 from datetime import datetime
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python table_detector.py <pdf_file>")
-        sys.exit(1)
+def detect_tables(pdf_path, textract_client):
+    """
+    Detect tables in PDF using Amazon Textract
     
-    pdf_path = sys.argv[1]
-    
-    if not Path(pdf_path).exists():
-        print(f"Error: PDF file '{pdf_path}' not found")
-        sys.exit(1)
-    
-    # Initialize Textract client (using us-east-1 region)
-    try:
-        textract_client = boto3.client('textract', region_name='us-east-1')
-    except Exception as e:
-        print(f"Error: Could not initialize AWS Textract client")
-        print(f"Make sure AWS credentials are configured")
-        print(f"Run 'aws configure' to set up credentials")
-        sys.exit(1)
-    
-    # Open PDF
+    Returns:
+        List of page numbers containing tables
+    """
     pdf_doc = fitz.open(pdf_path)
     print(f"Processing PDF: {Path(pdf_path).name}")
     print(f"Total pages: {pdf_doc.page_count}")
@@ -80,7 +66,6 @@ def main():
             
         except Exception as e:
             print(f"Page {page_num + 1}: Error processing - {str(e)}")
-            # Could also store errors in results if needed
     
     pdf_doc.close()
     
@@ -98,15 +83,109 @@ def main():
     with open(output_path, 'w') as f:
         json.dump(detection_results, f, indent=2)
     
-    # Summary
     print()
     print("=" * 50)
-    print(f"SUMMARY: {len(pages_with_tables)} pages contain tables")
+    print(f"TABLE DETECTION SUMMARY: {len(pages_with_tables)} pages contain tables")
     if pages_with_tables:
         print(f"Pages with tables: {', '.join(map(str, pages_with_tables))}")
     else:
         print("No tables detected in any pages")
-    print(f"Results saved to: {output_path}")
+        return []
+    print(f"Detection results saved to: {output_path}")
+    
+    return pages_with_tables
+
+
+def rotate_table_pages(pdf_path, page_numbers):
+    """
+    Rotate the specified table pages 90 degrees and create output PDF
+    
+    Args:
+        pdf_path: Path to the original PDF
+        page_numbers: List of page numbers to rotate
+    
+    Returns:
+        Path to the rotated PDF file
+    """
+    if not page_numbers:
+        print("No pages to rotate")
+        return None
+    
+    print()
+    print("=" * 50)
+    print(f"ROTATING TABLE PAGES")
+    print(f"Rotating {len(page_numbers)} pages 90 degrees clockwise...")
+    
+    # Create output path
+    pdf_path_obj = Path(pdf_path)
+    output_path = pdf_path_obj.parent / f"{pdf_path_obj.stem}_tables_rotated.pdf"
+    
+    # Open original PDF
+    pdf_doc = fitz.open(pdf_path)
+    
+    # Create new PDF for output
+    new_pdf = fitz.open()
+    
+    # Process only pages that contain tables
+    for page_index in sorted(page_numbers):
+        page_num = page_index - 1  # Convert to 0-indexed for PyMuPDF
+        original_page = pdf_doc[page_num]
+        
+        print(f"  Rotating page {page_index} by 90°")
+        
+        # Rotate the page 90 degrees
+        original_page.set_rotation(90)
+        
+        # Add page to new PDF
+        new_pdf.insert_pdf(pdf_doc, from_page=page_num, to_page=page_num)
+    
+    # Save the rotated PDF
+    new_pdf.save(output_path)
+    new_pdf.close()
+    pdf_doc.close()
+    
+    print(f"\n✅ Rotated PDF saved to: {output_path}")
+    print(f"📄 {len(page_numbers)} pages rotated 90° clockwise")
+    print(f"🎯 Ready for table extraction!")
+    
+    return str(output_path)
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python table_detector_and_rotator.py <pdf_file>")
+        print("Example: python table_detector_and_rotator.py document.pdf")
+        sys.exit(1)
+    
+    pdf_path = sys.argv[1]
+    
+    if not Path(pdf_path).exists():
+        print(f"Error: PDF file '{pdf_path}' not found")
+        sys.exit(1)
+    
+    # Initialize Textract client
+    try:
+        textract_client = boto3.client('textract', region_name='us-east-1')
+    except Exception as e:
+        print(f"Error: Could not initialize AWS Textract client")
+        print(f"Make sure AWS credentials are configured")
+        print(f"Run 'aws configure' to set up credentials")
+        sys.exit(1)
+    
+    # Step 1: Detect tables
+    print("🔍 STEP 1: DETECTING TABLES WITH TEXTRACT")
+    pages_with_tables = detect_tables(pdf_path, textract_client)
+    
+    if not pages_with_tables:
+        print("\n❌ No tables found. No rotation needed.")
+        return
+    
+    # Step 2: Rotate table pages
+    print("\n🔄 STEP 2: ROTATING TABLE PAGES")
+    output_path = rotate_table_pages(pdf_path, pages_with_tables)
+    
+    print(f"\n🎉 COMPLETE! Table pages detected and rotated.")
+    print(f"📁 Output: {output_path}")
 
 
 if __name__ == "__main__":
