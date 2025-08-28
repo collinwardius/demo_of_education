@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-PDF Table Detection and Rotation using Amazon Textract
-Detects tables in PDF pages and rotates them 90 degrees for optimal extraction
+PDF Table Detection and Smart Orientation using Amazon Textract
+Detects tables in PDF pages and applies orientation correction based on table content
 """
 
 import sys
@@ -43,26 +43,87 @@ def detect_tables(pdf_path, textract_client):
         image_bytes = pix.tobytes("png")
         
         try:
-            # Send to Textract for table detection
+            # Send to Textract for table detection and orientation info
             response = textract_client.analyze_document(
                 Document={'Bytes': image_bytes},
-                FeatureTypes=['TABLES']
+                FeatureTypes=['TABLES', 'FORMS']  # Adding FORMS to get orientation info
             )
             
-            # Check if any tables were found
-            tables_found = any(block['BlockType'] == 'TABLE' for block in response['Blocks'])
+            # Debug: Output DocumentMetadata to check for orientation info
+            print(f"    DEBUG: DocumentMetadata contents:")
+            if 'DocumentMetadata' in response:
+                for key, value in response['DocumentMetadata'].items():
+                    print(f"      {key}: {value}")
+            else:
+                print("      DocumentMetadata not found")
+                
+            # Find table blocks 
+            table_blocks = [block for block in response['Blocks'] if block['BlockType'] == 'TABLE']
             
-            if tables_found:
-                # Count number of tables
-                table_count = sum(1 for block in response['Blocks'] if block['BlockType'] == 'TABLE')
+            if table_blocks:
+                # Extract page-level orientation info from document metadata
+                orientation_correction = 0
+                confidence = 0
+                
+                # Look for orientation correction in various locations
+                page_orientation_raw = None
+                
+                # First check DocumentMetadata
+                if 'DocumentMetadata' in response and 'OrientationCorrection' in response['DocumentMetadata']:
+                    page_orientation_raw = response['DocumentMetadata']['OrientationCorrection']
+                    print(f"    Found OrientationCorrection in DocumentMetadata: {page_orientation_raw}")
+                
+                # Then check response root level
+                elif 'OrientationCorrection' in response:
+                    page_orientation_raw = response['OrientationCorrection']
+                    print(f"    Found OrientationCorrection at response root: {page_orientation_raw}")
+                
+                # Finally check PAGE blocks
+                else:
+                    page_blocks = [block for block in response['Blocks'] if block['BlockType'] == 'PAGE']
+                    if page_blocks and 'Geometry' in page_blocks[0]:
+                        page_geometry = page_blocks[0]['Geometry']
+                        page_orientation_raw = page_geometry.get('OrientationCorrection')
+                        if page_orientation_raw:
+                            print(f"    Found OrientationCorrection in PAGE block: {page_orientation_raw}")
+                
+                if page_orientation_raw is None:
+                    print(f"    ⚠️  WARNING: Page-level OrientationCorrection not found for page {page_num + 1}")
+                    print(f"    Available response keys: {list(response.keys())}")
+                    page_blocks = [block for block in response['Blocks'] if block['BlockType'] == 'PAGE']
+                    if page_blocks and 'Geometry' in page_blocks[0]:
+                        print(f"    Available PAGE geometry keys: {list(page_blocks[0]['Geometry'].keys())}")
+                    page_orientation_raw = 'ROTATE_0'  # Default fallback
+                
+                # Convert Textract orientation strings to degrees
+                orientation_mapping = {
+                    'ROTATE_0': 0,
+                    'ROTATE_90': 90,
+                    'ROTATE_180': 180,
+                    'ROTATE_270': 270
+                }
+                
+                # Handle both string and numeric values
+                if isinstance(page_orientation_raw, str):
+                    orientation_correction = orientation_mapping.get(page_orientation_raw, 0)
+                else:
+                    orientation_correction = page_orientation_raw or 0
+                
+                # Get confidence from the first table block for quality indication
+                if 'Confidence' in table_blocks[0]:
+                    confidence = table_blocks[0]['Confidence']
+                
                 page_info = {
                     'page_number': page_num + 1,
-                    'table_count': table_count,
-                    'textract_confidence': 'high'  # Could extract actual confidence if needed
+                    'table_count': len(table_blocks),
+                    'orientation_correction': orientation_correction,
+                    'textract_confidence': confidence,
+                    'needs_rotation': orientation_correction != 0
                 }
                 pages_with_tables.append(page_num + 1)
                 detection_results['pages_with_tables'].append(page_info)
-                print(f"Page {page_num + 1}: Contains {table_count} table(s)")
+                rotation_status = f"needs {orientation_correction}° rotation" if orientation_correction != 0 else "correctly oriented"
+                print(f"Page {page_num + 1}: Contains {len(table_blocks)} table(s) - {rotation_status}")
             
         except Exception as e:
             print(f"Page {page_num + 1}: Error processing - {str(e)}")
@@ -96,29 +157,45 @@ def detect_tables(pdf_path, textract_client):
     return pages_with_tables
 
 
-def rotate_table_pages(pdf_path, page_numbers):
+def correct_table_orientations(pdf_path, pages_with_tables):
     """
-    Rotate the specified table pages 90 degrees and create output PDF
+    Create PDF with table pages only, applying orientation correction as needed
     
     Args:
         pdf_path: Path to the original PDF
-        page_numbers: List of page numbers to rotate
+        pages_with_tables: List of dicts with page info including orientation_correction
     
     Returns:
-        Path to the rotated PDF file
+        Path to the output PDF file with table pages only
     """
-    if not page_numbers:
-        print("No pages to rotate")
+    if not pages_with_tables:
+        print("No pages with tables found")
         return None
+    
+    # Separate pages that need rotation vs those that don't
+    pages_needing_rotation = [page for page in pages_with_tables if page.get('needs_rotation', False)]
+    pages_correctly_oriented = [page for page in pages_with_tables if not page.get('needs_rotation', False)]
     
     print()
     print("=" * 50)
-    print(f"ROTATING TABLE PAGES")
-    print(f"Rotating {len(page_numbers)} pages 90 degrees clockwise...")
+    print(f"CREATING TABLE-ONLY PDF")
+    print(f"Total table pages: {len(pages_with_tables)}")
+    print(f"Pages needing rotation: {len(pages_needing_rotation)}")
+    print(f"Pages correctly oriented: {len(pages_correctly_oriented)}")
+    
+    if pages_needing_rotation:
+        print("\nOrientation corrections needed:")
+        for page in pages_needing_rotation:
+            print(f"  Page {page['page_number']}: {page['orientation_correction']}° correction")
+    
+    if pages_correctly_oriented:
+        print("\nPages already correctly oriented:")
+        for page in pages_correctly_oriented:
+            print(f"  Page {page['page_number']}: no rotation needed")
     
     # Create output path
     pdf_path_obj = Path(pdf_path)
-    output_path = pdf_path_obj.parent / f"{pdf_path_obj.stem}_tables_rotated.pdf"
+    output_path = pdf_path_obj.parent / f"{pdf_path_obj.stem}_tables_oriented.pdf"
     
     # Open original PDF
     pdf_doc = fitz.open(pdf_path)
@@ -126,15 +203,22 @@ def rotate_table_pages(pdf_path, page_numbers):
     # Create new PDF for output
     new_pdf = fitz.open()
     
-    # Process only pages that contain tables
-    for page_index in sorted(page_numbers):
-        page_num = page_index - 1  # Convert to 0-indexed for PyMuPDF
+    # Process ALL pages with tables (with and without rotation)
+    all_table_pages = sorted(pages_with_tables, key=lambda x: x['page_number'])
+    
+    print(f"\nProcessing {len(all_table_pages)} table pages:")
+    
+    for page_info in all_table_pages:
+        page_num = page_info['page_number'] - 1  # Convert to 0-indexed for PyMuPDF
+        rotation_angle = page_info.get('orientation_correction', 0)
+        
         original_page = pdf_doc[page_num]
         
-        print(f"  Rotating page {page_index} by 90°")
-        
-        # Rotate the page 90 degrees
-        original_page.set_rotation(90)
+        if rotation_angle != 0:
+            print(f"  Adding page {page_info['page_number']} with {rotation_angle}° correction")
+            original_page.set_rotation(rotation_angle)
+        else:
+            print(f"  Adding page {page_info['page_number']} (no rotation needed)")
         
         # Add page to new PDF
         new_pdf.insert_pdf(pdf_doc, from_page=page_num, to_page=page_num)
@@ -144,9 +228,11 @@ def rotate_table_pages(pdf_path, page_numbers):
     new_pdf.close()
     pdf_doc.close()
     
-    print(f"\n✅ Rotated PDF saved to: {output_path}")
-    print(f"📄 {len(page_numbers)} pages rotated 90° clockwise")
-    print(f"🎯 Ready for table extraction!")
+    print(f"\n✅ Table-only PDF saved to: {output_path}")
+    print(f"📄 {len(all_table_pages)} table pages included")
+    if pages_needing_rotation:
+        print(f"🔄 {len(pages_needing_rotation)} pages had orientation corrected")
+    print(f"🎯 Table content ready for extraction!")
     
     return str(output_path)
 
@@ -172,20 +258,31 @@ def main():
         print(f"Run 'aws configure' to set up credentials")
         sys.exit(1)
     
-    # Step 1: Detect tables
-    print("🔍 STEP 1: DETECTING TABLES WITH TEXTRACT")
+    # Step 1: Detect tables and orientation
+    print("🔍 STEP 1: DETECTING TABLES AND ORIENTATION WITH TEXTRACT")
     pages_with_tables = detect_tables(pdf_path, textract_client)
     
     if not pages_with_tables:
-        print("\n❌ No tables found. No rotation needed.")
+        print("\n❌ No tables found. No orientation correction needed.")
         return
     
-    # Step 2: Rotate table pages
-    print("\n🔄 STEP 2: ROTATING TABLE PAGES")
-    output_path = rotate_table_pages(pdf_path, pages_with_tables)
+    # Get detailed page info from detection results
+    output_file = Path(pdf_path).stem + '_table_detection.json'
+    output_path_json = Path(__file__).parent / output_file
     
-    print(f"\n🎉 COMPLETE! Table pages detected and rotated.")
-    print(f"📁 Output: {output_path}")
+    with open(output_path_json, 'r') as f:
+        detection_results = json.load(f)
+    
+    # Step 2: Create table-only PDF with orientation corrections
+    print("\n🔄 STEP 2: CREATING TABLE-ONLY PDF WITH CORRECTIONS")
+    output_path = correct_table_orientations(pdf_path, detection_results['pages_with_tables'])
+    
+    if output_path:
+        print(f"\n🎉 COMPLETE! Table-only PDF created with proper orientations.")
+        print(f"📁 Output: {output_path}")
+    else:
+        print(f"\n❌ ERROR: Could not create table PDF.")
+        print(f"📁 Check the original file: {pdf_path}")
 
 
 if __name__ == "__main__":
