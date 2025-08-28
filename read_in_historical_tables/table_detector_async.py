@@ -20,67 +20,54 @@ async def detect_tables_async(pdf_path, textract_client):
     Returns:
         List of page numbers containing tables
     """
-    pdf_doc = fitz.open(pdf_path)
     print(f"Processing PDF: {Path(pdf_path).name}")
-    print(f"Total pages: {pdf_doc.page_count}")
     print()
     
     pages_with_tables = []
     detection_results = {
         'pdf_path': pdf_path,
         'pdf_name': Path(pdf_path).name,
-        'total_pages': pdf_doc.page_count,
         'timestamp': datetime.now().isoformat(),
         'pages_with_tables': [],
         'summary': {}
     }
     
-    # Process pages concurrently
-    async def process_page(page_num):
-        page = pdf_doc[page_num]
-        
-        # Convert page to image (PNG format)
-        pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0))  # 2x resolution
-        image_bytes = pix.tobytes("png")
-        
-        try:
-            # Send to Textract for table detection (async)
-            response = await textract_client.analyze_document(
-                Document={'Bytes': image_bytes},
-                FeatureTypes=['TABLES']
-            )
-            
-            # Check if any tables were found
-            tables_found = any(block['BlockType'] == 'TABLE' for block in response['Blocks'])
-            
-            if tables_found:
-                # Count number of tables
-                table_count = sum(1 for block in response['Blocks'] if block['BlockType'] == 'TABLE')
-                page_info = {
-                    'page_number': page_num + 1,
-                    'table_count': table_count,
-                    'textract_confidence': 'high'  # Could extract actual confidence if needed
-                }
-                print(f"Page {page_num + 1}: Contains {table_count} table(s)")
-                return page_info
-            
-        except Exception as e:
-            print(f"Page {page_num + 1}: Error processing - {str(e)}")
-            return None
-        
-        return None
+    # Read PDF file as bytes
+    with open(pdf_path, 'rb') as pdf_file:
+        pdf_bytes = pdf_file.read()
     
-    # Process all pages concurrently
-    tasks = [process_page(page_num) for page_num in range(pdf_doc.page_count)]
-    results = await asyncio.gather(*tasks, return_exceptions=True)
-    
-    # Collect results
-    for result in results:
-        if result and not isinstance(result, Exception):
-            pages_with_tables.append(result['page_number'])
-            detection_results['pages_with_tables'].append(result)
-    
-    pdf_doc.close()
+    try:
+        # Send entire PDF to Textract for table detection (async)
+        response = await textract_client.analyze_document(
+            Document={'Bytes': pdf_bytes},
+            FeatureTypes=['TABLES']
+        )
+        
+        # Process blocks to find tables and their page numbers
+        page_tables = {}
+        for block in response['Blocks']:
+            if block['BlockType'] == 'TABLE':
+                page_num = block.get('Page', 1)
+                if page_num not in page_tables:
+                    page_tables[page_num] = 0
+                page_tables[page_num] += 1
+        
+        # Convert results
+        for page_num, table_count in page_tables.items():
+            page_info = {
+                'page_number': page_num,
+                'table_count': table_count,
+                'textract_confidence': 'high'
+            }
+            pages_with_tables.append(page_num)
+            detection_results['pages_with_tables'].append(page_info)
+            print(f"Page {page_num}: Contains {table_count} table(s)")
+        
+        detection_results['total_pages'] = response.get('DocumentMetadata', {}).get('Pages', len(page_tables))
+        
+    except Exception as e:
+        print(f"Error processing PDF - {str(e)}")
+        detection_results['total_pages'] = 0
     
     # Complete results
     detection_results['summary'] = {
