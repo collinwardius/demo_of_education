@@ -1,22 +1,12 @@
 {
-  "pdf_path": "test_table_detect_pdf.pdf",
+  "pdf_path": "s3://historical-education-college-tables/test_table_detect_pdf.pdf",
   "pdf_name": "test_table_detect_pdf.pdf",
-  "total_pages": 6,
-  "timestamp": "2025-08-28T11:19:31.566033",
-  "pages_with_tables": [
-    {
-      "page_number": 6,
-      "table_count": 1,
-      "orientation_correction": 0,
-      "textract_confidence": 99.951171875,
-      "needs_rotation": false
-    }
-  ],
+  "timestamp": "2025-08-28T12:20:41.425900",
+  "pages_with_tables": [],
   "summary": {
-    "total_pages_with_tables": 1,
-    "page_numbers": [
-      6
-    ],
-    "detection_success": true
-  }
+    "total_pages_with_tables": 0,
+    "page_numbers": [],
+    "detection_success": false
+  },
+  "total_pages": 0
 }
