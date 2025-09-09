@@ -1,2 +1,0 @@
-page_number,education_score,original_confidence,tables_detected,content_score,structure_score,keyword_score,numeric_score,education_keywords,reasons
-639,0.764262,0.83254,1,0.7350000000000001,0.44999999999999996,1.0,1.0,12,primary_education: 4 keywords; institutional: 1 keywords; administrative: 2 keywords; demographics: 3 keywords; academic: 3 keywords; statistics: 2 keywords; Structure indicators: 3; Numeric content: 273 numbers
