@@ -3,6 +3,29 @@ import json
 import pandas as pd
 import argparse
 
+def is_header_row(row):
+    """
+    Determine if a row is a header row.
+    """
+    row_text = ' '.join(str(cell) for cell in row).strip()
+    row_text_upper = row_text.upper()
+    
+    # Check for common header patterns
+    header_indicators = [
+        row_text.isdigit(),  # Rows with just numbers like "1 2 3 4 5"
+        'TABLE' in row_text_upper,
+        'LOCATION.' in row_text_upper,
+        'INSTITUTION.' in row_text_upper,
+        'FOR MEN, FOR WOMEN' in row_text_upper,
+        'CONTROL.' in row_text_upper,
+        'MEN.' in row_text_upper and 'WOMEN.' in row_text_upper,
+        len(row_text) < 10 and any(char.isdigit() for char in row_text),  # Short rows with numbers
+        # Check if row contains mostly single digits or column numbers
+        len([cell for cell in row if str(cell).strip() in ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']]) > len(row) * 0.5
+    ]
+    
+    return any(header_indicators)
+
 def extract_raw_table_data(json_file_path, page_ranges=None):
     """
     Extract all table data from Amazon Textract JSON without any header modifications or filtering.
@@ -81,9 +104,12 @@ def extract_raw_table_data(json_file_path, page_ranges=None):
                 
                 table_matrix[row_idx][col_idx] = cell_text.strip()
             
-            # Add ALL rows from this page (no filtering) without page number
+            # Add ALL rows from this page with header indicator as first column
             for row in table_matrix:
-                range_rows.append(row)
+                # Add header indicator (1 if header, 0 if not) as first column
+                header_indicator = 1 if is_header_row(row) else 0
+                row_with_indicator = [header_indicator] + row
+                range_rows.append(row_with_indicator)
         
         # Store results for this range
         if page_ranges is None:
