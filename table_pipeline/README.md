@@ -77,6 +77,9 @@ python3 master_program.py document.pdf my-s3-bucket arn:aws:iam::YOUR_ACCOUNT:ro
 
 # Custom output file
 python3 master_program.py document.pdf my-s3-bucket arn:aws:iam::YOUR_ACCOUNT:role/TextractRole --output my_tables.csv
+
+# Example given a real table and the AWS input
+python3 master_program.py '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/cleaned_scans/bi_survey1916_1918.pdf' historical-education-college-tables arn:aws:iam::672670075294:role/TextractRole --output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/extracted_scans/bi_survery1916_1918_extracted.csv' --json-output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/extracted_scans/textract_json/bi_survey1916_1918.json'
 ```
 
 ### Command-Line Options

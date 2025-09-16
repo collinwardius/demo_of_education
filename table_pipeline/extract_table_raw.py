@@ -10,6 +10,22 @@ def is_header_row(row):
     row_text = ' '.join(str(cell) for cell in row).strip()
     row_text_upper = row_text.upper()
     
+    # Check if row is primarily comprised of string variables (non-numeric content)
+    non_empty_cells = [str(cell).strip() for cell in row if str(cell).strip()]
+    if len(non_empty_cells) == 0:
+        string_ratio = 0
+    else:
+        string_cells = 0
+        for cell in non_empty_cells:
+            # Check if cell is not a number (considering various formats)
+            try:
+                float(cell.replace(',', '').replace('$', '').replace('%', ''))
+                # It's a number
+            except ValueError:
+                # It's a string/text
+                string_cells += 1
+        string_ratio = string_cells / len(non_empty_cells)
+    
     # Check for common header patterns
     header_indicators = [
         row_text.isdigit(),  # Rows with just numbers like "1 2 3 4 5"
@@ -19,9 +35,12 @@ def is_header_row(row):
         'FOR MEN, FOR WOMEN' in row_text_upper,
         'CONTROL.' in row_text_upper,
         'MEN.' in row_text_upper and 'WOMEN.' in row_text_upper,
+        'VALUE' in row_text_upper,
         len(row_text) < 10 and any(char.isdigit() for char in row_text),  # Short rows with numbers
         # Check if row contains mostly single digits or column numbers
-        len([cell for cell in row if str(cell).strip() in ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']]) > len(row) * 0.5
+        len([cell for cell in row if str(cell).strip() in ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']]) > len(row) * 0.5,
+        # Check if row is primarily strings (>= 30% non-numeric content)
+        string_ratio >= 0.3
     ]
     
     return any(header_indicators)
@@ -104,12 +123,12 @@ def extract_raw_table_data(json_file_path, page_ranges=None):
                 
                 table_matrix[row_idx][col_idx] = cell_text.strip()
             
-            # Add ALL rows from this page with header indicator as first column
+            # Add ALL rows from this page with page number and header indicator as first columns
             for row in table_matrix:
-                # Add header indicator (1 if header, 0 if not) as first column
+                # Add page number as first column, header indicator (1 if header, 0 if not) as second column
                 header_indicator = 1 if is_header_row(row) else 0
-                row_with_indicator = [header_indicator] + row
-                range_rows.append(row_with_indicator)
+                row_with_indicators = [page_num, header_indicator] + row
+                range_rows.append(row_with_indicators)
         
         # Store results for this range
         if page_ranges is None:

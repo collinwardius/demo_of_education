@@ -23,7 +23,7 @@ class TablePipelineProcessor:
         self.s3_bucket = s3_bucket
         self.aws_region = aws_region
     
-    def process_pdf_pipeline(self, pdf_file_path, page_ranges_str=None, output_csv_path=None):
+    def process_pdf_pipeline(self, pdf_file_path, page_ranges_str=None, output_csv_path=None, json_output_path=None):
         """
         Complete pipeline: PDF upload -> Textract analysis -> CSV extraction
         
@@ -31,6 +31,7 @@ class TablePipelineProcessor:
             pdf_file_path (str): Path to the PDF file to process
             page_ranges_str (str): Page ranges in format "1-3,4-6" (optional)
             output_csv_path (str): Output CSV file path (optional)
+            json_output_path (str): Output JSON file path (optional)
         
         Returns:
             str: Path to the generated CSV file if successful, None otherwise
@@ -56,7 +57,10 @@ class TablePipelineProcessor:
         
         # Generate JSON output filename
         document_name = Path(pdf_file_path).stem
-        json_output = f"{document_name}_textract_results.json"
+        if json_output_path:
+            json_output = json_output_path
+        else:
+            json_output = f"{document_name}_textract_results.json"
         
         try:
             processor = S3TextractProcessor(self.aws_role_arn, self.s3_bucket, s3_key, self.aws_region)
@@ -152,6 +156,7 @@ Note: The IAM role must have permissions for:
     parser.add_argument('aws_role_arn', help='IAM role ARN for Textract access')
     parser.add_argument('--page-ranges', '-p', help='Page ranges as "1-3,4-6,7-10" (optional)')
     parser.add_argument('--output', '-o', help='Output CSV file path (optional)')
+    parser.add_argument('--json-output', '-j', help='Output JSON file path (optional)')
     parser.add_argument('--region', '-r', default='us-east-2', help='AWS region (default: us-east-2)')
     
     args = parser.parse_args()
@@ -167,7 +172,8 @@ Note: The IAM role must have permissions for:
     result = processor.process_pdf_pipeline(
         pdf_file_path=args.pdf_file,
         page_ranges_str=args.page_ranges,
-        output_csv_path=args.output
+        output_csv_path=args.output,
+        json_output_path=args.json_output
     )
     
     if result:
