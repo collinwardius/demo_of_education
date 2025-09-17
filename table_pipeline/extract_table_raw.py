@@ -10,6 +10,31 @@ def is_header_row(row):
     row_text = ' '.join(str(cell) for cell in row).strip()
     row_text_upper = row_text.upper()
     
+    # List of US states and territories (including common abbreviations)
+    us_states = {
+        'ALABAMA', 'AL', 'ALASKA', 'AK', 'ARIZONA', 'AZ', 'ARKANSAS', 'AR',
+        'CALIFORNIA', 'CA', 'COLORADO', 'CO', 'CONNECTICUT', 'CT', 'DELAWARE', 'DE',
+        'FLORIDA', 'FL', 'GEORGIA', 'GA', 'HAWAII', 'HI', 'IDAHO', 'ID',
+        'ILLINOIS', 'IL', 'INDIANA', 'IN', 'IOWA', 'IA', 'KANSAS', 'KS',
+        'KENTUCKY', 'KY', 'LOUISIANA', 'LA', 'MAINE', 'ME', 'MARYLAND', 'MD',
+        'MASSACHUSETTS', 'MA', 'MICHIGAN', 'MI', 'MINNESOTA', 'MN', 'MISSISSIPPI', 'MS',
+        'MISSOURI', 'MO', 'MONTANA', 'MT', 'NEBRASKA', 'NE', 'NEVADA', 'NV',
+        'NEW HAMPSHIRE', 'NH', 'NEW JERSEY', 'NJ', 'NEW MEXICO', 'NM', 'NEW YORK', 'NY',
+        'NORTH CAROLINA', 'NC', 'NORTH DAKOTA', 'ND', 'OHIO', 'OH', 'OKLAHOMA', 'OK',
+        'OREGON', 'OR', 'PENNSYLVANIA', 'PA', 'RHODE ISLAND', 'RI', 'SOUTH CAROLINA', 'SC',
+        'SOUTH DAKOTA', 'SD', 'TENNESSEE', 'TN', 'TEXAS', 'TX', 'UTAH', 'UT',
+        'VERMONT', 'VT', 'VIRGINIA', 'VA', 'WASHINGTON', 'WA', 'WEST VIRGINIA', 'WV',
+        'WISCONSIN', 'WI', 'WYOMING', 'WY', 'DISTRICT OF COLUMBIA', 'DC',
+        'PUERTO RICO', 'PR', 'AMERICAN SAMOA', 'AS', 'GUAM', 'GU',
+        'NORTHERN MARIANA ISLANDS', 'MP', 'U.S. VIRGIN ISLANDS', 'VI'
+    }
+    
+    # Check if any cell in the row resembles a state name
+    for cell in row:
+        cell_text = str(cell).strip().upper()
+        if cell_text in us_states:
+            return False  # Don't classify as header if it contains a state name
+    
     # Check if row is primarily comprised of string variables (non-numeric content)
     non_empty_cells = [str(cell).strip() for cell in row if str(cell).strip()]
     if len(non_empty_cells) == 0:
@@ -40,7 +65,7 @@ def is_header_row(row):
         # Check if row contains mostly single digits or column numbers
         len([cell for cell in row if str(cell).strip() in ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22']]) > len(row) * 0.5,
         # Check if row is primarily strings (>= 30% non-numeric content)
-        string_ratio >= 0.3
+        string_ratio >= 0.5
     ]
     
     return any(header_indicators)
