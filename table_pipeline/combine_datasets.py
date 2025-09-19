@@ -8,17 +8,40 @@ import os
 from pathlib import Path
 from typing import Dict, Set
 import numpy as np
+import re
+
+def extract_year_from_filename(filename: str) -> int:
+    """Extract the starting year from a filename like 'bi_survey1916_1918.csv'."""
+    # Look for a 4-digit year in the filename
+    year_match = re.search(r'(\d{4})', filename)
+    if year_match:
+        return int(year_match.group(1))
+    # If no year found, return a high number to sort it last
+    return 9999
 
 def get_dataset_info(df: pd.DataFrame, filename: str) -> Dict:
     """Extract information about a dataset including variables and their types."""
     info = {
         'filename': filename,
+        'year': extract_year_from_filename(filename),
         'shape': df.shape,
         'columns': list(df.columns),
         'dtypes': df.dtypes.to_dict(),
         'missing_values': df.isnull().sum().to_dict(),
         'unique_values': {col: df[col].nunique() for col in df.columns}
     }
+    
+    # Count unique colleges if college column exists
+    if 'college' in df.columns:
+        # Remove any null/empty values and count unique colleges
+        colleges = df['college'].dropna()
+        colleges = colleges[colleges.str.strip() != ''] if len(colleges) > 0 else colleges
+        info['unique_colleges'] = colleges.nunique()
+        info['total_college_records'] = len(colleges)
+    else:
+        info['unique_colleges'] = 0
+        info['total_college_records'] = 0
+    
     return info
 
 def analyze_datasets(data_folder: str) -> Dict:
@@ -35,11 +58,11 @@ def analyze_datasets(data_folder: str) -> Dict:
     
     print(f"Analyzing datasets in: {data_folder}")
     
-    for file_path in data_folder.glob("*.csv"):
-        if file_path.name in exclude_files:
-            print(f"Skipping generated file: {file_path.name}")
-            continue
-            
+    # Get all CSV files and sort them by year
+    csv_files = [f for f in data_folder.glob("*.csv") if f.name not in exclude_files]
+    csv_files_sorted = sorted(csv_files, key=lambda x: extract_year_from_filename(x.name))
+    
+    for file_path in csv_files_sorted:
         print(f"Processing: {file_path.name}")
         try:
             df = pd.read_csv(file_path)
@@ -118,13 +141,42 @@ def create_summary_markdown(datasets_info: Dict, variable_analysis: Dict, output
     # Dataset overview
     markdown_content.append("## Dataset Overview")
     markdown_content.append("")
-    markdown_content.append("| Dataset | Rows | Columns | File |")
-    markdown_content.append("|---------|------|---------|------|")
+    markdown_content.append("| Dataset | Year | Rows | Columns | Unique Colleges | File |")
+    markdown_content.append("|---------|------|------|---------|----------------|------|")
     
-    for dataset_name, info in datasets_info.items():
+    # Sort datasets by year for consistent ordering
+    sorted_datasets = sorted(datasets_info.items(), key=lambda x: x[1]['year'])
+    
+    for dataset_name, info in sorted_datasets:
         rows, cols = info['shape']
         filename = info['filename']
-        markdown_content.append(f"| {dataset_name} | {rows:,} | {cols} | {filename} |")
+        year = info['year'] if info['year'] != 9999 else "Unknown"
+        unique_colleges = info.get('unique_colleges', 0)
+        markdown_content.append(f"| {dataset_name} | {year} | {rows:,} | {cols} | {unique_colleges:,} | {filename} |")
+    
+    markdown_content.append("")
+    
+    # College statistics summary
+    total_colleges_across_datasets = sum(info.get('unique_colleges', 0) for info in datasets_info.values())
+    total_college_records = sum(info.get('total_college_records', 0) for info in datasets_info.values())
+    
+    markdown_content.append("## College Statistics Summary")
+    markdown_content.append("")
+    markdown_content.append(f"- **Total unique colleges across all datasets:** {total_colleges_across_datasets:,}")
+    markdown_content.append(f"- **Total college-related records:** {total_college_records:,}")
+    markdown_content.append("")
+    
+    # College statistics by year
+    markdown_content.append("### Colleges by Dataset (Year Order)")
+    markdown_content.append("")
+    markdown_content.append("| Dataset | Year | Unique Colleges | College Records |")
+    markdown_content.append("|---------|------|----------------|----------------|")
+    
+    for dataset_name, info in sorted_datasets:
+        year = info['year'] if info['year'] != 9999 else "Unknown"
+        unique_colleges = info.get('unique_colleges', 0)
+        college_records = info.get('total_college_records', 0)
+        markdown_content.append(f"| {dataset_name} | {year} | {unique_colleges:,} | {college_records:,} |")
     
     markdown_content.append("")
     
@@ -146,9 +198,13 @@ def create_summary_markdown(datasets_info: Dict, variable_analysis: Dict, output
     # Unique variables by dataset
     markdown_content.append("### Dataset-Specific Variables")
     markdown_content.append("")
-    for dataset_name, unique_vars in variable_analysis['unique_variables'].items():
+    
+    # Sort datasets by year for unique variables section
+    for dataset_name, info in sorted_datasets:
+        unique_vars = variable_analysis['unique_variables'].get(dataset_name, set())
         if unique_vars:
-            markdown_content.append(f"#### {dataset_name}")
+            year = info['year'] if info['year'] != 9999 else "Unknown"
+            markdown_content.append(f"#### {dataset_name} ({year})")
             for var in sorted(unique_vars):
                 markdown_content.append(f"- `{var}`")
             markdown_content.append("")
@@ -157,8 +213,10 @@ def create_summary_markdown(datasets_info: Dict, variable_analysis: Dict, output
     markdown_content.append("## Detailed Variable Information")
     markdown_content.append("")
     
-    for dataset_name, info in datasets_info.items():
-        markdown_content.append(f"### {dataset_name}")
+    # Sort datasets by year for detailed variable information
+    for dataset_name, info in sorted_datasets:
+        year = info['year'] if info['year'] != 9999 else "Unknown"
+        markdown_content.append(f"### {dataset_name} ({year})")
         markdown_content.append("")
         markdown_content.append("| Variable | Data Type | Missing Values | Unique Values |")
         markdown_content.append("|----------|-----------|----------------|---------------|")
