@@ -1,4 +1,8 @@
 
+# Survey 1914-1915
+python3 master_program.py '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/cleaned_scans/commis_1913_1914.pdf' historical-education-college-tables arn:aws:iam::672670075294:role/TextractRole --output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/extracted_scans/commis_1913_1914_extracted.csv' --json-output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/textract_json/commis_1913_1914.json'
+
+
 # Survey 1915-1916
 python3 master_program.py '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/cleaned_scans/commis_1915_1916.pdf' historical-education-college-tables arn:aws:iam::672670075294:role/TextractRole --output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/extracted_scans/commis_1915_1916_extracted.csv' --json-output '/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/textract_json/commis_1915_1916.json'
 

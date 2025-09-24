@@ -1,0 +1,303 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring 31 Jul 2026
+Serial number: 401909304042
+  Licensed to: Collin Jay Wardius
+               UC San Diego
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased; see
+          help set_maxvar.
+
+. do clean19241926.do 
+
+. 
+. cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education"
+/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education
+
+. import delimited "data/extracted_scans/bi_survey1924_1926_extracted", clear
+(encoding automatically selected: ISO-8859-1)
+(16 vars, 8,064 obs)
+
+. rename v1 page_number 
+
+. rename v2 header_indicator 
+
+. 
+. compress
+  (0 bytes saved)
+
+. 
+. * generated header inicator works well for these data
+. keep if inrange(page_number, 1,28) | inrange(page_number, 35,96)
+(2,022 observations deleted)
+
+. 
+. * drop header rows
+. 
+. drop if header_indicator==1
+(732 observations deleted)
+
+. 
+. * assign states to colleges. state names often have appended periods
+. 
+. g is_state = !missing(v3) & missing(v4)
+
+. 
+. g state = substr(v3, 1, strpos(v3, "-") - 1) if is_state & strpos(v3, "-")>0
+(5,310 missing values generated)
+
+. replace state = v3 if is_state & strpos(v3, "-")==0
+variable state was str1 now str20
+(93 real changes made)
+
+. replace state = subinstr(state, ".","",.)
+(0 real changes made)
+
+. replace state = upper(state)
+(1 real change made)
+
+. replace state = "NORTH CAROLINA" if state=="NORTH CARO"
+(0 real changes made)
+
+. replace state = "DISTRICT OF COLUMBIA" if state=="DISTRICT OF CO"
+(0 real changes made)
+
+. replace state = "MASSACHUSETTS" if state=="MASSACHUSETTS CONTINUED"
+(0 real changes made)
+
+. replace state = "OHIO" if state == "OH10"
+(0 real changes made)
+
+. replace state = "NORTH CAROLINA" if state == "NORTH CAROLINA "
+(0 real changes made)
+
+. 
+. * fill states
+. 
+. replace state = state[_n-1] if missing(state) 
+(5,217 real changes made)
+
+. drop if is_state
+(93 observations deleted)
+
+. 
+. * fill town
+. 
+. replace v3 = "" if inlist(v3, "Do", "Do (May", "Do.") // Indicates continuation
+(251 real changes made)
+
+. replace v3 = v3[_n-1] if missing(v3)
+(4,480 real changes made)
+
+. 
+. 
+. * fill university
+. 
+. g lower_cat = lower(v4)
+(1 missing value generated)
+
+. g is_college = strpos(lower_cat, "col") > 0 ///
+>     | strpos(lower_cat, "inst") > 0 ///
+>     | strpos(lower_cat, "uni") > 0
+
+. 
+. g college = lower_cat if is_college
+(4,366 missing values generated)
+
+. replace college = college[_n-1] if missing(college)
+(4,349 real changes made)
+
+. replace college = "alabama polytechnic institute" if missing(college) // Unique 
+> to 1924-1926
+(17 real changes made)
+
+. 
+. * drop anything in parentheses typically some indications of control
+. 
+. replace college = substr(college,1,strpos(college, "(")-1) if strpos(college, "(
+> ")>0
+(218 real changes made)
+
+. 
+. * create a category row 
+. 
+. g category = "total" if is_college
+(4,366 missing values generated)
+
+. replace category = "major" if is_college ==0
+(4,366 real changes made)
+
+. 
+. 
+. * create header row
+. 
+. rename v3 town
+
+. rename v4 program
+
+. rename v5 year_first_opening
+
+. rename v6 professors_men
+
+. rename v7 professors_women
+
+. rename v8 students_men
+
+. rename v9 students_women
+
+. rename v10 first_degrees_men
+
+. rename v11 first_degrees_women
+
+. rename v12 graduate_degrees_men
+
+. rename v13 graduate_degrees_women
+
+. rename v14 honorary_degrees
+
+. 
+. * keep a subset of the variables
+. 
+. keep state town college program category year_first_opening professors_men profe
+> ssors_women students_men students_women first_degrees_men first_degrees_women gr
+> aduate_degrees_men graduate_degrees_women honorary_degrees
+
+. 
+. order state town college program category year_first_opening professors_men prof
+> essors_women students_men students_women first_degrees_men first_degrees_women g
+> raduate_degrees_men graduate_degrees_women honorary_degrees
+
+. 
+. * clean college names - remove non-conventional characters including Unicode and
+>  numbers
+. replace college = ustrregexra(college, "[^\x20-\x7E]", "") if !missing(college)
+(15 real changes made)
+
+. replace college = regexr(college, "[^a-zA-Z \-\'\.]", "") if !missing(college)
+(545 real changes made)
+
+. replace college = regexr(college, " +", " ") if !missing(college)
+(0 real changes made)
+
+. replace college = trim(college) if !missing(college)
+(720 real changes made)
+
+. replace college = regexr(college, "^[\.\-]+|[\.\-]+$", "") if !missing(college)
+(480 real changes made)
+
+. 
+. 
+. * remove dashes and spaces as well
+. 
+. replace college = subinstr(college, "-", "", .)
+(207 real changes made)
+
+. replace college = subinstr(college, "  ", " ", .)
+(7 real changes made)
+
+. 
+. * destring all numeric variables
+. 
+. loc numeric_vars year_first_opening professors_men professors_women students_men
+>  students_women first_degrees_men first_degrees_women graduate_degrees_men gradu
+> ate_degrees_women honorary_degrees
+
+. 
+. foreach variable of local numeric_vars {
+  2.     replace `variable' = subinstr(`variable', ",", "", .) if !missing(`variab
+> le')
+  3.     replace `variable' = subinstr(`variable', "$", "", .) if !missing(`variab
+> le')
+  4. }
+(0 real changes made)
+(0 real changes made)
+(3 real changes made)
+(1 real change made)
+(0 real changes made)
+(1 real change made)
+(217 real changes made)
+(0 real changes made)
+(166 real changes made)
+(0 real changes made)
+(6 real changes made)
+(2 real changes made)
+(1 real change made)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(2 real changes made)
+(0 real changes made)
+(0 real changes made)
+(0 real changes made)
+
+. 
+. *check to ensure missing county are close to that of the original string variabl
+> es. Additional missings are typically the result of textract errors.
+. 
+. destring year_first_opening, replace 
+year_first_opening: contains nonnumeric characters; no replace
+
+. destring professors_men, replace force 
+professors_men: contains nonnumeric characters; replaced as int
+(1058 missing values generated)
+
+. destring professors_women, replace force
+professors_women: contains nonnumeric characters; replaced as int
+(1472 missing values generated)
+
+. destring students_men, replace force
+students_men: contains nonnumeric characters; replaced as int
+(100 missing values generated)
+
+. destring students_women, replace force
+students_women: contains nonnumeric characters; replaced as double
+(454 missing values generated)
+
+. destring first_degrees_men, replace force
+first_degrees_men: contains nonnumeric characters; replaced as int
+(2681 missing values generated)
+
+. destring first_degrees_women, replace force
+first_degrees_women: contains nonnumeric characters; replaced as int
+(3036 missing values generated)
+
+. destring graduate_degrees_men, replace force
+graduate_degrees_men: contains nonnumeric characters; replaced as int
+(4449 missing values generated)
+
+. destring graduate_degrees_women, replace force
+graduate_degrees_women: all characters numeric; replaced as int
+(4607 missing values generated)
+
+. destring honorary_degrees, replace force
+honorary_degrees: contains nonnumeric characters; replaced as byte
+(4396 missing values generated)
+
+. 
+. compress 
+  variable town was str74 now str19
+  variable college was str50 now str47
+  variable program was str74 now str73
+  variable year_first_opening was str68 now str9
+  (615,606 bytes saved)
+
+. 
+. export delimited "data/cleaned_scans/bi_survey1924_1926.csv", replace
+file data/cleaned_scans/bi_survey1924_1926.csv saved
+
+. 
+. 
+end of do-file

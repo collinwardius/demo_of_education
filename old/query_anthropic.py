@@ -2,21 +2,26 @@ import anthropic
 
 client = anthropic.Anthropic(api_key="***REMOVED***")
 
-
-# Use the file_id with code execution
+# Direct message request to extract first page of blue_book.pdf
 response = client.beta.messages.create(
-    model="claude-opus-4-1-20250805",
-    betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
-    max_tokens=4096,
+    model="claude-sonnet-4-20250514",
+    betas=["files-api-2025-04-14"],
+    max_tokens=8192,
     messages=[{
         "role": "user",
         "content": [
-            {"type": "text", "text": "You are json file cleaner and your job is to extract data from this json file and make sure header names are consistent. The file attached is a JSON file containing data from a survey of universities that was extracted using amazon textract from a pdf. There are many tables within this json file. Make sure to note the nested nature of the headers. Create headers that are consistent across tables and imbed all the nested information. It is also your job to detect within the document the different tables contained within. Make sure to create different outpput csv's for each of the different tables. Tables of the same type should be appended together, however."},
-            {"type": "container_upload", "file_id": "file_011CSy6eM36dcMjN6FrK4vS8.id"}
+            {"type": "text", "text": "You are a PDF table text extractor. Please extract all text content from the first page only of the blue_book.pdf file using OCR tools. Output the results in a csv. Extract only the text that is contained within the tables. note that the extra large headers are state names. they should apply to all colleges until the next state is reached. for bold headers without numbers, these classify the type of college. these should be used for the succeeding colleges until the next bold header or state name is reached. there should be no rows in the table that are blank except for the first column. make sure to verify that you are always outputting the text to the correct column as there are sometimes nested headers. You do not need to include any text in your response except for the csv."},
+            {"type": "document", "source": {"type": "file", "file_id": "file_011CTRySCHwGfk5VuLuzytjz"}}
         ]
-    }],
-    tools=[{
-        "type": "code_execution_20250825",
-        "name": "code_execution"
     }]
 )
+
+print("Extraction completed!")
+extracted_text = response.content[0].text
+print("Extracted text:")
+print(extracted_text)
+
+# Save to text file
+with open("blue_book_first_page.txt", "w", encoding="utf-8") as f:
+    f.write(extracted_text)
+print(f"Text saved to blue_book_first_page.txt")

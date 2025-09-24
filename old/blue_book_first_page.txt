@@ -1,0 +1,36 @@
+State,Type,Location (City or Town),Founded Year,Control,Student Enrollment Male,Student Enrollment Female,Recognized By
+ARKANSAS,,,,,,, 
+,, Alabama College,Montevallo,1896,State,900,671,ASDOU
+,, Alabama Poly. Inst.§,Auburn,1872,State,834,595,SDO
+,, Alabama University,University,1831,State,5500,3577,ASDOUY
+,, Athens College,Athens,1843,ME So.,500,182,DO
+,, Birmingham So. Coll.,Birmingham,1856,ME So.,950,550,ASDOUY
+,, Howard College,Birmingham,1842,Baptist,1350,678,ASDOUY
+,, Huntington College,Montgomery,1854,ME So.,650,,SDOUY
+,, Judson College,Marion,1838,Baptist,317,317,SDORY
+,, Spring Hill College,Spring Hill,1830,R.C.,350,270,ASDOY
+,, State Teachers Coll.§,Florence,1872,State,600,515,STD
+,, State Teachers Coll.§,Jacksonville,1882,State,1000,414,STDO
+,, State Teachers Coll.§,Livingston,1883,State,350,55,STDO
+,, State Teachers Coll.§,Troy,1887,State,,,STDO
+Colleges Especially for Negroes,Miles College,Birmingham,1907,C.M.E.,450,94,DS
+,, Montgomery St. T. C.,Montgomery,1874,State,,,
+,, Oakwood College,Huntsville,1869,7D Ad.,,,JSD
+,, Selma University,Selma,1878,Baptist,795,300,C
+,, St. Agri.&Mech.Inst.§,Normal,1875,Public,395,180,SD
+,, Stillman Institute,Tuscaloosa,1876,Presby.,,,
+,, Talladega College,Talladega,1867,A.M.A.,340,,SXD
+,, Tuskegee Institute §,Tuskegee,1881,Non-S.,2591,1747,SXD
+Junior Colleges,Marion Institute,Marion,1842,Private,250,238,DUSJ
+,, Sacred Heart Jr. Coll.,Cullman,1906,R.C.,175,175,DUJ
+,, Snead Junior College,Boaz,1898,M.E.,177,80,JSU
+,, Southern Union College,Wadley,1923,Private,70,22,OJD
+,, St. Bernard College,St. Bernard,1892,R.C.,300,200,SO
+,, Walker Junior College,Jasper,1938,Private,62,20,DUJ
+ALASKA,University of Alaska,College,1917,Terr.,250,180,WDO
+ARIZONA,Arizona State College §,Flagstaff,1899,State,357,215,NTDO
+,, Arizona State College §,Tempe,1885,State,1500,750,NTDO
+,, Arizona University,Tucson,1885,State,4000,1033,ANDOUY
+Colleges Especially for Negroes,NONE,,,,,, 
+Junior Colleges,Gila Junior College,Thatcher,1891,Dist.,400,153,DUOJ
+,, Phoenix Junior College,Phoenix,1920,Dist.,1450,700,DUNJ

@@ -1,0 +1,61 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring 31 Jul 2026
+Serial number: 401909304042
+  Licensed to: Collin Jay Wardius
+               UC San Diego
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased; see
+          help set_maxvar.
+
+. do clean_appended_dataset.do 
+
+. * clean appended dataset
+. cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education"
+/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education
+
+. import delimited "data/cleaned_scans/college_surveys_appended.csv", clear
+(encoding automatically selected: ISO-8859-1)
+(37 vars, 40,061 obs)
+
+. 
+. * clean any inconsistent strings
+. 
+. replace state = "DISTRICT OF COLUMBIA" if state == "DIST COLUMBIA"
+(64 real changes made)
+
+. replace state = "NEW HAMPSHIRE" if state == "NEW HAMP"
+(2 real changes made)
+
+. replace state = "PENNSYLVANIA"  if state == "PENNSYLVANIA CONTD"
+(33 real changes made)
+
+. replace state = "SOUTH CAROLINA" if state == "SOUTH CARO"
+(16 real changes made)
+
+. replace state = "OHIO" if state == "OMO"
+(77 real changes made)
+
+. 
+. drop if inlist(state,"PUERTO RICO", "PORTO RICO", "LOCATION")
+(82 observations deleted)
+
+. 
+. export delimited "data/college_data/cleaned_appended_college_data", replace
+file data/college_data/cleaned_appended_college_data.csv saved
+
+. 
+end of do-file

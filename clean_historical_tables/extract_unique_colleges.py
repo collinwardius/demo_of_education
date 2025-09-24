@@ -60,13 +60,9 @@ def extract_unique_colleges(input_file: str, output_folder: str):
     unique_colleges.to_csv(colleges_output, index=False)
     print(f"Saved unique colleges by state to: {colleges_output}")
     
-    # 2. Colleges by state summary
-    state_summary_output = output_folder / "colleges_by_state_summary.csv"
-    colleges_by_state.to_csv(state_summary_output, index=False)
-    print(f"Saved state summary to: {state_summary_output}")
+    # Skip creating colleges_by_state_summary.csv file
     
-    # Create a detailed report
-    create_college_report(unique_colleges, colleges_by_state, output_folder)
+    # Skip creating college_extraction_report.md
     
     return unique_colleges, colleges_by_state
 
@@ -117,8 +113,7 @@ def create_college_report(unique_colleges, colleges_by_state, output_folder):
     markdown_content.append("## Generated Files")
     markdown_content.append("")
     markdown_content.append("1. **unique_colleges_by_state.csv** - All unique college-state combinations sorted by state then college name")
-    markdown_content.append("2. **colleges_by_state_summary.csv** - Summary of college counts by state")
-    markdown_content.append("3. **college_extraction_report.md** - This report")
+    markdown_content.append("2. **college_extraction_report.md** - This report")
     markdown_content.append("")
     
     # Write report
@@ -131,8 +126,8 @@ def main():
     """Main function to run the college extraction."""
     
     # Define paths
-    input_file = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/cleaned_scans/college_surveys_appended.csv"
-    output_folder = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/cleaned_scans"
+    input_file = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/cleaned_appended_college_data.csv"
+    output_folder = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data"
     
     print("Starting college extraction...")
     print(f"Input file: {input_file}")

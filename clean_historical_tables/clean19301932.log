@@ -1,0 +1,332 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring 31 Jul 2026
+Serial number: 401909304042
+  Licensed to: Collin Jay Wardius
+               UC San Diego
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased; see
+          help set_maxvar.
+
+. do clean19301932.do 
+
+. 
+. cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education"
+/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education
+
+. import delimited "data/extracted_scans/bi_survey1930_1932_extracted", clear
+(encoding automatically selected: UTF-8)
+(31 vars, 7,204 obs)
+
+. rename v1 page_number 
+
+. rename v2 header_indicator 
+
+. 
+. compress
+  v3 is strL now coalesced
+  (273,730 bytes saved)
+
+. 
+. * generated header inicator works well for these data
+. keep if inrange(page_number, 1,34)
+(6,183 observations deleted)
+
+. 
+. * drop header rows
+. 
+. drop if header_indicator==1
+(96 observations deleted)
+
+. 
+. * assign states to colleges. state names often have appended periods
+. 
+. g is_state = !missing(v3) & missing(v4) & missing(v5) & missing(v6) & missing(v7
+> )
+
+. 
+. g state = substr(v3, 1, strpos(v3, "-") - 1) if is_state & strpos(v3, "-")>0
+(925 missing values generated)
+
+. replace state = v3 if is_state & strpos(v3, "-")==0
+variable state was str1 now str20
+(94 real changes made)
+
+. replace state = subinstr(state, ".","",.)
+(0 real changes made)
+
+. replace state = upper(state)
+(0 real changes made)
+
+. replace state = "NORTH CAROLINA" if state=="NORTH CARO"
+(0 real changes made)
+
+. replace state = "DISTRICT OF COLUMBIA" if state=="DISTRICT OF CO"
+(0 real changes made)
+
+. replace state = "MASSACHUSETTS" if state=="MASSACHUSETTS CONTINUED"
+(0 real changes made)
+
+. replace state = "OHIO" if state == "OH10"
+(0 real changes made)
+
+. replace state = "NORTH CAROLINA" if state == "NORTH CAROLINA "
+(0 real changes made)
+
+. 
+. * fill states
+. 
+. replace state = state[_n-1] if missing(state) 
+(831 real changes made)
+
+. drop if is_state
+(94 observations deleted)
+
+. 
+. * remove town from the university name. They always come after a ,
+. 
+. replace v3 = substr(v3, 1, strpos(v3,",") - 1) if strpos(v3 , ",") > 0
+(781 real changes made)
+
+. 
+. 
+. * fill university
+. 
+. g lower_cat = lower(v3)
+(1 missing value generated)
+
+. g college = lower_cat
+(1 missing value generated)
+
+. 
+. * drop anything in parentheses typically some indications of control
+. 
+. replace college = substr(college,1,strpos(college, "(")-1) if strpos(college, "(
+> ")>0
+(0 real changes made)
+
+. 
+. * create a category row 
+. 
+. g category = "total"
+
+. 
+. 
+. * create header row
+. 
+. rename v3 program
+
+. rename v4 professors_men
+
+. rename v5 professors_women
+
+. rename v6 students_men
+
+. rename v7 students_women
+
+. rename v12 undergrads_arts_men
+
+. rename v13 undergrads_arts_women
+
+. rename v14 grads_arts_men
+
+. rename v15 grads_arts_women
+
+. rename v16 undergrads_prof_men
+
+. rename v17 undergrads_prof_women
+
+. rename v18 grads_prof_men
+
+. rename v19 grads_prof_women
+
+. rename v20 first_degrees_men
+
+. rename v21 first_degrees_women
+
+. rename v22 masters_total
+
+. rename v23 doctorate_total
+
+. rename v24 honorary_degrees
+
+. 
+. * keep a subset of the variables
+. 
+. keep state college program category professors_men professors_women students_men
+>  students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_a
+> rts_women undergrads_prof_men undergrads_prof_women grads_prof_men grads_prof_wo
+> men first_degrees_men first_degrees_women masters_total doctorate_total honorary
+> _degrees
+
+. 
+. order state college program category professors_men professors_women students_me
+> n students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_
+> arts_women undergrads_prof_men undergrads_prof_women grads_prof_men grads_prof_w
+> omen first_degrees_men first_degrees_women masters_total doctorate_total honorar
+> y_degrees
+
+. 
+. * clean college names - remove non-conventional characters including Unicode and
+>  numbers
+. replace college = ustrregexra(college, "[^\x20-\x7E]", "") if !missing(college)
+(0 real changes made)
+
+. replace college = regexr(college, "[^a-zA-Z \-\'\.]", "") if !missing(college)
+(6 real changes made)
+
+. replace college = regexr(college, " +", " ") if !missing(college)
+(0 real changes made)
+
+. replace college = trim(college) if !missing(college)
+(4 real changes made)
+
+. replace college = regexr(college, "^[\.\-]+|[\.\-]+$", "") if !missing(college)
+(2 real changes made)
+
+. 
+. 
+. * remove dashes and spaces as well
+. 
+. replace college = subinstr(college, "-", "", .)
+(39 real changes made)
+
+. replace college = subinstr(college, "  ", " ", .)
+(0 real changes made)
+
+. 
+. * destring all numeric variables
+. 
+. loc numeric_vars professors_men professors_women students_men students_women und
+> ergrads_arts_men undergrads_arts_women grads_arts_men grads_arts_women undergrad
+> s_prof_men undergrads_prof_women grads_prof_men grads_prof_women first_degrees_m
+> en first_degrees_women masters_total doctorate_total honorary_degrees
+
+. 
+. foreach variable of local numeric_vars {
+  2.     replace `variable' = subinstr(`variable', ",", "", .) if !missing(`variab
+> le')
+  3.     replace `variable' = subinstr(`variable', "$", "", .) if !missing(`variab
+> le')
+  4. }
+(5 real changes made)
+(0 real changes made)
+(0 real changes made)
+(3 real changes made)
+(120 real changes made)
+(0 real changes made)
+(71 real changes made)
+(0 real changes made)
+(46 real changes made)
+(0 real changes made)
+(29 real changes made)
+(0 real changes made)
+(4 real changes made)
+(0 real changes made)
+(2 real changes made)
+(0 real changes made)
+(73 real changes made)
+(1 real change made)
+(17 real changes made)
+(0 real changes made)
+(6 real changes made)
+(0 real changes made)
+(2 real changes made)
+(0 real changes made)
+(8 real changes made)
+(0 real changes made)
+(2 real changes made)
+(0 real changes made)
+(1 real change made)
+(0 real changes made)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(0 real changes made)
+
+. 
+. *check to ensure missing county are close to that of the original string variabl
+> es. Additional missings are typically the result of textract errors.
+. 
+. foreach variable of local numeric_vars {
+  2.     di "`variable'"
+  3.     destring `variable', replace force 
+  4. }
+professors_men
+professors_men: contains nonnumeric characters; replaced as int
+(74 missing values generated)
+professors_women
+professors_women: contains nonnumeric characters; replaced as int
+(181 missing values generated)
+students_men
+students_men: contains nonnumeric characters; replaced as int
+(151 missing values generated)
+students_women
+students_women: contains nonnumeric characters; replaced as int
+(157 missing values generated)
+undergrads_arts_men
+undergrads_arts_men: contains nonnumeric characters; replaced as double
+(306 missing values generated)
+undergrads_arts_women
+undergrads_arts_women: contains nonnumeric characters; replaced as int
+(271 missing values generated)
+grads_arts_men
+grads_arts_men: contains nonnumeric characters; replaced as int
+(602 missing values generated)
+grads_arts_women
+grads_arts_women: contains nonnumeric characters; replaced as int
+(615 missing values generated)
+undergrads_prof_men
+undergrads_prof_men: contains nonnumeric characters; replaced as int
+(478 missing values generated)
+undergrads_prof_women
+undergrads_prof_women: contains nonnumeric characters; replaced as int
+(563 missing values generated)
+grads_prof_men
+grads_prof_men: contains nonnumeric characters; replaced as int
+(643 missing values generated)
+grads_prof_women
+grads_prof_women: contains nonnumeric characters; replaced as int
+(730 missing values generated)
+first_degrees_men
+first_degrees_men: contains nonnumeric characters; replaced as int
+(186 missing values generated)
+first_degrees_women
+first_degrees_women: contains nonnumeric characters; replaced as int
+(201 missing values generated)
+masters_total
+masters_total: all characters numeric; replaced as int
+(537 missing values generated)
+doctorate_total
+doctorate_total: contains nonnumeric characters; replaced as int
+(735 missing values generated)
+honorary_degrees
+honorary_degrees: contains nonnumeric characters; replaced as byte
+(510 missing values generated)
+
+. 
+. 
+. compress 
+  variable program was strL now str70
+  (27,993 bytes saved)
+
+. 
+. export delimited "data/cleaned_scans/bi_survey1930_1932.csv", replace
+file data/cleaned_scans/bi_survey1930_1932.csv saved
+
+. 
+. 
+end of do-file

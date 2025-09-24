@@ -34,19 +34,13 @@ drop if is_state
 
 * remove town from the university name. They always come after a ,
 
-replace varname = substr(v3, 1, strpos(v3,",") - 1) if strpos(v3 , ",") > 0
+replace v3 = substr(v3, 1, strpos(v3,",") - 1) if strpos(v3 , ",") > 0
 
 
 * fill university
 
-g lower_cat = lower(v4)
-g is_college = strpos(lower_cat, "coll") > 0 ///
-    | strpos(lower_cat, "inst") > 0 ///
-    | strpos(lower_cat, "uni") > 0 ///
-    | strpos(lower_cat, "polytechnical") > 0
-
-g college = lower_cat if is_college
-replace college = college[_n-1] if missing(college)
+g lower_cat = lower(v3)
+g college = lower_cat
 
 * drop anything in parentheses typically some indications of control
 
@@ -54,15 +48,14 @@ replace college = substr(college,1,strpos(college, "(")-1) if strpos(college, "(
 
 * create a category row 
 
-g category = "total" if is_college
-replace category = "major" if is_college ==0
+g category = "total"
 
 
 * create header row
 
 rename v3 program
 rename v4 professors_men
-rename v5 professors_womem
+rename v5 professors_women
 rename v6 students_men
 rename v7 students_women
 rename v12 undergrads_arts_men
@@ -81,9 +74,9 @@ rename v24 honorary_degrees
 
 * keep a subset of the variables
 
-keep state college program category professors_men professors_womem students_men students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_arts_women undergrads 
+keep state college program category professors_men professors_women students_men students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_arts_women undergrads_prof_men undergrads_prof_women grads_prof_men grads_prof_women first_degrees_men first_degrees_women masters_total doctorate_total honorary_degrees
 
-order state town college program category year_first_opening professors_men professors_women students_men students_women first_degrees_men first_degrees_women graduate_degrees_men graduate_degrees_women honorary_degrees
+order state college program category professors_men professors_women students_men students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_arts_women undergrads_prof_men undergrads_prof_women grads_prof_men grads_prof_women first_degrees_men first_degrees_women masters_total doctorate_total honorary_degrees
 
 * clean college names - remove non-conventional characters including Unicode and numbers
 replace college = ustrregexra(college, "[^\x20-\x7E]", "") if !missing(college)
@@ -100,7 +93,7 @@ replace college = subinstr(college, "  ", " ", .)
 
 * destring all numeric variables
 
-loc numeric_vars year_first_opening professors_men professors_women students_men students_women first_degrees_men first_degrees_women graduate_degrees_men graduate_degrees_women honorary_degrees
+loc numeric_vars professors_men professors_women students_men students_women undergrads_arts_men undergrads_arts_women grads_arts_men grads_arts_women undergrads_prof_men undergrads_prof_women grads_prof_men grads_prof_women first_degrees_men first_degrees_women masters_total doctorate_total honorary_degrees
 
 foreach variable of local numeric_vars {
     replace `variable' = subinstr(`variable', ",", "", .) if !missing(`variable')
@@ -109,18 +102,13 @@ foreach variable of local numeric_vars {
 
 *check to ensure missing county are close to that of the original string variables. Additional missings are typically the result of textract errors.
 
-destring year_first_opening, replace 
-destring professors_men, replace force 
-destring professors_women, replace force
-destring students_men, replace force
-destring students_women, replace force
-destring first_degrees_men, replace force
-destring first_degrees_women, replace force
-destring graduate_degrees_men, replace force
-destring graduate_degrees_women, replace force
-destring honorary_degrees, replace force
+foreach variable of local numeric_vars {
+    di "`variable'"
+    destring `variable', replace force 
+}
+
 
 compress 
 
-export delimited "data/cleaned_scans/bi_survey1926_1928.csv", replace
+export delimited "data/cleaned_scans/bi_survey1930_1932.csv", replace
 
