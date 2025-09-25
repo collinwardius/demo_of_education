@@ -1369,3 +1369,204 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
 (Font)                  OT1/phv/b/n --> OT1/phv/b/n on input line 277.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 277.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 277.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 277.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
+Dictionary: translator-bibliography-dictionary, Language: English 
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict
+Dictionary: translator-environment-dictionary, Language: English 
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict
+Dictionary: translator-months-dictionary, Language: English 
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict
+Dictionary: translator-numbers-dictionary, Language: English 
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
+Dictionary: translator-theorem-dictionary, Language: English 
+)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout5 = `econ286_slides_oct30.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'econ286_slides_oct30.bbl' found.
+ (./econ286_slides_oct30.bbl)
+Package biblatex Info: Reference section=0 on input line 277.
+Package biblatex Info: Reference segment=0 on input line 277.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 277.
+\c@mv@tabular=\count535
+\c@mv@boldtabular=\count536
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+ (./econ286_slides_oct30.nav)
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 277.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 14.4pt on input line 281.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 281.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 4.0pt on input line 281.
+ [1
+
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_y72t7m.enc}] [2
+
+] [3
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=30, 1011.78pt x 433.62pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png  used on input line 304.
+(pdftex.def)             Requested size: 346.67151pt x 148.5735pt.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 304.
+ [4
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png, id=36, 1156.32pt x 867.24pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png  used on input line 313.
+(pdftex.def)             Requested size: 218.7503pt x 164.06273pt.
+ [5
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png, id=44, 772.8875pt x 562.1pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png  used on input line 320.
+(pdftex.def)             Requested size: 225.594pt x 164.06836pt.
+ [6
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png (PNG copy)>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png, id=50, 1004.3121pt x 1437.2094pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png  used on input line 329.
+(pdftex.def)             Requested size: 114.64294pt x 164.05849pt.
+ [7
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png>] [8
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png, id=63, 859.5312pt x 570.2103pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png  used on input line 343.
+(pdftex.def)             Requested size: 247.31659pt x 164.06905pt.
+ [9
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png>] [10
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png, id=75, 997.0851pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png  used on input line 359.
+(pdftex.def)             Requested size: 287.13899pt x 164.0695pt.
+ [11
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png, id=82, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png  used on input line 368.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [12
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=89, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png  used on input line 377.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [13
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png, id=97, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png  used on input line 385.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [14
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=104, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png  used on input line 393.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [15
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 4.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 4.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 4.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 4.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/b/n' will be
+(Font)              scaled to size 10.95pt on input line 6.
+) [16
+
+] [17
+
+] [18
+
+]
+\tf@nav=\write8
+\openout8 = `econ286_slides_oct30.nav'.
+
+\tf@toc=\write9
+\openout9 = `econ286_slides_oct30.toc'.
+
+\tf@snm=\write10
+\openout10 = `econ286_slides_oct30.snm'.
+
+ (./econ286_slides_oct30.aux)
+Package rerunfilecheck Info: File `econ286_slides_oct30.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
+\openout1 = `econ286_slides_oct30.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 45369 strings out of 476025
+ 1003426 string characters out of 5790016
+ 1860388 words of memory out of 5000000
+ 64980 multiletter control sequences out of 15000+600000
+ 550096 words of font info for 71 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 128i,15n,122p,763b,1015s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb>
+Output written on econ286_slides_oct30.pdf (18 pages, 3312737 bytes).
+PDF statistics:
+ 151 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+
