@@ -79,6 +79,15 @@ def append_college_data():
     # Concatenate all dataframes
     combined_df = pd.concat(dataframes, ignore_index=True, sort=False)
 
+    # Add University of California Los Angeles entry
+    ucla_entry = pd.DataFrame({
+        'College_Name': ['University of California Los Angeles'],
+        'Founded_Year': [1919],
+        'State': ['California'],
+        'Control': ['State']
+    })
+    combined_df = pd.concat([combined_df, ucla_entry], ignore_index=True)
+
     # Reorder columns for consistency
     standard_columns = [
         'State', 'College_Type', 'Number', 'College_Name', 'Gender', 'City',
