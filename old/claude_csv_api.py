@@ -1,7 +1,12 @@
 import pandas as pd
 import anthropic
+import os
 
-client = anthropic.Anthropic(api_key="***REMOVED***")
+# Read API key from config file
+with open(os.path.expanduser('~/Documents/.claude_api_key'), 'r') as f:
+    api_key = f.read().strip()
+
+client = anthropic.Anthropic(api_key=api_key)
 # Example: Reading a CSV file
 df = pd.read_csv('table-1.csv')
 csv_content = df.to_string()

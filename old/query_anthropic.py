@@ -1,6 +1,11 @@
 import anthropic
+import os
 
-client = anthropic.Anthropic(api_key="***REMOVED***")
+# Read API key from config file
+with open(os.path.expanduser('~/Documents/.claude_api_key'), 'r') as f:
+    api_key = f.read().strip()
+
+client = anthropic.Anthropic(api_key=api_key)
 
 # Direct message request to extract first page of blue_book.pdf
 response = client.beta.messages.create(
