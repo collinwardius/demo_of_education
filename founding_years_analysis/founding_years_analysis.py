@@ -905,6 +905,98 @@ def create_regional_control_latex_table(df_clean):
 
     print(f"LaTeX table saved to: {output_path}")
 
+def create_city_timeline_scatter(df_clean):
+    """Create timeline scatter plot showing colleges founded by city between 1900-1940.
+    Only shows cities that went from 0 to 1 active college during this period."""
+
+    # Filter for colleges founded between 1900 and 1940
+    df_filtered = df_clean[(df_clean['founding_year'] >= 1900) & (df_clean['founding_year'] <= 1940)].copy()
+
+    print(f"\nCreating city timeline scatter plot...")
+    print(f"Colleges founded 1900-1940: {len(df_filtered)}")
+
+    # Clean city data - handle missing cities
+    df_filtered = df_filtered[df_filtered['City'].notna()].copy()
+    print(f"Colleges with valid city data: {len(df_filtered)}")
+
+    # Find cities that had 0 active colleges before 1900 and got their first college 1900-1940
+    # First, identify all cities with colleges before 1900
+    cities_before_1900 = set(df_clean[(df_clean['founding_year'] < 1900) &
+                                       (df_clean['City'].notna())]['City'].unique())
+
+    # Get cities with exactly 1 college founded 1900-1940
+    city_counts_1900_1940 = df_filtered['City'].value_counts()
+    cities_with_one_college = city_counts_1900_1940[city_counts_1900_1940 == 1].index.tolist()
+
+    # Filter to cities that had no colleges before 1900 AND got exactly 1 college 1900-1940
+    cities_to_show = [city for city in cities_with_one_college if city not in cities_before_1900]
+
+    df_plot = df_filtered[df_filtered['City'].isin(cities_to_show)].copy()
+
+    print(f"\nShowing {len(cities_to_show)} cities that went from 0 to 1 college ({len(df_plot)} colleges total)")
+
+    # Sort cities by founding year for better visualization
+    df_plot = df_plot.sort_values('founding_year')
+    cities_sorted = df_plot['City'].tolist()
+
+    # Create region color mapping
+    region_colors = {
+        'Northeast': '#e41a1c',
+        'South': '#377eb8',
+        'Midwest': '#4daf4a',
+        'West': '#984ea3'
+    }
+
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(18, max(12, len(cities_sorted) * 0.25)))
+
+    # Plot each college
+    for idx, row in df_plot.iterrows():
+        city = row['City']
+        year = row['founding_year']
+        region = row['region']
+        college_name = row['College_Name'] if 'College_Name' in row else 'Unknown'
+
+        y_pos = cities_sorted.index(city)
+
+        # Plot the point
+        ax.scatter(year, y_pos, color=region_colors[region],
+                  s=150, alpha=0.7, edgecolors='black', linewidth=0.8, zorder=3)
+
+        # Add college name as annotation directly next to the dot
+        ax.annotate(college_name, xy=(year, y_pos), xytext=(8, 0),
+                   textcoords='offset points', fontsize=8, va='center', ha='left',
+                   bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.85, edgecolor='gray', linewidth=0.5))
+
+    # Add legend for regions
+    for region, color in region_colors.items():
+        ax.scatter([], [], color=color, s=150, alpha=0.7, edgecolors='black',
+                  linewidth=0.8, label=region)
+
+    # Set y-axis to show city names
+    ax.set_yticks(range(len(cities_sorted)))
+    ax.set_yticklabels(cities_sorted, fontsize=9)
+
+    # Set x-axis
+    ax.set_xlabel('Founding Year', fontsize=14)
+    ax.set_ylabel('City', fontsize=14)
+    ax.set_title('First College Founded in Each City, 1900-1940\n(Cities with no prior colleges, excluding Junior Colleges)',
+                 fontsize=16, fontweight='bold')
+
+    # Add grid
+    ax.grid(True, alpha=0.3, axis='x')
+    ax.set_xlim(1898, 1942)
+
+    # Add legend
+    ax.legend(fontsize=11, loc='lower right', title='Region', framealpha=0.9)
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "city_timeline_scatter_1900_1940.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"\nCity timeline scatter plot saved to: {output_path}")
+
 def main():
     print("Creating founding years CDF analysis...")
 
@@ -938,6 +1030,9 @@ def main():
 
     # Create LaTeX table of colleges by region and control type
     create_regional_control_latex_table(df_clean)
+
+    # Create city timeline scatter plot
+    create_city_timeline_scatter(df_clean)
 
     print("\nFounding years analysis complete!")
 

@@ -16,5 +16,310 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{actonDistanceDegreesHow2025}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=f49504aeeeb79bff78fea701863d42ca}{%
+           family={Acton},
+           familyi={A\bibinitperiod},
+           given={Riley},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=024cc47c6cf25681c8af320c108e7baa}{%
+           family={Cortes},
+           familyi={C\bibinitperiod},
+           given={Kalena\bibnamedelima E.},
+           giveni={K\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4633106c29fbe7a0d8199f0cb0d0ee0b}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Lois},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e08d2d71b877ef82f48198d2d5ab3cb6}{%
+           family={Morales},
+           familyi={M\bibinitperiod},
+           given={Camila},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{bd898f748f3b0ca8b9ae49bb271f4852}
+      \strng{fullhash}{a3d29a2f834fc75b4489f51017d62c19}
+      \strng{bibnamehash}{bd898f748f3b0ca8b9ae49bb271f4852}
+      \strng{authorbibnamehash}{bd898f748f3b0ca8b9ae49bb271f4852}
+      \strng{authornamehash}{bd898f748f3b0ca8b9ae49bb271f4852}
+      \strng{authorfullhash}{a3d29a2f834fc75b4489f51017d62c19}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{02727757}
+      \field{journaltitle}{Economics of Education Review}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{shorttitle}{Distance to Degrees}
+      \field{title}{Distance to Degrees: {{How}} College Proximity Shapes Students' Enrollment Choices and Attainment across Race-Ethnicity and Socioeconomic Status}
+      \field{urlday}{12}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{102724}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.econedurev.2025.102724
+      \endverb
+    \endentry
+    \entry{cardUsingGeographicVariation1993}{report}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a9e88233ec6ce30d2d31e294961e3e76}{%
+           family={Card},
+           familyi={C\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {National Bureau of Economic Research}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \strng{namehash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \strng{fullhash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \strng{bibnamehash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \strng{authorbibnamehash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \strng{authornamehash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \strng{authorfullhash}{a9e88233ec6ce30d2d31e294961e3e76}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{number}{w4483}
+      \field{title}{Using {{Geographic Variation}} in {{College Proximity}} to {{Estimate}} the {{Return}} to {{Schooling}}}
+      \field{type}{techreport}
+      \field{urlday}{12}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{1993}
+      \field{urldateera}{ce}
+      \field{pages}{w4483}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.3386/w4483
+      \endverb
+    \endentry
+    \entry{dufloSchoolingLaborMarket2001}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7e6b0ea4eee38822cdb0a4361e98752c}{%
+           family={Duflo},
+           familyi={D\bibinitperiod},
+           given={Esther},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \strng{fullhash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \strng{bibnamehash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \strng{authorbibnamehash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \strng{authornamehash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \strng{authorfullhash}{7e6b0ea4eee38822cdb0a4361e98752c}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Between 1973 and 1978, the Indonesian government engaged in one of the largest school construction programs on record. Combining differences across regions in the number of schools constructed with differences across cohorts induced by the timing of the program suggests that each primary school constructed per 1,000 children led to an average increase of 0.12 to 0.19 years of education, as well as a 1.5 to 2.7 percent increase in wages. This implies estimates of economic returns to education ranging from 6.8 to 10.6 percent. (JEL I2, J31, O15, O22)}
+      \field{issn}{0002-8282}
+      \field{journaltitle}{American Economic Review}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{4}
+      \field{shorttitle}{Schooling and {{Labor Market Consequences}} of {{School Construction}} in {{Indonesia}}}
+      \field{title}{Schooling and {{Labor Market Consequences}} of {{School Construction}} in {{Indonesia}}: {{Evidence}} from an {{Unusual Policy Experiment}}}
+      \field{urlday}{8}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{91}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \field{pages}{795\bibrangedash 813}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1257/aer.91.4.795
+      \endverb
+    \endentry
+    \entry{goldinAmericasGraduationHigh1998}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a18c02f3c78d81d8178faf1ae63981ee}{%
+           family={Goldin},
+           familyi={G\bibinitperiod},
+           given={Claudia},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{fullhash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{bibnamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authorbibnamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authornamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authorfullhash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \field{extraname}{1}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Secondary-school enrollment and graduation rates increased spectacularly in much of the United States from 1910 to 1940; the advance was particularly rapid from 1920 to 1935 in the nonsouthern states. This increase was uniquely American; no other nation underwent an equivalent change for several decades. States that rapidly expanded their high school enrollments early in the period had greater wealth, more homogeneity of wealth, and less manufacturing activity than others. Factors prompting the expansion include the substantial returns to education early in the century and a responsive "state." This work is based on a newly constructed state-level data set.}
+      \field{eprinttype}{jstor}
+      \field{issn}{0022-0507}
+      \field{journaltitle}{The Journal of Economic History}
+      \field{number}{2}
+      \field{shorttitle}{America's {{Graduation}} from {{High School}}}
+      \field{title}{America's {{Graduation}} from {{High School}}: {{The Evolution}} and {{Spread}} of {{Secondary Schooling}} in the {{Twentieth Century}}}
+      \field{urlday}{15}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{volume}{58}
+      \field{year}{1998}
+      \field{urldateera}{ce}
+      \field{pages}{345\bibrangedash 374}
+      \range{pages}{30}
+      \verb{eprint}
+      \verb 2566738
+      \endverb
+    \endentry
+    \entry{goldinHumanCapitalCenturyAmerican2001}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a18c02f3c78d81d8178faf1ae63981ee}{%
+           family={Goldin},
+           familyi={G\bibinitperiod},
+           given={Claudia},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{fullhash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{bibnamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authorbibnamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authornamehash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \strng{authorfullhash}{a18c02f3c78d81d8178faf1ae63981ee}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The modern concept of the wealth of nations emerged by the early twentieth century. Capital embodied in people-human capital-mattered. The United States led all nations in mass postelementary education during the "human-capital century." The American system of education was shaped by New World endowments and Republican ideology and was characterized by virtues including publicly funded mass education that was open and forgiving, academic yet practical, secular, gender neutral, and funded and controlled by small districts. The American educational template was a remarkable success, but recent educational concerns and policy have redefined some of its "virtues" as "vices."}
+      \field{eprinttype}{jstor}
+      \field{issn}{0022-0507}
+      \field{journaltitle}{The Journal of Economic History}
+      \field{number}{2}
+      \field{shorttitle}{The {{Human-Capital Century}} and {{American Leadership}}}
+      \field{title}{The {{Human-Capital Century}} and {{American Leadership}}: {{Virtues}} of the {{Past}}}
+      \field{urlday}{9}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{volume}{61}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \field{pages}{263\bibrangedash 292}
+      \range{pages}{30}
+      \verb{eprint}
+      \verb 2698021
+      \endverb
+    \endentry
+    \entry{goldinOriginsStateLevelDifferences1998}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=a18c02f3c78d81d8178faf1ae63981ee}{%
+           family={Goldin},
+           familyi={G\bibinitperiod},
+           given={Claudia},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=571c7bf71524e7f1a01a182010ad3b77}{%
+           family={Katz},
+           familyi={K\bibinitperiod},
+           given={Lawrence\bibnamedelima F.},
+           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {American Economic Association}%
+      }
+      \strng{namehash}{b8a00661462ac143181bf75c18821f6f}
+      \strng{fullhash}{b8a00661462ac143181bf75c18821f6f}
+      \strng{bibnamehash}{b8a00661462ac143181bf75c18821f6f}
+      \strng{authorbibnamehash}{b8a00661462ac143181bf75c18821f6f}
+      \strng{authornamehash}{b8a00661462ac143181bf75c18821f6f}
+      \strng{authorfullhash}{b8a00661462ac143181bf75c18821f6f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{eprinttype}{jstor}
+      \field{issn}{0002-8282}
+      \field{journaltitle}{The American Economic Review}
+      \field{number}{2}
+      \field{shorttitle}{The {{Origins}} of {{State-Level Differences}} in the {{Public Provision}} of {{Higher Education}}}
+      \field{title}{The {{Origins}} of {{State-Level Differences}} in the {{Public Provision}} of {{Higher Education}}: 1890-1940}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{volume}{88}
+      \field{year}{1998}
+      \field{urldateera}{ce}
+      \field{pages}{303\bibrangedash 308}
+      \range{pages}{6}
+      \verb{eprint}
+      \verb 116938
+      \endverb
+    \endentry
+    \entry{nimier-davidLocalHumanCapital2023}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4177d0d4338394607fd1d4a8fe1da74}{%
+           family={{Nimier-David}},
+           familyi={N\bibinitperiod},
+           given={Elio},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \strng{fullhash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \strng{bibnamehash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \strng{authorbibnamehash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \strng{authornamehash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \strng{authorfullhash}{c4177d0d4338394607fd1d4a8fe1da74}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Local {{Human Capital}} and {{Firm Creation Evidence}} from the {{Massification}} of {{Higher Education}} in {{France}}}
+      \field{year}{2023}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

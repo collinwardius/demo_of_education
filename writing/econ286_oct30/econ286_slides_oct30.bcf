@@ -2362,6 +2362,13 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">../bib/references.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1" intorder="1">goldinAmericasGraduationHigh1998</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">goldinOriginsStateLevelDifferences1998</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">goldinHumanCapitalCenturyAmerican2001</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">dufloSchoolingLaborMarket2001</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">nimier-davidLocalHumanCapital2023</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">cardUsingGeographicVariation1993</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">actonDistanceDegreesHow2025</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

@@ -6,6 +6,9 @@ backend=biber,
 style=authoryear,
 ]{biblatex}
 
+\DeclareFieldFormat{parens}{\mkbibparens{#1}}
+\renewbibmacro*{cite}{\printnames{labelname}\setunit{\addspace}\printfield[parens]{year}}
+
 % These slides also contain speaker notes. You can print just the slides,
 % just the notes, or both, depending on the setting below. Comment out the want
 % you want.
@@ -25,6 +28,7 @@ style=authoryear,
 
 \usepackage{helvet}
 \usepackage[default]{lato}
+\usepackage{bm}
 \usepackage{array}
 \usepackage{adjustbox}
 \newcommand{\tabnotes}[2]{\bottomrule \multicolumn{#1}{@{}p{0.7\linewidth}@{}}{\footnotesize #2 }\end{tabular}\end{table}}
@@ -265,7 +269,7 @@ fill=green!30]
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[]{How the Dawn of Public Higher Education Shaped Access and Work}
+\title[]{How the Dawn of Public Higher Education (1900-1940) Shaped Access and Work}
 \author{Collin Wardius} % Your name
 \institute{
   Department of Economics, UC San Diego
@@ -280,12 +284,48 @@ fill=green!30]
   \titlepage
 \end{frame}
 
+\begin{frame}{Higher education in the US experienced its first major transformation in the early 1900s}
+  \begin{wideitemize}
+    \item Many more students enrolled
+    \item Public universities began to dominate in terms of enrollment
+  \end{wideitemize}
+\end{frame}
+
+
 \begin{frame}{Questions}
 \begin{wideitemize}
-    \item How did the founding of public colleges change access to college?
+    \item \textbf{How did the founding of public colleges change access to college?}
     \item How did the founding of public colleges change the labor force of local economies?
 \end{wideitemize}
 \end{frame}
+
+\begin{frame}{Preview of identification approach}
+  \begin{wideitemize}
+    \item \textbf{Identifying variation}: quasi-random founding date of a university
+    \item Some people are lucky as they are born just late enough to access a new university
+    \item Some people are unlucky as they are born too early to access a new university
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Literature}
+  \begin{itemize}
+    \item \textbf{History of US higher education (1900-1940)}: \cite{goldinAmericasGraduationHigh1998}, \cite{goldinOriginsStateLevelDifferences1998}, \cite{goldinHumanCapitalCenturyAmerican2001}
+    \begin{itemize}
+      \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Quantify the causal effect of university expansion on education access
+    \end{itemize}
+
+    \item \textbf{Effects of university building in non-US countries}: \cite{dufloSchoolingLaborMarket2001}, \cite{nimier-davidLocalHumanCapital2023}
+    \begin{itemize}
+      \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} US university foundings and variation in public vs private control
+    \end{itemize}
+
+    \item \textbf{How proximity to college affects access}: \cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}
+    \begin{itemize}
+      \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Examine extensive margin of college access via new university foundings
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
 
 \begin{transitionframe}
   \begin{center}
@@ -392,6 +432,37 @@ fill=green!30]
     \end{figure}
 \end{frame}
 
+
+\begin{frame}{Estimating the effect of a university founding on college attainment}
+  Cross sectional regression, identifying variation is at the cohort-by-county level.
+  \begin{equation}
+    y_{ick} = \alpha_c + \lambda_k + \beta \text{New college}_{ck}\times \lambda_k +\xi \bm{X}_{ick} + \epsilon_{ick}
+  \end{equation}
+  \begin{wideitemize}
+    \item $c$: county, $k$: age cohort, $i$: person
+    \item $\text{New college}_{ck} = \mathbbm{1}\{\text{There is a college founded in $c$ that is available to $k$}\}$
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}{The identification assumption}
+\begin{wideitemize}
+  \item Compare the gap in attainment between older cohorts and younger cohorts in counties that have a new college versus those that do not
+  \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college and those that didn't would have experienced parallel trends in attainment across cohorts, absent the new college.
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Testing parallel trends: Event study specification}
+  To test for pre-trends and trace out dynamic effects, estimate:
+  \begin{equation}
+    y_{ick} = \alpha_c + \lambda_k + \sum_{j \neq -1} \beta_j \mathbbm{1}\{\text{Cohort } k \text{ born } j \text{ years relative to college founding in } c\} + \xi \bm{X}_{ick} + \epsilon_{ick}
+  \end{equation}
+  \begin{wideitemize}
+    \item $j < 0$: Cohorts born \textit{before} college founding (test for pre-trends)
+    \item $j \geq 0$: Cohorts born \textit{after} college founding (treatment effects)
+    \item Omit $j = -1$ as reference category
+    \item Null hypothesis: $\beta_j = 0$ for all $j < 0$ (no pre-trends)
+  \end{wideitemize}
+\end{frame}
 
 \begin{frame}{Regional Control of Colleges}
     \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex"}

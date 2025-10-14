@@ -2,7 +2,7 @@ PWD /Users/cjwardius/Documents/GitHub/demo_of_education/writing/econ286_oct30
 INPUT /usr/local/texlive/2023/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT econ286_slides_oct30.tex
+INPUT /Users/cjwardius/Documents/GitHub/demo_of_education/writing/econ286_oct30/econ286_slides_oct30.tex
 OUTPUT econ286_slides_oct30.log
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/beamer/beamer.cls
@@ -1357,6 +1357,17 @@ INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/bm.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/adjustbox/adjustbox.sty
@@ -1953,14 +1964,62 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Regular-OT1
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Regular-OT1-TLF--base.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Regular-OT1-TLF.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Regular-OT1-TLF--base.tfm
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Bold-OT1-TLF.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Bold-OT1-TLF.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Bold-OT1-TLF--base.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Regular-OT1-TLF.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Italic-OT1-TLF.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Italic-OT1-TLF.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Italic-OT1-TLF--base.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Regular-OT1-TLF.vf
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Regular-OT1-TLF--base.tfm
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png
@@ -2006,10 +2065,6 @@ INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of educatio
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png
 INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
-INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -2021,33 +2076,56 @@ INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
-INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro7t.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Bold-OT1-TLF.tfm
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Bold-OT1-TLF.vf
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Bold-OT1-TLF--base.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib6.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/bbm/bbm10.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/bbm/bbm8.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/bbm/bbm6.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/public/bbm/bbm5.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/helvetic/phvro7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/helvetic/phvro7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvro8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/helvetic/phvbo7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvbo8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Italic-OT1-TLF.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/helvetic/phvr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/adobe/helvetic/phvr7t.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/vf/typoland/lato/Lato-Italic-OT1-TLF.vf
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/typoland/lato/Lato-Italic-OT1-TLF--base.tfm
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
+INPUT /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex
 OUTPUT econ286_slides_oct30.nav
 OUTPUT econ286_slides_oct30.toc
 OUTPUT econ286_slides_oct30.snm
@@ -2056,5 +2134,16 @@ INPUT ./econ286_slides_oct30.out
 INPUT ./econ286_slides_oct30.out
 INPUT econ286_slides_oct30.run.xml
 OUTPUT econ286_slides_oct30.run.xml
+INPUT /Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb
 INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb
