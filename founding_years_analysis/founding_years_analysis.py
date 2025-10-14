@@ -7,7 +7,7 @@ def create_founding_years_cdf():
     """Create CDF of college founding years for colleges existing as of 1944."""
 
     # Load data
-    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data.csv"
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data_cleaned.csv"
     df = pd.read_csv(data_path)
 
     # Drop junior colleges
@@ -722,7 +722,7 @@ def create_regional_capacity_per_capita_histogram(regional_pop):
     """Create histogram of student capacity per capita by region in 1945."""
 
     # Load the full dataset (not just the cleaned one)
-    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data.csv"
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data_cleaned.csv"
     df = pd.read_csv(data_path)
 
     # Drop junior colleges
@@ -917,12 +917,20 @@ def create_city_timeline_scatter(df_clean):
 
     # Clean city data - handle missing cities
     df_filtered = df_filtered[df_filtered['City'].notna()].copy()
-    print(f"Colleges with valid city data: {len(df_filtered)}")
+
+    # Exclude normal schools, teachers colleges, junior colleges, and related abbreviations
+    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+
+    # Filter for colleges with capacity over 100
+    df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
+    df_filtered = df_filtered[df_filtered['Student_Capacity'] > 100].copy()
+    print(f"Colleges with valid city data (excluding normal schools/teachers colleges, capacity > 100): {len(df_filtered)}")
 
     # Find cities that had 0 active colleges before 1900 and got their first college 1900-1940
-    # First, identify all cities with colleges before 1900
-    cities_before_1900 = set(df_clean[(df_clean['founding_year'] < 1900) &
-                                       (df_clean['City'].notna())]['City'].unique())
+    # First, identify all cities with colleges before 1900 (excluding normal schools/teachers colleges/jr/nor/teach)
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    cities_before_1900 = set(df_clean_no_normal[(df_clean_no_normal['founding_year'] < 1900) &
+                                                 (df_clean_no_normal['City'].notna())]['City'].unique())
 
     # Get cities with exactly 1 college founded 1900-1940
     city_counts_1900_1940 = df_filtered['City'].value_counts()
@@ -957,14 +965,21 @@ def create_city_timeline_scatter(df_clean):
         region = row['region']
         college_name = row['College_Name'] if 'College_Name' in row else 'Unknown'
 
+        # Add student capacity to the label
+        student_capacity = row['Student_Capacity']
+        if pd.notna(student_capacity):
+            label = f"{college_name}, {int(student_capacity)}"
+        else:
+            label = f"{college_name}, N/A"
+
         y_pos = cities_sorted.index(city)
 
         # Plot the point
         ax.scatter(year, y_pos, color=region_colors[region],
                   s=150, alpha=0.7, edgecolors='black', linewidth=0.8, zorder=3)
 
-        # Add college name as annotation directly next to the dot
-        ax.annotate(college_name, xy=(year, y_pos), xytext=(8, 0),
+        # Add college name and capacity as annotation directly next to the dot
+        ax.annotate(label, xy=(year, y_pos), xytext=(8, 0),
                    textcoords='offset points', fontsize=8, va='center', ha='left',
                    bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.85, edgecolor='gray', linewidth=0.5))
 
