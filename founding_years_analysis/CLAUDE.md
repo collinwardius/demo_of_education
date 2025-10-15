@@ -20,3 +20,7 @@ All generated LaTeX tables and statistical tables (for papers/reports) should be
 
 Always make sure to run newly generated / modified code to make sure it runs and ensure that the output is consistent with the request.
 
+## README file updating
+
+Always make sure to update the read me file after making changes to the codebase so that it stays up to date.
+

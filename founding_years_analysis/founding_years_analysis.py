@@ -1012,6 +1012,202 @@ def create_city_timeline_scatter(df_clean):
     plt.close()
     print(f"\nCity timeline scatter plot saved to: {output_path}")
 
+def create_capacity_share_bar_chart(df_clean, year=1930):
+    """Create bar chart showing share of public (state) student capacity by census region for a specific year."""
+
+    # Filter out normal schools, teachers colleges, and related abbreviations
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+
+    # Filter for colleges founded by specified year
+    df_filtered = df_filtered[df_filtered['founding_year'] <= year].copy()
+
+    # Filter out colleges with missing capacity data
+    df_filtered = df_filtered[df_filtered['Student_Capacity'].notna()].copy()
+    df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
+    df_filtered = df_filtered[df_filtered['Student_Capacity'] > 0].copy()
+
+    print(f"\nColleges with capacity data (founded by {year}, excluding normal/teachers colleges): {len(df_filtered)}")
+    print(f"Total student capacity: {df_filtered['Student_Capacity'].sum():,.0f}")
+
+    # Create control type categories
+    df_filtered['control_type'] = df_filtered['Control'].apply(lambda x: 'State' if x == 'State' else 'Non-State')
+
+    # Define regions
+    regions = ['Northeast', 'South', 'Midwest', 'West']
+
+    # Create consistent region colors
+    region_colors = {
+        'Northeast': '#e41a1c',
+        'South': '#377eb8',
+        'Midwest': '#4daf4a',
+        'West': '#984ea3'
+    }
+
+    # Calculate state share for each region
+    state_shares = []
+    colors = []
+
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region].copy()
+
+        if len(regional_data) == 0:
+            state_shares.append(0)
+        else:
+            # Calculate total capacity by control type
+            state_capacity = regional_data[regional_data['control_type'] == 'State']['Student_Capacity'].sum()
+            total_capacity = regional_data['Student_Capacity'].sum()
+
+            if total_capacity > 0:
+                state_share = (state_capacity / total_capacity) * 100
+            else:
+                state_share = 0
+
+            state_shares.append(state_share)
+
+        colors.append(region_colors[region])
+
+    # Create bar chart
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    x_positions = np.arange(len(regions))
+    bars = ax.bar(x_positions, state_shares, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add value labels on top of bars
+    for i, (bar, value) in enumerate(zip(bars, state_shares)):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{value:.1f}%',
+                ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+    # Set labels and title
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(regions, fontsize=12)
+    ax.set_ylabel('State Share of Student Capacity (%)', fontsize=12)
+    ax.set_title(f'Share of Public (State) Student Capacity by Region ({year})\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
+                fontsize=14, fontweight='bold')
+    ax.set_ylim(0, 100)
+    ax.grid(True, alpha=0.3, axis='y')
+
+    plt.tight_layout()
+
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / f"capacity_share_by_region_bar_{year}.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Bar chart saved to: {output_path}")
+
+    # Print summary statistics
+    print(f"\nState Capacity Share by Region in {year}:")
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region]
+        if len(regional_data) > 0:
+            state_capacity = regional_data[regional_data['control_type'] == 'State']['Student_Capacity'].sum()
+            total_capacity = regional_data['Student_Capacity'].sum()
+
+            if total_capacity > 0:
+                state_share = (state_capacity / total_capacity) * 100
+                print(f"  {region}: {state_share:.1f}% State (Total capacity: {total_capacity:,.0f})")
+
+def create_capacity_share_by_control_and_region(df_clean):
+    """Create figure showing share of public (state) student capacity by census region from 1890-1940."""
+
+    # Filter out normal schools, teachers colleges, and related abbreviations
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+
+    # Filter for colleges founded by 1940
+    df_filtered = df_filtered[df_filtered['founding_year'] <= 1940].copy()
+
+    # Filter out colleges with missing capacity data
+    df_filtered = df_filtered[df_filtered['Student_Capacity'].notna()].copy()
+    df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
+    df_filtered = df_filtered[df_filtered['Student_Capacity'] > 0].copy()
+
+    print(f"\nColleges with capacity data (founded by 1940, excluding normal/teachers colleges): {len(df_filtered)}")
+    print(f"Total student capacity: {df_filtered['Student_Capacity'].sum():,.0f}")
+
+    # Create control type categories
+    df_filtered['control_type'] = df_filtered['Control'].apply(lambda x: 'State' if x == 'State' else 'Non-State')
+
+    # Define decades to analyze
+    decades = list(range(1890, 1950, 10))
+
+    # Define regions
+    regions = ['Northeast', 'South', 'Midwest', 'West']
+
+    # Create consistent region colors
+    region_colors = {
+        'Northeast': '#e41a1c',
+        'South': '#377eb8',
+        'Midwest': '#4daf4a',
+        'West': '#984ea3'
+    }
+
+    # Create single plot
+    plt.figure(figsize=(14, 8))
+
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region].copy()
+
+        if len(regional_data) == 0:
+            continue
+
+        state_shares = []
+
+        for decade in decades:
+            # Get colleges operating at this decade (founded on or before this decade)
+            operating = regional_data[regional_data['founding_year'] <= decade]
+
+            if len(operating) == 0:
+                state_shares.append(0)
+                continue
+
+            # Calculate total capacity by control type
+            state_capacity = operating[operating['control_type'] == 'State']['Student_Capacity'].sum()
+            non_state_capacity = operating[operating['control_type'] == 'Non-State']['Student_Capacity'].sum()
+            total_capacity = state_capacity + non_state_capacity
+
+            if total_capacity > 0:
+                state_share = (state_capacity / total_capacity) * 100
+            else:
+                state_share = 0
+
+            state_shares.append(state_share)
+
+        # Plot the state share for this region
+        plt.plot(decades, state_shares, linewidth=2.5, label=region,
+                color=region_colors[region], alpha=0.8, marker='o', markersize=8)
+
+    plt.title('Share of Public (State) Student Capacity by Region (1890-1940)\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
+             fontsize=16, fontweight='bold')
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('State Share of Student Capacity (%)', fontsize=12)
+    plt.ylim(-5, 105)
+    plt.grid(True, alpha=0.3)
+    plt.legend(fontsize=11, loc='best')
+    plt.xticks(decades)
+
+    plt.tight_layout()
+
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "capacity_share_by_control_region_1890_1940.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Capacity share by control/region plot saved to: {output_path}")
+
+    # Print summary statistics
+    print("\nState Capacity Share by Region in 1940:")
+    for region in regions:
+        regional_data = df_filtered[(df_filtered['region'] == region) &
+                                    (df_filtered['founding_year'] <= 1940)]
+        if len(regional_data) > 0:
+            state_capacity = regional_data[regional_data['control_type'] == 'State']['Student_Capacity'].sum()
+            non_state_capacity = regional_data[regional_data['control_type'] == 'Non-State']['Student_Capacity'].sum()
+            total_capacity = state_capacity + non_state_capacity
+
+            if total_capacity > 0:
+                state_share = (state_capacity / total_capacity) * 100
+                print(f"  {region}: {state_share:.1f}% State (Total capacity: {total_capacity:,.0f})")
+
 def main():
     print("Creating founding years CDF analysis...")
 
@@ -1048,6 +1244,12 @@ def main():
 
     # Create city timeline scatter plot
     create_city_timeline_scatter(df_clean)
+
+    # Create capacity share by control type and region
+    create_capacity_share_by_control_and_region(df_clean)
+
+    # Create bar chart for 1930
+    create_capacity_share_bar_chart(df_clean, year=1930)
 
     print("\nFounding years analysis complete!")
 
