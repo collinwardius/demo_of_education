@@ -1127,6 +1127,182 @@ def create_county_timeline_scatter(df_clean):
     plt.close()
     print(f"\nCounty timeline scatter plot saved to: {output_path}")
 
+def create_county_analysis_table(df_clean):
+    """Create LaTeX table and visualization showing county treatment/control groups."""
+
+    print(f"\nCreating county analysis table...")
+
+    # Load 1940 county shapefile to get total number of counties
+    shape_dir = Path('/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files')
+    shapefile_path = shape_dir / 'nhgis0003_shapefile_tl2008_us_county_1940' / 'US_county_1940_conflated.shp'
+
+    import geopandas as gpd
+    counties_gdf = gpd.read_file(shapefile_path)
+    total_counties_1940 = len(counties_gdf)
+    print(f"Total counties in 1940: {total_counties_1940}")
+
+    # Filter out normal schools, teachers colleges, junior colleges
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\\.|Nor\\.|Teach', case=False, na=False, regex=True)].copy()
+
+    # Filter for colleges with capacity > 100
+    df_clean_no_normal['Student_Capacity'] = pd.to_numeric(df_clean_no_normal['Student_Capacity'], errors='coerce')
+    df_clean_no_normal = df_clean_no_normal[df_clean_no_normal['Student_Capacity'] > 100].copy()
+
+    # Get all unique counties that ever had a college
+    all_counties_with_colleges = df_clean_no_normal[df_clean_no_normal['ICPSRNAM'].notna()]['ICPSRNAM'].unique()
+
+    # Filter for colleges before 1900
+    df_before_1900 = df_clean_no_normal[df_clean_no_normal['founding_year'] < 1900].copy()
+    counties_before_1900 = set(df_before_1900[df_before_1900['ICPSRNAM'].notna()]['ICPSRNAM'].unique())
+
+    # Filter for colleges 1900-1940
+    df_1900_1940 = df_clean_no_normal[(df_clean_no_normal['founding_year'] >= 1900) &
+                                       (df_clean_no_normal['founding_year'] <= 1940)].copy()
+
+    # Count colleges per county in 1900-1940 period
+    county_counts_1900_1940 = df_1900_1940[df_1900_1940['ICPSRNAM'].notna()]['ICPSRNAM'].value_counts()
+
+    # Group 1: Counties that had college before 1900
+    group1_counties = counties_before_1900
+
+    # Group 2: Counties that gained exactly 1 college 1900-1940 (and had 0 before 1900) - TREATED
+    counties_with_one = set(county_counts_1900_1940[county_counts_1900_1940 == 1].index.tolist())
+    group2_counties = counties_with_one - counties_before_1900
+
+    # Group 3: Counties that had 0 before 1900 and gained 2+ colleges 1900-1940
+    counties_with_multiple = set(county_counts_1900_1940[county_counts_1900_1940 > 1].index.tolist())
+    group3_counties = counties_with_multiple - counties_before_1900
+
+    # Group 4: Counties that had college before 1900 and did NOT get another 1900-1940
+    counties_that_gained_1900_1940 = set(county_counts_1900_1940.index.tolist())
+    group4_counties = counties_before_1900 - counties_that_gained_1900_1940
+
+    # Group 5: Counties that never had a college by 1940 - CONTROL
+    n_counties_with_colleges = len(all_counties_with_colleges)
+    n_group5 = total_counties_1940 - n_counties_with_colleges
+
+    # Calculate totals
+    n_group1 = len(group1_counties)
+    n_group2 = len(group2_counties)
+    n_group3 = len(group3_counties)
+    n_group4 = len(group4_counties)
+    n_total_with_colleges = len(all_counties_with_colleges)
+
+    print(f"Group 1 (Had college before 1900): {n_group1}")
+    print(f"Group 2 (0→1 college, 1900-1940) [TREATED]: {n_group2}")
+    print(f"Group 3 (0→2+ colleges, 1900-1940): {n_group3}")
+    print(f"Group 4 (Had college before 1900, no new college 1900-1940) [CONTROL]: {n_group4}")
+    print(f"Group 5 (Never had college by 1940) [CONTROL]: {n_group5}")
+    print(f"Total counties with colleges: {n_total_with_colleges}")
+    print(f"Total counties: {total_counties_1940}")
+
+    # Create LaTeX table
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables"
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+
+    latex_content = []
+    latex_content.append("\\begin{table}[htbp]")
+    latex_content.append("\\centering")
+    latex_content.append("\\caption{County Classification for College Analysis (1900-1940)}")
+    latex_content.append("\\label{tab:county_classification}")
+    latex_content.append("\\begin{tabular}{lcc}")
+    latex_content.append("\\toprule")
+    latex_content.append("\\textbf{County Group} & \\textbf{Count} & \\textbf{Role in Analysis} \\\\")
+    latex_content.append("\\midrule")
+    latex_content.append(f"Had college before 1900 & {n_group1} & --- \\\\")
+    latex_content.append(f"\\quad Did not gain college 1900-1940 & {n_group4} & Potential Control \\\\")
+    latex_content.append(f"\\quad Gained college(s) 1900-1940 & {n_group1 - n_group4} & --- \\\\")
+    latex_content.append("\\midrule")
+    latex_content.append(f"No college before 1900 & {n_group2 + n_group3 + n_group5} & --- \\\\")
+    latex_content.append(f"\\quad Gained exactly 1 college 1900-1940 & {n_group2} & \\textbf{{Treated}} \\\\")
+    latex_content.append(f"\\quad Gained 2+ colleges 1900-1940 & {n_group3} & --- \\\\")
+    latex_content.append(f"\\quad Never gained college by 1940 & {n_group5} & Potential Control \\\\")
+    latex_content.append("\\bottomrule")
+    latex_content.append("\\end{tabular}")
+    latex_content.append("\\\\[1em]")
+    latex_content.append("\\begin{minipage}{0.85\\textwidth}")
+    latex_content.append("\\small")
+    latex_content.append("\\textit{Notes:} Analysis excludes junior colleges, normal schools, teachers colleges, and colleges with capacity $\\leq$ 100. ")
+    latex_content.append("Treated group consists of counties that had no college before 1900 and gained exactly one college 1900-1940. ")
+    latex_content.append("Potential control groups consist of (1) counties that had a college before 1900 but did not gain additional colleges 1900-1940, ")
+    latex_content.append("and (2) counties that never had a college by 1940.")
+    latex_content.append("\\end{minipage}")
+    latex_content.append("\\end{table}")
+
+    # Write to file
+    output_path = Path(output_dir) / "county_classification_table.tex"
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(latex_content))
+
+    print(f"LaTeX table saved to: {output_path}")
+
+    # Create visual representation
+    fig, ax = plt.subplots(figsize=(14, 8))
+
+    # Define categories for visualization
+    categories = [
+        'Had college\nbefore 1900\n(did not gain\n1900-1940)',
+        'Never had\ncollege by 1940',
+        'No college before 1900\n→ Exactly 1 college\n1900-1940\n[TREATED]',
+        'Had college\nbefore 1900\n(gained college(s)\n1900-1940)',
+        'No college before 1900\n→ 2+ colleges\n1900-1940'
+    ]
+
+    counts = [
+        n_group4,
+        n_group5,
+        n_group2,
+        n_group1 - n_group4,
+        n_group3
+    ]
+
+    colors = ['#fee08b', '#fdd49e', '#66c2a5', '#d3d3d3', '#d3d3d3']  # Yellow for controls, green for treated, gray for others
+
+    # Create bars
+    bars = ax.bar(categories, counts, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add value labels on bars
+    for bar, count in zip(bars, counts):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{count}',
+                ha='center', va='bottom', fontsize=14, fontweight='bold')
+
+    # Add annotations for treatment/control
+    ax.text(0, counts[0] * 1.05, 'Potential\nControl 1', ha='center', fontsize=10,
+            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow', alpha=0.3))
+    ax.text(1, counts[1] * 1.05, 'Potential\nControl 2', ha='center', fontsize=10,
+            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow', alpha=0.3))
+    ax.text(2, counts[2] * 1.05, 'Treatment\nGroup', ha='center', fontsize=10,
+            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='lightgreen', alpha=0.3))
+
+    # Labels and title
+    ax.set_ylabel('Number of Counties', fontsize=13)
+    ax.set_title('County Classification for College Analysis (1900-1940)\n(Excluding Junior Colleges, Normal Schools, Teachers Colleges, and Capacity ≤ 100)',
+                 fontsize=14, fontweight='bold', pad=20)
+    ax.set_ylim(0, max(counts) * 1.25)
+    ax.grid(True, alpha=0.3, axis='y')
+
+    # Rotate x-axis labels for better readability
+    plt.setp(ax.xaxis.get_majorticklabels(), rotation=0, ha='center', fontsize=9)
+
+    plt.tight_layout()
+
+    output_dir_fig = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path_fig = Path(output_dir_fig) / "county_classification_chart.png"
+    plt.savefig(output_path_fig, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"County classification chart saved to: {output_path_fig}")
+
+    return {
+        'n_had_college_before_1900': n_group1,
+        'n_treated_0_to_1': n_group2,
+        'n_0_to_multiple': n_group3,
+        'n_control_had_no_gain': n_group4,
+        'n_control_never_had': n_group5,
+        'n_total': total_counties_1940
+    }
+
 def create_capacity_share_bar_chart(df_clean, year=1930):
     """Create bar chart showing share of public (state) student capacity by census region for a specific year."""
 
@@ -1362,6 +1538,9 @@ def main():
 
     # Create county timeline scatter plot
     create_county_timeline_scatter(df_clean)
+
+    # Create county analysis table and visualization
+    create_county_analysis_table(df_clean)
 
     # Create capacity share by control type and region
     create_capacity_share_by_control_and_region(df_clean)

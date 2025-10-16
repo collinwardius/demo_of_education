@@ -319,19 +319,12 @@ fill=green!30]
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} US university foundings and variation in public vs private control
     \end{itemize}
 
-    \item \textbf{How proximity to college affects access}: \cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}
+    \item \textbf{How proximity to college affects attainment}: \cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}
     \begin{itemize}
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Examine extensive margin of college access via new university foundings
     \end{itemize}
   \end{itemize}
 \end{frame}
-
-
-\begin{transitionframe}
-  \begin{center}
-    {\Large \textcolor{white}{Trends in college attendance}}
-  \end{center}
-\end{transitionframe}
 
 
 
@@ -343,84 +336,11 @@ fill=green!30]
     \end{figure}
 \end{frame}
 
-
-\begin{frame}{BA Completion Maps}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_maps.png"}
-        \caption{Geographic Distribution of BA Completion}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/col_attainment_funding_quadrants1936.png"}
-  \end{figure}
-\end{frame}
-
-
-\begin{frame}{College Enrollment Changes by State}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/enrollments_bowman_1962.png"}
-        \caption{College Enrollments from Bowman (1962)}
-    \end{figure}
-\end{frame}
-
-\begin{transitionframe}
-  \begin{center}
-    {\Large \textcolor{white}{Who goes to public versus private higher ed?}}
-  \end{center}
-\end{transitionframe}
-
-\begin{frame}{Parent Occupations}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/parent_occ_bowman_1962.png"}
-        \caption{Parent Occupations from Bowman (1962)}
-    \end{figure}
-\end{frame}
-
-
-\begin{transitionframe}
-  \begin{center}
-    {\Large \textcolor{white}{Founding year of colleges}}
-  \end{center}
-\end{transitionframe}
-
-
-\begin{frame}{College Founding Years}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf.png"}
-        \caption{Cumulative Distribution of College Founding Years}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{College Founding Years (1800+)}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_1800_plus.png"}
-        \caption{Cumulative Distribution of College Founding Years (1800+)}
-    \end{figure}
-\end{frame}
-
-
 \begin{frame}{College Founding Years by Region}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png"}
         \caption{Regional Distribution of College Founding Years}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{College Founding Years by Region (1800+)}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional_1800_plus.png"}
-        \caption{Regional Distribution of College Founding Years (1800+)}
     \end{figure}
 \end{frame}
 
@@ -450,6 +370,13 @@ fill=green!30]
   \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college and those that didn't would have experienced parallel trends in attainment across cohorts, absent the new college.
 \end{wideitemize}
 \end{frame}
+
+\begin{frame}{Picking a control group}
+\input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex"}
+\end{frame}
+
+
+
 
 \begin{frame}{Testing parallel trends: Event study specification}
   To test for pre-trends and trace out dynamic effects, estimate:

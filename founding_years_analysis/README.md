@@ -44,17 +44,17 @@ python geocode_colleges.py --overwrite
 - `unique_locations_geocoded.csv` - Unique city-state pairs with coordinates
 
 ### `founding_years_analysis.py`
-Generates comprehensive visualizations and statistical analyses of college founding years, regional distributions, and enrollment capacity.
+Generates comprehensive visualizations and statistical analyses of college founding years, regional distributions, and enrollment capacity. Uses county-level geographic data from 1940 census boundaries.
 
 **Main Functions:**
 
 **Founding Year Distributions:**
 - `create_founding_years_cdf()` - Cumulative distribution of college founding years
-- `create_zoomed_founding_cdf()` - Zoomed CDF focusing on specific time periods
+- `create_zoomed_founding_cdf()` - Zoomed CDF focusing on 1800+ period
 - `create_regional_founding_cdf()` - Regional comparison of founding year CDFs
-- `create_zoomed_regional_founding_cdf()` - Zoomed regional CDF
-- `create_control_type_founding_cdf()` - CDF by control type (public/private)
-- `create_zoomed_control_type_founding_cdf()` - Zoomed control type CDF
+- `create_zoomed_regional_founding_cdf()` - Zoomed regional CDF (1800-1944)
+- `create_control_type_founding_cdf()` - CDF by control type (State vs Non-State)
+- `create_zoomed_control_type_founding_cdf()` - Zoomed control type CDF (1800-1944)
 
 **Regional Analysis:**
 - `create_regional_operating_colleges_by_decade()` - Number of operating colleges by region and decade
@@ -62,10 +62,17 @@ Generates comprehensive visualizations and statistical analyses of college found
 - `create_colleges_per_capita_by_decade()` - Colleges per capita by region over time
 - `create_public_colleges_per_capita_by_decade()` - Public colleges per capita by region
 - `create_regional_capacity_per_capita_histogram()` - Student capacity per capita by region (1945)
+- `create_capacity_share_by_control_and_region()` - Share of public student capacity by region (1890-1940)
+- `create_capacity_share_bar_chart()` - Bar chart of state capacity share by region for specific year
 
-**Tables and Other Outputs:**
-- `create_regional_control_latex_table()` - LaTeX table of colleges by region and control type
-- `create_city_timeline_scatter()` - Timeline scatter plot of college foundings by city
+**Geographic Analysis:**
+- `create_city_timeline_scatter()` - Timeline scatter plot of first college foundings by city (1900-1940)
+- `create_county_timeline_scatter()` - Timeline scatter plot of first college foundings by county (1900-1940)
+- `create_county_analysis_table()` - LaTeX table and visualization showing county treatment/control groups for causal analysis
+
+**Tables:**
+- `create_regional_control_latex_table()` - LaTeX table of colleges founded 1900-1940 by region and control type
+- `create_county_analysis_table()` - LaTeX table classifying counties for difference-in-differences analysis
 
 **Regional Definitions:**
 - **Northeast:** ME, NH, VT, MA, RI, CT, NY, NJ, PA
