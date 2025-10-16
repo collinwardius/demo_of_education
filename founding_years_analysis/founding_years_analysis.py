@@ -7,7 +7,7 @@ def create_founding_years_cdf():
     """Create CDF of college founding years for colleges existing as of 1944."""
 
     # Load data
-    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data_cleaned.csv"
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/colleges_with_counties_1940.csv"
     df = pd.read_csv(data_path)
 
     # Drop junior colleges
@@ -722,7 +722,7 @@ def create_regional_capacity_per_capita_histogram(regional_pop):
     """Create histogram of student capacity per capita by region in 1945."""
 
     # Load the full dataset (not just the cleaned one)
-    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/combined_college_blue_book_data_cleaned.csv"
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/colleges_with_counties_1940.csv"
     df = pd.read_csv(data_path)
 
     # Drop junior colleges
@@ -1012,6 +1012,121 @@ def create_city_timeline_scatter(df_clean):
     plt.close()
     print(f"\nCity timeline scatter plot saved to: {output_path}")
 
+def create_county_timeline_scatter(df_clean):
+    """Create timeline scatter plot showing colleges founded by county between 1900-1940.
+    Only shows counties that went from 0 to 1 active college during this period."""
+
+    # Filter for colleges founded between 1900 and 1940
+    df_filtered = df_clean[(df_clean['founding_year'] >= 1900) & (df_clean['founding_year'] <= 1940)].copy()
+
+    print(f"\nCreating county timeline scatter plot...")
+    print(f"Colleges founded 1900-1940: {len(df_filtered)}")
+
+    # Clean county data - handle missing counties
+    df_filtered = df_filtered[df_filtered['ICPSRNAM'].notna()].copy()
+
+    # Exclude normal schools, teachers colleges, junior colleges, and related abbreviations
+    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+
+    # Filter for colleges with capacity over 100
+    df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
+    df_filtered = df_filtered[df_filtered['Student_Capacity'] > 100].copy()
+    print(f"Colleges with valid county data (excluding normal schools/teachers colleges, capacity > 100): {len(df_filtered)}")
+
+    # Find counties that had 0 active colleges before 1900 and got their first college 1900-1940
+    # First, identify all counties with colleges before 1900 (excluding normal schools/teachers colleges/jr/nor/teach)
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+
+    # Filter for colleges with capacity > 100 in the historical data as well
+    df_clean_no_normal['Student_Capacity'] = pd.to_numeric(df_clean_no_normal['Student_Capacity'], errors='coerce')
+    df_clean_no_normal = df_clean_no_normal[df_clean_no_normal['Student_Capacity'] > 100].copy()
+
+    counties_before_1900 = set(df_clean_no_normal[(df_clean_no_normal['founding_year'] < 1900) &
+                                                   (df_clean_no_normal['ICPSRNAM'].notna())]['ICPSRNAM'].unique())
+
+    # Get counties with exactly 1 college founded 1900-1940
+    county_counts_1900_1940 = df_filtered['ICPSRNAM'].value_counts()
+    counties_with_one_college = county_counts_1900_1940[county_counts_1900_1940 == 1].index.tolist()
+
+    # Filter to counties that had no colleges before 1900 AND got exactly 1 college 1900-1940
+    counties_to_show = [county for county in counties_with_one_college if county not in counties_before_1900]
+
+    df_plot = df_filtered[df_filtered['ICPSRNAM'].isin(counties_to_show)].copy()
+
+    print(f"\nShowing {len(counties_to_show)} counties that went from 0 to 1 college ({len(df_plot)} colleges total)")
+
+    # Sort counties by founding year for better visualization
+    df_plot = df_plot.sort_values('founding_year')
+
+    # Create county labels with state names
+    df_plot['county_label'] = df_plot['ICPSRNAM'] + ', ' + df_plot['STATENAM']
+    counties_sorted = df_plot['county_label'].tolist()
+
+    # Create region color mapping
+    region_colors = {
+        'Northeast': '#e41a1c',
+        'South': '#377eb8',
+        'Midwest': '#4daf4a',
+        'West': '#984ea3'
+    }
+
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(18, max(12, len(counties_sorted) * 0.25)))
+
+    # Plot each college
+    for idx, row in df_plot.iterrows():
+        county_label = row['county_label']
+        year = row['founding_year']
+        region = row['region']
+        college_name = row['College_Name'] if 'College_Name' in row else 'Unknown'
+
+        # Add student capacity to the label
+        student_capacity = row['Student_Capacity']
+        if pd.notna(student_capacity):
+            label = f"{college_name}, {int(student_capacity)}"
+        else:
+            label = f"{college_name}, N/A"
+
+        y_pos = counties_sorted.index(county_label)
+
+        # Plot the point
+        ax.scatter(year, y_pos, color=region_colors[region],
+                  s=150, alpha=0.7, edgecolors='black', linewidth=0.8, zorder=3)
+
+        # Add college name and capacity as annotation directly next to the dot
+        ax.annotate(label, xy=(year, y_pos), xytext=(8, 0),
+                   textcoords='offset points', fontsize=8, va='center', ha='left',
+                   bbox=dict(boxstyle='round,pad=0.4', facecolor='white', alpha=0.85, edgecolor='gray', linewidth=0.5))
+
+    # Add legend for regions
+    for region, color in region_colors.items():
+        ax.scatter([], [], color=color, s=150, alpha=0.7, edgecolors='black',
+                  linewidth=0.8, label=region)
+
+    # Set y-axis to show county names
+    ax.set_yticks(range(len(counties_sorted)))
+    ax.set_yticklabels(counties_sorted, fontsize=9)
+
+    # Set x-axis
+    ax.set_xlabel('Founding Year', fontsize=14)
+    ax.set_ylabel('County', fontsize=14)
+    ax.set_title('First College Founded in Each County, 1900-1940\n(Counties with no prior colleges, excluding Junior Colleges, Normal Schools, and Teachers Colleges, capacity > 100)',
+                 fontsize=16, fontweight='bold')
+
+    # Add grid
+    ax.grid(True, alpha=0.3, axis='x')
+    ax.set_xlim(1898, 1942)
+
+    # Add legend
+    ax.legend(fontsize=11, loc='lower right', title='Region', framealpha=0.9)
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "county_timeline_scatter_1900_1940.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"\nCounty timeline scatter plot saved to: {output_path}")
+
 def create_capacity_share_bar_chart(df_clean, year=1930):
     """Create bar chart showing share of public (state) student capacity by census region for a specific year."""
 
@@ -1244,6 +1359,9 @@ def main():
 
     # Create city timeline scatter plot
     create_city_timeline_scatter(df_clean)
+
+    # Create county timeline scatter plot
+    create_county_timeline_scatter(df_clean)
 
     # Create capacity share by control type and region
     create_capacity_share_by_control_and_region(df_clean)
