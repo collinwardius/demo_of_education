@@ -80,22 +80,54 @@ Generates comprehensive visualizations and statistical analyses of college found
 - **Midwest:** OH, IN, IL, MI, WI, MN, IA, MO, ND, SD, NE, KS
 - **West:** MT, WY, CO, NM, ID, UT, NV, AZ, WA, OR, CA, AK, HI
 
+**Filtering Criteria:**
+Analysis excludes:
+- Junior colleges
+- Normal schools and teachers colleges
+- Colleges with student capacity ≤ 100
+
 **Usage:**
 ```bash
 python founding_years_analysis.py
 ```
 
-**Input:** `combined_college_blue_book_data_cleaned.csv`
+**Input:**
+- `colleges_with_counties_1940.csv` - College data with 1940 county assignments
+- Historical state population data by year
+- 1940 county shapefiles (for total county counts)
 
 **Outputs:**
-- Figures: `/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/`
-- Tables: `/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/`
+- **Figures:** `/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/`
+  - Founding year CDFs (overall, regional, by control type)
+  - Operating colleges by region/decade
+  - Colleges per capita by region
+  - Student capacity analyses
+  - City and county timeline scatter plots
+  - County classification chart
+- **Tables:** `/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/`
+  - Regional control type classifications
+  - County treatment/control group assignments
+
+### `intersect_colleges_counties_1940.py`
+Performs spatial intersection of college locations with 1940 census county boundaries to assign each college to its historical county.
+
+**Usage:**
+```bash
+python intersect_colleges_counties_1940.py
+```
+
+**Input:**
+- `colleges_with_coordinates.csv` - Geocoded college data
+- 1940 county shapefiles from NHGIS
+
+**Output:** `colleges_with_counties_1940.csv` - College data with county assignments
 
 ## Data Pipeline
 
 1. **Clean data:** `clean_bluebook.py` → `combined_college_blue_book_data_cleaned.csv`
 2. **Geocode locations:** `geocode_colleges.py` → `colleges_with_coordinates.csv`
-3. **Generate analysis:** `founding_years_analysis.py` → figures and tables
+3. **Assign counties:** `intersect_colleges_counties_1940.py` → `colleges_with_counties_1940.csv`
+4. **Generate analysis:** `founding_years_analysis.py` → figures and tables
 
 ## Requirements
 
