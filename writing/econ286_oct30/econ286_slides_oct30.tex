@@ -258,7 +258,7 @@ fill=green!30]
 }
 
 \setbeamertemplate{footline}[frame number]
-\setbeamertemplate{navigation symbols}
+\setbeamertemplate{navigation symbols}{}
 
 \DeclareMathOperator*{\argmin}{arg\!\min}
 \DeclareMathOperator*{\argmax}{arg\!\max}
@@ -371,7 +371,7 @@ fill=green!30]
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Isolating treated and control counties}
+\begin{frame}[label=isolating]{Isolating treated and control counties}
   \begin{wideitemize}
     \item Restrict attention to ``conventional'' colleges: exclude junior colleges, normal schools, teachers colleges, and colleges with capacity $\leq$ 100.
     \item Treated counties gain exactly one college over this period
@@ -382,10 +382,12 @@ fill=green!30]
       \item Counties that received a college before 1900 and do not receive a college during this period (already treated)
     \end{wideitemize}
   \end{wideitemize}
-\end{frame}
 
-\begin{frame}{County spatial stability over 1900-1940}
-    \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex"}
+  \vspace{1em}
+  \centering
+  \hyperlink{spatialstability}{\beamerbutton{County spatial stability over 1900-1940}}
+  \raggedright
+  \hyperlink{countycrosswalk}{\beamerbutton{County crosswalk construction}}
 \end{frame}
 
 \begin{frame}{Quantifying the treated and control counties}
@@ -419,20 +421,30 @@ fill=green!30]
   \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Regional Control of Colleges}
-    \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex"}
+\appendix
+\setbeamertemplate{headline}{}
+
+\begin{frame}[label=spatialstability]{County spatial stability over 1900-1940}
+    \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex"}
+
+    \vspace{1em}
+    \centering
+    \hyperlink{isolating}{\beamerbutton{Back to Isolating treated and control counties}}
 \end{frame}
 
+\begin{frame}[label=countycrosswalk]{Creating a county crosswalk}
+We need consistent county boundaries to accurately assign college locations across census years.
 
-\begin{frame}{What next?}
-  \begin{wideitemize}
-    \item Still cleaning my historical tables on enrollments
-    \item Will have better data on program enrollments and associated analysis 
-  \end{wideitemize}
-\end{frame}
-
-\begin{frame}{}
-\centering cwardius@ucsd.edu
+\textbf{Approach:}
+\begin{enumerate}
+\item Use 1900 as the reference year (counties typically split into smaller units over time, rather than merging)
+\item Spatially intersect 1910, 1920, 1930, and 1940 boundaries with 1900 boundaries
+\item Match counties where the intersection exceeds 70\% overlap
+\item Retain only counties that appear consistently across all census years
+\end{enumerate}
+\vspace{1em}
+\centering
+\hyperlink{isolating}{\beamerbutton{Back to Isolating treated and control counties}}
 \end{frame}
 
 \end{document}

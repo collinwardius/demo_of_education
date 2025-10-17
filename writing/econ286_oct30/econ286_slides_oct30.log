@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  16 OCT 2025 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  17 OCT 2025 11:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1490,7 +1490,7 @@ LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
  [5
 
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=43, 1011.78pt x 433.62pt>
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=47, 1011.78pt x 433.62pt>
 File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png Graphic file (type png)
 <use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>
 Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png  used on input line 337.
@@ -1498,7 +1498,7 @@ Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDie
  [6
 
  </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=49, 1004.0712pt x 569.7285pt>
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=53, 1004.0712pt x 569.7285pt>
 File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png Graphic file (type png)
 <use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>
 Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png  used on input line 345.
@@ -1506,7 +1506,7 @@ Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDie
  [7
 
  </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=58, 1004.0712pt x 569.7285pt>
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=62, 1004.0712pt x 569.7285pt>
 File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png Graphic file (type png)
 <use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>
 Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png  used on input line 353.
@@ -1541,28 +1541,29 @@ File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 
 ] [11
 
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [12
-
 ] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex)
-Overfull \vbox (17.42876pt too high) detected at line 393
+Overfull \vbox (17.42876pt too high) detected at line 395
  []
 
-[13
+[12
 
-] [14
+] [13
 
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex) [15
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex) [14
 
 ]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 420.
- [16
+(Font)              scaled to size 10.95pt on input line 422.
+ [15
 
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/regional_control_colleges_table.tex) [17
+]
 
-] [18
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 424.
 
-] [19
+(/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [16
+
+] [17
 
 ]
 \tf@nav=\write8
@@ -1576,24 +1577,24 @@ LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
 
  (./econ286_slides_oct30.aux)
 Package rerunfilecheck Info: File `econ286_slides_oct30.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 5BCEA9CF7D2D9AECE7CAC4018E9F6C5B;81.
 Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
 \openout1 = `econ286_slides_oct30.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45876 strings out of 476025
- 1009702 string characters out of 5790016
+ 45948 strings out of 476025
+ 1011038 string characters out of 5790016
  1864388 words of memory out of 5000000
- 65437 multiletter control sequences out of 15000+600000
+ 65509 multiletter control sequences out of 15000+600000
  581121 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,122p,892b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on econ286_slides_oct30.pdf (19 pages, 1023832 bytes).
+Output written on econ286_slides_oct30.pdf (17 pages, 1017404 bytes).
 PDF statistics:
- 204 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
- 58 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 152 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

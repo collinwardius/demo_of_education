@@ -4,8 +4,8 @@ import numpy as np
 
 # Load the 1900 and 1940 county shapefiles
 print("Loading shapefiles...")
-counties_1900 = gpd.read_file("/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files/nhgis0003_shapefile_tl2008_us_county_1900/US_county_1900_conflated.shp")
-counties_1940 = gpd.read_file("/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files/nhgis0003_shapefile_tl2008_us_county_1940/US_county_1940_conflated.shp")
+counties_1900 = gpd.read_file("/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files/nhgis0004_shapefile_tl2000_us_county_1900/US_county_1900.shp")
+counties_1940 = gpd.read_file("/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files/nhgis0004_shapefile_tl2000_us_county_1940/US_county_1940.shp")
 
 print(f"1900 counties: {len(counties_1900)}")
 print(f"1940 counties: {len(counties_1940)}")
@@ -171,11 +171,6 @@ print(f"  - Actual mergers detected: {merged_counties}")
 print("\nIf boundaries stayed the same:")
 print("  - Both analyses would show HIGH overlap (95%+)")
 print("="*60)
-
-# Optional: Save the detailed results
-overlap_1940_df.to_csv('county_overlap_1940_reference.csv', index=False)
-overlap_1900_df.to_csv('county_overlap_1900_reference.csv', index=False)
-print("\nDetailed results saved to CSV files.")
 
 # Optional: Identify specific counties with major changes
 print("\n" + "="*60)

@@ -1,3 +1,9 @@
-\beamer@slide {tab:county_overlap}{12}
-\beamer@slide {tab:county_classification}{13}
-\beamer@slide {tab:linked_vs_unlinked}{15}
+\beamer@slide {isolating<1>}{11}
+\beamer@slide {isolating}{11}
+\beamer@slide {tab:county_classification}{12}
+\beamer@slide {tab:linked_vs_unlinked}{14}
+\beamer@slide {spatialstability<1>}{16}
+\beamer@slide {spatialstability}{16}
+\beamer@slide {tab:county_overlap}{16}
+\beamer@slide {countycrosswalk<1>}{17}
+\beamer@slide {countycrosswalk}{17}
