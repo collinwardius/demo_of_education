@@ -68,7 +68,7 @@ Generates comprehensive visualizations and statistical analyses of college found
 **Geographic Analysis:**
 - `create_city_timeline_scatter()` - Timeline scatter plot of first college foundings by city (1900-1940)
 - `create_county_timeline_scatter()` - Timeline scatter plot of first college foundings by county (1900-1940)
-- `create_county_analysis_table()` - LaTeX table and visualization showing county treatment/control groups for causal analysis
+- `create_county_analysis_table()` - LaTeX table showing county treatment/control groups for causal analysis
 
 **Tables:**
 - `create_regional_control_latex_table()` - LaTeX table of colleges founded 1900-1940 by region and control type
@@ -103,7 +103,6 @@ python founding_years_analysis.py
   - Colleges per capita by region
   - Student capacity analyses
   - City and county timeline scatter plots
-  - County classification chart
 - **Tables:** `/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/`
   - Regional control type classifications
   - County treatment/control group assignments

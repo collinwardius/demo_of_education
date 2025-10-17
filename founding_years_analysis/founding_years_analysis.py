@@ -1236,64 +1236,6 @@ def create_county_analysis_table(df_clean):
 
     print(f"LaTeX table saved to: {output_path}")
 
-    # Create visual representation
-    fig, ax = plt.subplots(figsize=(14, 8))
-
-    # Define categories for visualization
-    categories = [
-        'Had college\nbefore 1900\n(did not gain\n1900-1940)',
-        'Never had\ncollege by 1940',
-        'No college before 1900\n→ Exactly 1 college\n1900-1940\n[TREATED]',
-        'Had college\nbefore 1900\n(gained college(s)\n1900-1940)',
-        'No college before 1900\n→ 2+ colleges\n1900-1940'
-    ]
-
-    counts = [
-        n_group4,
-        n_group5,
-        n_group2,
-        n_group1 - n_group4,
-        n_group3
-    ]
-
-    colors = ['#fee08b', '#fdd49e', '#66c2a5', '#d3d3d3', '#d3d3d3']  # Yellow for controls, green for treated, gray for others
-
-    # Create bars
-    bars = ax.bar(categories, counts, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
-
-    # Add value labels on bars
-    for bar, count in zip(bars, counts):
-        height = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'{count}',
-                ha='center', va='bottom', fontsize=14, fontweight='bold')
-
-    # Add annotations for treatment/control
-    ax.text(0, counts[0] * 1.05, 'Potential\nControl 1', ha='center', fontsize=10,
-            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow', alpha=0.3))
-    ax.text(1, counts[1] * 1.05, 'Potential\nControl 2', ha='center', fontsize=10,
-            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='yellow', alpha=0.3))
-    ax.text(2, counts[2] * 1.05, 'Treatment\nGroup', ha='center', fontsize=10,
-            style='italic', bbox=dict(boxstyle='round,pad=0.5', facecolor='lightgreen', alpha=0.3))
-
-    # Labels and title
-    ax.set_ylabel('Number of Counties', fontsize=13)
-    ax.set_title('County Classification for College Analysis (1900-1940)\n(Excluding Junior Colleges, Normal Schools, Teachers Colleges, and Capacity ≤ 100)',
-                 fontsize=14, fontweight='bold', pad=20)
-    ax.set_ylim(0, max(counts) * 1.25)
-    ax.grid(True, alpha=0.3, axis='y')
-
-    # Rotate x-axis labels for better readability
-    plt.setp(ax.xaxis.get_majorticklabels(), rotation=0, ha='center', fontsize=9)
-
-    plt.tight_layout()
-
-    output_dir_fig = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
-    output_path_fig = Path(output_dir_fig) / "county_classification_chart.png"
-    plt.savefig(output_path_fig, dpi=300, bbox_inches='tight')
-    plt.close()
-    print(f"County classification chart saved to: {output_path_fig}")
-
     return {
         'n_had_college_before_1900': n_group1,
         'n_treated_0_to_1': n_group2,

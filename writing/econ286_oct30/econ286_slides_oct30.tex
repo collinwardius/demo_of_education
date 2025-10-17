@@ -17,6 +17,7 @@ style=authoryear,
 % \setbeameroption{show notes on second screen=right} % Both
 
 \usepackage{booktabs}
+\usepackage{threeparttable}
 \usepackage{siunitx}
 \newcolumntype{d}{S[
     input-open-uncertainty=,
@@ -327,7 +328,6 @@ fill=green!30]
 \end{frame}
 
 
-
 \begin{frame}{BA Completion: 1900 vs 1936 Birth Cohorts}
     \begin{figure}
         \centering
@@ -371,11 +371,35 @@ fill=green!30]
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Picking a control group}
-\input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex"}
+\begin{frame}{Isolating treated and control counties}
+  \begin{wideitemize}
+    \item Restrict attention to ``conventional'' colleges: exclude junior colleges, normal schools, teachers colleges, and colleges with capacity $\leq$ 100.
+    \item Treated counties gain exactly one college over this period
+    \item Three natural control groups:
+    \begin{wideitemize}
+      \item Counties that never get a college (never-treated)
+      \item Counties that get a college later in the period (not yet treated)
+      \item Counties that received a college before 1900 and do not receive a college during this period (already treated)
+    \end{wideitemize}
+  \end{wideitemize}
 \end{frame}
 
+\begin{frame}{Quantifying the treated and control counties}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex"}
+\end{frame}
 
+\begin{frame}{Identifying treated individuals in the census}
+  We only observe education in 1940, after individuals either received or did not receive a college education \vspace{.4cm}
+  \begin{enumerate}
+    \item Identify individuals who are at least 25 in the 1940 census
+    \item Link back to the latest census for which they are below the age of 18
+    \item Assign the individual that county of residence for the purposes of treatment assignment
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Comparing linked versus unlinked individuals in the census}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex"}
+\end{frame}
 
 
 \begin{frame}{Testing parallel trends: Event study specification}
