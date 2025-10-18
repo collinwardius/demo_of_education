@@ -16,7 +16,8 @@ import pandas as pd
 
 # Input and output paths
 input_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned.csv"
-output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned_linked.csv"
+output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned_merged.csv"
+
 
 print("="*70)
 print("FILTER FOR LINKED INDIVIDUALS ONLY")
@@ -28,6 +29,7 @@ print(f"Input file: {input_path}")
 df = pd.read_csv(input_path)
 print(f"Loaded {len(df):,} total observations")
 print(f"Unique individuals: {df['HIK'].nunique():,}")
+print(df.columns)
 
 # Step 1: Get all individuals observed in 1940 who are age 25-70
 print("\n" + "="*70)
@@ -97,14 +99,79 @@ print(f"\nObservations by age group:")
 print(f"  Age < 18: {pre18_count:,} ({pre18_count/len(df_linked)*100:.1f}%)")
 print(f"  Age >= 18: {post18_count:,} ({post18_count/len(df_linked)*100:.1f}%)")
 
-# Step 6: Save filtered dataset
+# Step 6: Merge county treatment status
 print("\n" + "="*70)
-print("SAVING FILTERED DATASET")
+print("MERGING COUNTY TREATMENT STATUS")
+print("="*70)
+
+# Load county treatment status data
+treatment_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/county_treatment_status.csv"
+print(f"Loading treatment data from: {treatment_path}")
+df_treatment = pd.read_csv(treatment_path)
+print(f"Loaded {len(df_treatment):,} county records")
+print(f"Treatment data columns: {list(df_treatment.columns)}")
+
+# Check for merge keys in census data
+print("\nChecking merge keys in census data...")
+if 'stateicp' not in df_linked.columns:
+    print("WARNING: stateicp not found in census data")
+else:
+    print(f"  Found stateicp in census data")
+if 'COUNTYICP' not in df_linked.columns:
+    print("WARNING: COUNTYICP not found in census data")
+else:
+    print(f"  Found COUNTYICP in census data")
+
+# Count observations before merge
+n_before_merge = len(df_linked)
+
+# Perform many-to-1 merge (many census observations to 1 county)
+# Census data uses stateicp/countyicp, treatment data uses ICPSRST/ICPSRCTY
+# indicator=True allows us to see merge statistics
+df_merged = df_linked.merge(
+    df_treatment,
+    left_on=['stateicp', 'COUNTYICP'],
+    right_on=['ICPSRST', 'ICPSRCTY'],
+    how='left',
+    indicator=True,
+    validate='many_to_one'
+)
+
+# Report merge statistics
+print("\nMerge statistics:")
+merge_stats = df_merged['_merge'].value_counts()
+print(merge_stats)
+
+if 'left_only' in merge_stats.index:
+    n_unmatched = merge_stats['left_only']
+    pct_unmatched = (n_unmatched / n_before_merge) * 100
+    print(f"\nCensus observations without county match: {n_unmatched:,} ({pct_unmatched:.2f}%)")
+    print("These observations will be kept in the dataset (no census data dropped)")
+
+if 'both' in merge_stats.index:
+    n_matched = merge_stats['both']
+    pct_matched = (n_matched / n_before_merge) * 100
+    print(f"Census observations with county match: {n_matched:,} ({pct_matched:.2f}%)")
+
+# Drop the merge indicator column
+df_merged = df_merged.drop(columns=['_merge'])
+
+# Verify no census observations were dropped
+n_after_merge = len(df_merged)
+assert n_after_merge == n_before_merge, f"Census observations were dropped! Before: {n_before_merge}, After: {n_after_merge}"
+print(f"\nVerified: No census observations dropped (still {n_after_merge:,} observations)")
+
+# Update the dataframe to use merged version
+df_linked = df_merged
+
+# Step 7: Save filtered and merged dataset
+print("\n" + "="*70)
+print("SAVING FILTERED AND MERGED DATASET")
 print("="*70)
 print(f"Output file: {output_path}")
 df_linked.to_csv(output_path, index=False)
 print(f"Saved {len(df_linked):,} observations to linked-only file")
 
 print("\n" + "="*70)
-print("Filtering complete!")
+print("Filtering and merging complete!")
 print("="*70)

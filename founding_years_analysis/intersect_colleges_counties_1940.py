@@ -9,13 +9,13 @@ output_path = Path('/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/de
 
 # Load 1940 county shapefile
 print("Loading 1940 county boundaries...")
-shapefile_path = shape_dir / 'nhgis0003_shapefile_tl2008_us_county_1940' / 'US_county_1940_conflated.shp'
+shapefile_path = shape_dir / 'nhgis0004_shapefile_tl2000_us_county_1940' / 'US_county_1940.shp'
 counties_gdf = gpd.read_file(shapefile_path)
 print(f"Loaded {len(counties_gdf)} counties")
 
 # Load colleges
 print("\nLoading colleges with coordinates...")
-colleges_df = pd.read_csv(colleges_path)
+colleges_df = pd.read_csv(colleges_path)   
 print(f"Loaded {len(colleges_df)} colleges")
 
 # Create GeoDataFrame from colleges (filter out any missing coordinates)

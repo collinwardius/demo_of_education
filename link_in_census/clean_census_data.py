@@ -26,6 +26,106 @@ print(f"Input file: {input_path}")
 df = pd.read_csv(input_path)
 print(f"Loaded {len(df):,} total observations")
 
+# Create ICPSR state code from FIPS state code
+print("\nCreating ICPSR state code (stateicp) from STATEFIP...")
+fips_icp = {
+    1: 41, 2: 81, 4: 61, 5: 42, 6: 71, 8: 62, 9: 1, 10: 11,
+    11: 55, 12: 43, 13: 44, 15: 82, 16: 63, 17: 21, 18: 22, 19: 31,
+    20: 32, 21: 51, 22: 45, 23: 2, 24: 52, 25: 3, 26: 23, 27: 33,
+    28: 46, 29: 34, 30: 64, 31: 35, 32: 65, 33: 4, 34: 12, 35: 66,
+    36: 13, 37: 47, 38: 36, 39: 24, 40: 53, 41: 72, 42: 14, 44: 5,
+    45: 48, 46: 37, 47: 54, 48: 49, 49: 67, 50: 6, 51: 40, 53: 73,
+    54: 56, 55: 25, 56: 68
+}
+
+df['stateicp'] = df['STATEFIP'].map(fips_icp)
+
+# Check if any states didn't match
+unmapped = df[df['stateicp'].isna()]
+if len(unmapped) > 0:
+    print(f"   Warning: {len(unmapped):,} observations have STATEFIP values not in mapping")
+    print(f"   Unique unmapped STATEFIP values: {sorted(unmapped['STATEFIP'].unique())}")
+else:
+    print(f"   Successfully mapped all {len(df):,} observations")
+
+# Merge with county crosswalks to standardize counties across time
+print("\n" + "="*70)
+print("MERGING WITH COUNTY CROSSWALKS")
+print("="*70)
+print("Standardizing counties to 1900 boundaries across all years")
+
+crosswalk_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files"
+
+# Track observations before merges
+n_before_crosswalk = len(df)
+
+# Process each year separately
+# We actually don't need the 1940 crosswalk since it will not be determining the treatment assignment
+for year in [1900, 1910, 1920, 1930]:
+    # Filter data for this year
+    df_year = df[df['YEAR'] == year].copy()
+    df_other = df[df['YEAR'] != year].copy()
+
+    n_before_merge = len(df_year)
+
+    if n_before_merge == 0:
+        print(f"\n{year}: No observations to merge")
+        continue
+
+    # Load crosswalk file
+    crosswalk_file = f"{crosswalk_dir}/county_crosswalk_{year}_to_1940.csv"
+    crosswalk = pd.read_csv(crosswalk_file)
+
+    # Rename columns for merging
+    # Native data has: stateicp, COUNTYICP
+    # Crosswalk has: icpsrst_{year}, icpsrcty_{year}, icpsrst_1940, icpsrcty_1940
+    crosswalk = crosswalk.rename(columns={
+        f'icpsrst_{year}': 'stateicp',
+        f'icpsrcty_{year}': 'COUNTYICP',
+        f'icpsrst_1940': 'stateicp_1940',
+        f'icpsrcty_1940': 'COUNTYICP_1940'
+    })
+
+    # Keep only necessary columns from crosswalk
+    crosswalk = crosswalk[['stateicp', 'COUNTYICP', 'stateicp_1940', 'COUNTYICP_1940']]
+
+    # Merge with census data (inner merge to keep only matched observations)
+    df_year_merged = df_year.merge(
+        crosswalk,
+        on=['stateicp', 'COUNTYICP'],
+        how='inner',
+        indicator=True
+    )
+
+    n_after_merge = len(df_year_merged)
+    n_dropped = n_before_merge - n_after_merge
+
+    print(f"\n{year}: Merged {n_before_merge:,} observations")
+    print(f"   Matched: {n_after_merge:,} observations")
+    print(f"   Dropped: {n_dropped:,} observations ({n_dropped/n_before_merge*100:.2f}%)")
+
+    # Replace original county codes with 1940 standardized codes
+    df_year_merged['stateicp'] = df_year_merged['stateicp_1940']
+    df_year_merged['COUNTYICP'] = df_year_merged['COUNTYICP_1940']
+
+    # Drop temporary columns
+    df_year_merged = df_year_merged.drop(columns=['stateicp_1940', 'COUNTYICP_1940', '_merge'])
+
+    # Combine back with other years
+    df = pd.concat([df_other, df_year_merged], ignore_index=True)
+
+# 1940 remains unchanged
+df_1 = df[df['YEAR'] == 1940]
+print(f"\n1940: No crosswalk needed (baseline year) - {len(df_1):,} observations")
+
+n_after_crosswalk = len(df)
+n_total_dropped = n_before_crosswalk - n_after_crosswalk
+
+print(f"\nTotal crosswalk merge summary:")
+print(f"   Before merges: {n_before_crosswalk:,} observations")
+print(f"   After merges:  {n_after_crosswalk:,} observations")
+print(f"   Total dropped: {n_total_dropped:,} observations ({n_total_dropped/n_before_crosswalk*100:.2f}%)")
+
 # Data cleaning steps
 print("\n" + "="*70)
 print("CLEANING STEPS")

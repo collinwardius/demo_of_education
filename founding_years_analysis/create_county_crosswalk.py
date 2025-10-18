@@ -23,8 +23,6 @@ if target_year not in valid_years:
     raise ValueError(f"target_year must be one of {valid_years}, got {target_year}")
 if base_year not in valid_years:
     raise ValueError(f"base_year must be one of {valid_years}, got {base_year}")
-if target_year <= base_year:
-    raise ValueError(f"target_year ({target_year}) must be later than base_year ({base_year})")
 
 print("="*80)
 print(f"GENERATING CROSSWALK: {target_year} → {base_year}")
