@@ -447,4 +447,12 @@ We need consistent county boundaries to accurately assign college locations acro
 \hyperlink{isolating}{\beamerbutton{Back to Isolating treated and control counties}}
 \end{frame}
 
+\begin{frame}{My reference on how the spatial join is performed}
+  Consider $A$ and $B$ from 1900 (the base year) and 1940 (the target year) respectively. Then get the area of $A\cap B$. We then compare this to the area of the target to calculate 
+  \begin{equation}
+  \frac{A\cap B}{B}  
+  \end{equation}
+  and we map B to A if this is above some threshold. I am using 70\% as of right now but this could be modified. In practice it seems like overlap among the counties is around 90\%.
+\end{frame}
+
 \end{document}

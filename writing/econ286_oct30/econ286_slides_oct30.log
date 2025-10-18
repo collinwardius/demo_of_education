@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  17 OCT 2025 11:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  17 OCT 2025 16:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1565,6 +1565,8 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 ] [17
 
+] [18
+
 ]
 \tf@nav=\write8
 \openout8 = `econ286_slides_oct30.nav'.
@@ -1583,18 +1585,18 @@ Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45948 strings out of 476025
- 1011038 string characters out of 5790016
+ 45952 strings out of 476025
+ 1011073 string characters out of 5790016
  1864388 words of memory out of 5000000
- 65509 multiletter control sequences out of 15000+600000
+ 65511 multiletter control sequences out of 15000+600000
  581121 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,122p,892b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on econ286_slides_oct30.pdf (17 pages, 1017404 bytes).
+Output written on econ286_slides_oct30.pdf (18 pages, 1019145 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
+ 214 PDF objects out of 1000 (max. 8388607)
+ 156 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
