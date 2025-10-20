@@ -4,13 +4,38 @@ Generate LaTeX comparison table of linked vs unlinked individuals.
 This script creates a table comparing 1940 characteristics between:
 - Individuals age 25-70 in 1940 who can be linked to pre-18 observations
 - Individuals age 25-70 in 1940 who cannot be linked to pre-18 observations
+
+Usage:
+    python analyze_pre18_linking.py <input_path> [output_path]
+
+Arguments:
+    input_path: Path to cleaned census data CSV
+    output_path: (Optional) Path to save LaTeX table
+                 Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex
 """
 
 import pandas as pd
+import sys
+
+# Parse command-line arguments
+if len(sys.argv) < 2:
+    print("Error: Missing required arguments")
+    print("\nUsage:")
+    print("  python analyze_pre18_linking.py <input_path> [output_path]")
+    print("\nArguments:")
+    print("  input_path:  Path to cleaned census data CSV")
+    print("  output_path: (Optional) Path to save LaTeX table")
+    sys.exit(1)
+
+data_path = sys.argv[1]
+
+# Default output path (can be overridden)
+default_output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex"
+output_path = sys.argv[2] if len(sys.argv) > 2 else default_output_path
 
 # Load the cleaned data
-data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned.csv"
 print("Loading cleaned census data...")
+print(f"Input file: {data_path}")
 df = pd.read_csv(data_path)
 print(f"Loaded {len(df):,} total observations")
 
@@ -126,9 +151,9 @@ latex_output += "\\end{tablenotes}\n"
 latex_output += "\\end{table}\n"
 
 # Save LaTeX table
-output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex"
+print(f"\nSaving LaTeX table to: {output_path}")
 with open(output_path, 'w') as f:
     f.write(latex_output)
 
-print(f"\nLaTeX table saved to: {output_path}")
+print(f"LaTeX table saved to: {output_path}")
 print("LaTeX table generation complete!")

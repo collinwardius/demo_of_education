@@ -8,15 +8,39 @@ This script:
 4. Keeps only those individuals (all their observations across all census years)
 5. Saves the filtered dataset
 
+Usage:
+    python filter_merge_cleaned_data.py <input_path> <output_path> [treatment_path]
+
+Arguments:
+    input_path: Path to cleaned census data CSV
+    output_path: Path to save filtered and merged census data CSV
+    treatment_path: (Optional) Path to county treatment status CSV
+                   Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/county_treatment_status.csv
+
 Input: cleaned census data
 Output: linked-only census data
 """
 
 import pandas as pd
+import sys
 
-# Input and output paths
-input_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned.csv"
-output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned_merged.csv"
+# Parse command-line arguments
+if len(sys.argv) < 3:
+    print("Error: Missing required arguments")
+    print("\nUsage:")
+    print("  python filter_merge_cleaned_data.py <input_path> <output_path> [treatment_path]")
+    print("\nArguments:")
+    print("  input_path:     Path to cleaned census data CSV")
+    print("  output_path:    Path to save filtered and merged census data CSV")
+    print("  treatment_path: (Optional) Path to county treatment status CSV")
+    sys.exit(1)
+
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+
+# Default treatment path (can be overridden)
+default_treatment_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/county_treatment_status.csv"
+treatment_path = sys.argv[3] if len(sys.argv) > 3 else default_treatment_path
 
 
 print("="*70)
@@ -104,8 +128,7 @@ print("\n" + "="*70)
 print("MERGING COUNTY TREATMENT STATUS")
 print("="*70)
 
-# Load county treatment status data
-treatment_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/county_treatment_status.csv"
+# Load county treatment status data, counties are treated if they gain exactly one college.
 print(f"Loading treatment data from: {treatment_path}")
 df_treatment = pd.read_csv(treatment_path)
 print(f"Loaded {len(df_treatment):,} county records")

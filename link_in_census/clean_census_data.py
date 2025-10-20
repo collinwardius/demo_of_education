@@ -5,26 +5,110 @@ This script performs data cleaning steps on the raw census data:
 1. Drops records with missing age (AGE=999)
 2. Saves cleaned data for subsequent analysis
 
+Usage:
+    python clean_census_data.py <input_path> <output_path> [crosswalk_dir]
+
+Arguments:
+    input_path: Path to raw census data CSV
+    output_path: Path to save cleaned census data CSV
+    crosswalk_dir: (Optional) Directory containing county crosswalk files
+                   Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files
+
 Input: Raw census data
 Output: Cleaned census data ready for linking analysis
 """
 
 import pandas as pd
-import os
+import sys
 
-# Input and output paths
-input_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging.csv"
-output_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/census/born_georgia_linked_census_for_debugging_cleaned.csv"
+# Parse command-line arguments
+if len(sys.argv) < 3:
+    print("Error: Missing required arguments")
+    print("\nUsage:")
+    print("  python clean_census_data.py <input_path> <output_path> [crosswalk_dir]")
+    print("\nArguments:")
+    print("  input_path:    Path to raw census data CSV")
+    print("  output_path:   Path to save cleaned census data CSV")
+    print("  crosswalk_dir: (Optional) Directory containing county crosswalk files")
+    sys.exit(1)
+
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+
+# Default crosswalk directory (can be overridden)
+default_crosswalk_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files"
+crosswalk_dir = sys.argv[3] if len(sys.argv) > 3 else default_crosswalk_dir
 
 print("="*70)
 print("CENSUS DATA CLEANING")
 print("="*70)
 
-# Load the data
-print("\nLoading census data...")
+# Load the data in chunks to handle large files
+print("\nProcessing census data in chunks to minimize memory usage...")
 print(f"Input file: {input_path}")
-df = pd.read_csv(input_path)
-print(f"Loaded {len(df):,} total observations")
+
+# PASS 1: Identify valid HIKs (people aged 25-70 in 1940 with non-missing education)
+print("\nPass 1: Identifying valid individuals from 1940 census...")
+valid_hiks = set()
+total_rows_scanned = 0
+chunk_size = 100000
+
+for chunk in pd.read_csv(input_path, chunksize=chunk_size):
+    total_rows_scanned += len(chunk)
+
+    # Filter to 1940 observations only
+    chunk_1940 = chunk[chunk['YEAR'] == 1940]
+
+    # Keep people aged 25-70 with non-missing education
+    valid_chunk = chunk_1940[
+        (chunk_1940['AGE'] >= 25) &
+        (chunk_1940['AGE'] <= 70) &
+        (chunk_1940['EDUC'] != 99)
+    ]
+
+    # Add their HIKs to the set
+    valid_hiks.update(valid_chunk['HIK'].unique())
+
+    if total_rows_scanned % 500000 == 0:
+        print(f"   Scanned {total_rows_scanned:,} rows, found {len(valid_hiks):,} valid individuals so far...")
+
+print(f"   Scanned {total_rows_scanned:,} total rows")
+print(f"   Identified {len(valid_hiks):,} valid individuals (aged 25-70 in 1940 with valid education)")
+
+# PASS 2: Load only relevant observations in chunks
+print("\nPass 2: Loading relevant observations...")
+print("   For 1940: keeping ages 25-70")
+print("   For other years: keeping ages under 18")
+
+df_chunks = []
+total_kept = 0
+
+for chunk in pd.read_csv(input_path, chunksize=chunk_size):
+    # Filter to valid HIKs only
+    chunk = chunk[chunk['HIK'].isin(valid_hiks)]
+
+    # Apply age filters based on year
+    chunk_1940 = chunk[chunk['YEAR'] == 1940]
+    chunk_other = chunk[chunk['YEAR'] != 1940]
+
+    # For other years, keep only ages under 18
+    chunk_other = chunk_other[chunk_other['AGE'] < 18]
+
+    # Combine
+    chunk_filtered = pd.concat([chunk_1940, chunk_other], ignore_index=True)
+
+    if len(chunk_filtered) > 0:
+        df_chunks.append(chunk_filtered)
+        total_kept += len(chunk_filtered)
+
+    if total_kept % 500000 == 0 and total_kept > 0:
+        print(f"   Kept {total_kept:,} observations so far...")
+
+# Combine all chunks
+df = pd.concat(df_chunks, ignore_index=True)
+del df_chunks  # Free memory
+
+print(f"   Loaded {len(df):,} total observations")
 
 # Create ICPSR state code from FIPS state code
 print("\nCreating ICPSR state code (stateicp) from STATEFIP...")
@@ -53,8 +137,7 @@ print("\n" + "="*70)
 print("MERGING WITH COUNTY CROSSWALKS")
 print("="*70)
 print("Standardizing counties to 1900 boundaries across all years")
-
-crosswalk_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files"
+print(f"Crosswalk directory: {crosswalk_dir}")
 
 # Track observations before merges
 n_before_crosswalk = len(df)
@@ -133,60 +216,24 @@ print("="*70)
 
 n_before = len(df)
 
-# Step 1: Drop people with age < 25 or > 70 in 1940
-print("\n1. Dropping people with age < 25 or > 70 in 1940:")
-if 'AGE' in df.columns and 'HIK' in df.columns and 'YEAR' in df.columns:
-    n_before_age = len(df)
+# Step 1: Age and education filtering (already done during chunk loading)
+print("\n1. Age filtering (already applied during data loading):")
+print(f"   Kept only individuals aged 25-70 in 1940")
+print(f"   For other years: kept only observations with age < 18")
 
-    # Find people in 1940 outside age range 25-70
-    df_1940 = df[df['YEAR'] == 1940]
-    n_outside_range = ((df_1940['AGE'] < 25) | (df_1940['AGE'] > 70)).sum()
-    print(f"   Found {n_outside_range:,} observations in 1940 with AGE<25 or AGE>70")
+# Verify the filtering
+df_1940 = df[df['YEAR'] == 1940]
+n_outside_range = ((df_1940['AGE'] < 25) | (df_1940['AGE'] > 70)).sum()
+print(f"   Verification: {n_outside_range:,} observations in 1940 outside age range 25-70 (should be 0)")
 
-    if n_outside_range > 0:
-        # Get HIKs to drop (people with age<25 or age>70 in 1940)
-        hiks_to_drop = df_1940[(df_1940['AGE'] < 25) | (df_1940['AGE'] > 70)]['HIK'].unique()
-        print(f"   Dropping {len(hiks_to_drop):,} unique individuals (all their observations across all years)")
+print("\n2. Education filtering (already applied during data loading):")
+print(f"   Dropped individuals with EDUC=99 in 1940")
 
-        # Drop all observations for these individuals
-        df = df[~df['HIK'].isin(hiks_to_drop)].copy()
-        n_after_age = len(df)
-        print(f"   Dropped {n_before_age - n_after_age:,} total observations")
-    else:
-        print(f"   No records to drop")
-else:
-    if 'AGE' not in df.columns:
-        print(f"   Warning: AGE column not found in data")
-    if 'HIK' not in df.columns:
-        print(f"   Warning: HIK column not found in data")
-    if 'YEAR' not in df.columns:
-        print(f"   Warning: YEAR column not found in data")
+# Verify the filtering
+n_missing_educ_1940 = ((df['YEAR'] == 1940) & (df['EDUC'] == 99)).sum()
+print(f"   Verification: {n_missing_educ_1940:,} observations in 1940 with EDUC=99 (should be 0)")
 
 n_after = len(df)
-
-# Step 2: Drop people in 1940 with missing education (educ=99)
-print("\n2. Dropping people observed in 1940 with missing education (EDUC=99):")
-if 'EDUC' in df.columns and 'YEAR' in df.columns:
-    n_before_educ = len(df)
-    n_missing_educ_1940 = ((df['YEAR'] == 1940) & (df['EDUC'] == 99)).sum()
-    print(f"   Found {n_missing_educ_1940:,} observations in 1940 with EDUC=99")
-
-    if n_missing_educ_1940 > 0:
-        # Get HIKs to drop (people with educ=99 in 1940)
-        hiks_to_drop = df[(df['YEAR'] == 1940) & (df['EDUC'] == 99)]['HIK'].unique()
-        print(f"   Dropping {len(hiks_to_drop):,} unique individuals (all their observations across all years)")
-
-        # Drop all observations for these individuals
-        df = df[~df['HIK'].isin(hiks_to_drop)].copy()
-        n_after_educ = len(df)
-        print(f"   Dropped {n_before_educ - n_after_educ:,} total observations")
-    else:
-        print(f"   No records to drop")
-else:
-    if 'EDUC' not in df.columns:
-        print(f"   Warning: EDUC column not found in data")
-    if 'YEAR' not in df.columns:
-        print(f"   Warning: YEAR column not found in data")
 
 # Step 3: Create education indicator variables (college and ba)
 print("\n3. Creating education indicator variables:")
