@@ -19,6 +19,58 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
+    \entry{abramitzkyNationImmigrantsAssimilation2014}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=dfaa0bfe014fce7344fad0782d0d0d01}{%
+           family={Abramitzky},
+           familyi={A\bibinitperiod},
+           given={Ran},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=977bb0d156bd9a4f11d72cb1cd1a9159}{%
+           family={Boustan},
+           familyi={B\bibinitperiod},
+           given={Leah\bibnamedelima Platt},
+           giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ee4f98dc5fca1344da5371dc8dd16aba}{%
+           family={Eriksson},
+           familyi={E\bibinitperiod},
+           given={Katherine},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5ad3ce8972d83434a968db281cb79d83}
+      \strng{fullhash}{5ad3ce8972d83434a968db281cb79d83}
+      \strng{bibnamehash}{5ad3ce8972d83434a968db281cb79d83}
+      \strng{authorbibnamehash}{5ad3ce8972d83434a968db281cb79d83}
+      \strng{authornamehash}{5ad3ce8972d83434a968db281cb79d83}
+      \strng{authorfullhash}{5ad3ce8972d83434a968db281cb79d83}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0022-3808, 1537-534X}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{number}{3}
+      \field{shorttitle}{A {{Nation}} of {{Immigrants}}}
+      \field{title}{A {{Nation}} of {{Immigrants}}: {{Assimilation}} and {{Economic Outcomes}} in the {{Age}} of {{Mass Migration}}}
+      \field{urlday}{20}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{122}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \field{pages}{467\bibrangedash 506}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.1086/675805
+      \endverb
+    \endentry
     \entry{actonDistanceDegreesHow2025}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=f49504aeeeb79bff78fea701863d42ca}{%
@@ -75,6 +127,55 @@
       \verb 10.1016/j.econedurev.2025.102724
       \endverb
     \endentry
+    \entry{bleemerChangesCollegeMobility2025}{misc}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=82f06f67f04ab357560d069ad7ddcd50}{%
+           family={Bleemer},
+           familyi={B\bibinitperiod},
+           given={Zachary},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6025cdd5835bfa5000a0318c47975757}{%
+           family={Quincy},
+           familyi={Q\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {National Bureau of Economic Research}%
+      }
+      \strng{namehash}{49968240a0586f446f667caa1284e853}
+      \strng{fullhash}{49968240a0586f446f667caa1284e853}
+      \strng{bibnamehash}{49968240a0586f446f667caa1284e853}
+      \strng{authorbibnamehash}{49968240a0586f446f667caa1284e853}
+      \strng{authornamehash}{49968240a0586f446f667caa1284e853}
+      \strng{authorfullhash}{49968240a0586f446f667caa1284e853}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Going to college has consistently conferred a large wage premium. We show that the relative premium received by lower-income Americans has halved since 1960. We decompose this steady rise in `collegiate regressivity' using dozens of survey and administrative datasets documenting 1900--2020 wage premiums and the composition and value-added of collegiate institutions and majors. Three factors explain 80 percent of collegiate regressivity's growth. First, the teaching-oriented public universities where lower-income students are concentrated have relatively declined in funding, retention, and economic value since 1960. Second, lower-income students have been disproportionately diverted into community and for-profit colleges since 1980 and 1990, respectively. Third, higher-income students' falling humanities enrollment and rising computer science enrollment since 2000 have increased their degrees' value. Selection into college-going and across four-year universities are second-order. College-going provided equitable returns before 1960, but collegiate regressivity now curtails higher education's potential to reduce inequality and mediates 25 percent of intergenerational income transmission.}
+      \field{eprinttype}{National Bureau of Economic Research}
+      \field{month}{5}
+      \field{number}{33797}
+      \field{series}{Working {{Paper Series}}}
+      \field{title}{Changes in the {{College Mobility Pipeline Since}} 1900}
+      \field{type}{Working {{Paper}}}
+      \field{urlday}{19}
+      \field{urlmonth}{5}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.3386/w33797
+      \endverb
+      \verb{eprint}
+      \verb 33797
+      \endverb
+    \endentry
     \entry{cardUsingGeographicVariation1993}{report}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=a9e88233ec6ce30d2d31e294961e3e76}{%
@@ -116,6 +217,47 @@
       \range{pages}{-1}
       \verb{doi}
       \verb 10.3386/w4483
+      \endverb
+    \endentry
+    \entry{derenoncourtCanYouMove2022}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7af6e1eec676918209f8442a91292792}{%
+           family={Derenoncourt},
+           familyi={D\bibinitperiod},
+           given={Ellora},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7af6e1eec676918209f8442a91292792}
+      \strng{fullhash}{7af6e1eec676918209f8442a91292792}
+      \strng{bibnamehash}{7af6e1eec676918209f8442a91292792}
+      \strng{authorbibnamehash}{7af6e1eec676918209f8442a91292792}
+      \strng{authornamehash}{7af6e1eec676918209f8442a91292792}
+      \strng{authorfullhash}{7af6e1eec676918209f8442a91292792}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper shows that racial composition shocks during the Great Migration (1940--1970) reduced the gains from growing up in the northern United States for Black families and can explain 27 percent of the region's racial upward mobility gap today. I identify northern Black share increases by interacting pre-1940 Black migrants' location choices with predicted southern county out-migration. Locational changes, not negative selection of families, explain lower upward mobility, with persistent segregation and increased crime and policing as plausible mechanisms. The case of the Great Migration provides a more nuanced view of moving to opportunity when destination reactions are taken into account. (JEL H75, H76, J15, J62, K42, N32, R23)}
+      \field{issn}{0002-8282}
+      \field{journaltitle}{American Economic Review}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{number}{2}
+      \field{shorttitle}{Can {{You Move}} to {{Opportunity}}?}
+      \field{title}{Can {{You Move}} to {{Opportunity}}? {{Evidence}} from the {{Great Migration}}}
+      \field{urlday}{20}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{112}
+      \field{year}{2022}
+      \field{urldateera}{ce}
+      \field{pages}{369\bibrangedash 408}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.1257/aer.20200002
       \endverb
     \endentry
     \entry{dufloSchoolingLaborMarket2001}{article}{}
@@ -295,6 +437,46 @@
       \verb 116938
       \endverb
     \endentry
+    \entry{hurt1947college}{book}{}
+      \name{author}{3}{}{%
+        {{un=2,uniquepart=given,hash=622f4891fd0dc4f1d5d7ab4573a070ae}{%
+           family={Hurt},
+           familyi={H\bibinitperiod},
+           given={H.W.},
+           giveni={H\bibinitperiod},
+           givenun=2}}%
+        {{un=2,uniquepart=given,hash=ce2690219008eddd435d2c550947b406}{%
+           family={Hurt},
+           familyi={H\bibinitperiod},
+           given={H.J.},
+           giveni={H\bibinitperiod},
+           givenun=2}}%
+        {{un=0,uniquepart=base,hash=4dda32378b3b84d0186bb74ed96ef785}{%
+           family={Burckel},
+           familyi={B\bibinitperiod},
+           given={C.E.},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {C. E. Burckel}%
+      }
+      \strng{namehash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \strng{fullhash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \strng{bibnamehash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \strng{authorbibnamehash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \strng{authornamehash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \strng{authorfullhash}{df5904f4e3d04d8e03db60480bb4b3d1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{v. 1}
+      \field{title}{The College Blue Book}
+      \field{year}{1947}
+    \endentry
     \entry{nimier-davidLocalHumanCapital2023}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=c4177d0d4338394607fd1d4a8fe1da74}{%
@@ -318,6 +500,97 @@
       \field{labeltitlesource}{title}
       \field{title}{Local {{Human Capital}} and {{Firm Creation Evidence}} from the {{Massification}} of {{Higher Education}} in {{France}}}
       \field{year}{2023}
+    \endentry
+    \entry{rugglesIPUMSUSAVersion2025}{misc}{}
+      \name{author}{10}{}{%
+        {{un=0,uniquepart=base,hash=7387f51a82f67bf6afaf06e50696a5ba}{%
+           family={Ruggles},
+           familyi={R\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1d1fdad8c06cc33521b145d93817da67}{%
+           family={Flood},
+           familyi={F\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=87928807d3b2c56017eaad58f9f65811}{%
+           family={Sobek},
+           familyi={S\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ac102c2f04dd0843244ab1807aaab6c0}{%
+           family={Backman},
+           familyi={B\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7e5890410e9c49d30a39e1ed5f890f7a}{%
+           family={Cooper},
+           familyi={C\bibinitperiod},
+           given={Grace},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=db3e3133d4aaf94567adc6896ec62501}{%
+           family={Drew},
+           familyi={D\bibinitperiod},
+           given={Julia\bibnamedelimb A.\bibnamedelimi Rivera},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=183f9332e7955f582d84acff6c86edf2}{%
+           family={Richards},
+           familyi={R\bibinitperiod},
+           given={Stephanie},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=18c822c799eae536099d4d057e8b4841}{%
+           family={Rodgers},
+           familyi={R\bibinitperiod},
+           given={Renae},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=36fe880a83819ae0b378aa7b9ea509f8}{%
+           family={Schroeder},
+           familyi={S\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=66ac073177c375b91a70248f0d1301e3}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Kari},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Minneapolis, MN: IPUMS}%
+      }
+      \strng{namehash}{dc2ce9401fe56d5d462d6aaea4312709}
+      \strng{fullhash}{3de39b19331ddd9f89fb452b7402b4e8}
+      \strng{bibnamehash}{dc2ce9401fe56d5d462d6aaea4312709}
+      \strng{authorbibnamehash}{dc2ce9401fe56d5d462d6aaea4312709}
+      \strng{authornamehash}{dc2ce9401fe56d5d462d6aaea4312709}
+      \strng{authorfullhash}{3de39b19331ddd9f89fb452b7402b4e8}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{IPUMS USA contains harmonized census and American Community Survey (ACS) data from 1790 to the present. For the period 1850 to 1950, IPUMS includes 100\% of individuals in the decennial censuses. For the period 1960 to 2010, we have public use samples of decennial censuses. For the period since 2000, IPUMS provides annual ACS public use samples. The available information in the censuses and ACS varies by year, but generally includes basic housing data (type of housing, household appliances, and housing characteristics), demographic data (age, race, sex, marital status, and relationship to the head of household), economic data (occupation, industry, income, work status), and other individual characteristics (migration, disability, veteran status). For the period 1790 to 1840, IPUMS includes household level records for 100\% of households. IPUMS USA is available through an online data access system free of charge to registered users at usa.ipums.org.}
+      \field{langid}{english}
+      \field{shorttitle}{{{IPUMS USA}}}
+      \field{title}{{{IPUMS USA}}: {{Version}} 16.0}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.18128/D010.V16.0
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

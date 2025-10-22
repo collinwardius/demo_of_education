@@ -270,8 +270,8 @@ fill=green!30]
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[]{How the Dawn of Public Higher Education (1900-1940) Shaped Access and Work}
-\author{Collin Wardius} % Your name
+\title[]{The effect of college expansion on college attainment: evidence from historical US censuses}
+\author{Collin J Wardius} % Your name
 \institute{
   Department of Economics, UC San Diego
   \newline
@@ -285,18 +285,18 @@ fill=green!30]
   \titlepage
 \end{frame}
 
-\begin{frame}{Higher education in the US experienced its first major transformation in the early 1900s}
-  \begin{wideitemize}
-    \item Many more students enrolled
-    \item Public universities began to dominate in terms of enrollment
-  \end{wideitemize}
+\begin{frame}{Education in the US experienced a major transformation in the early 1900s}
+ \begin{wideitemize}
+\item Many more students completed HS and college
+\item Massive increase in capacity and spending at all levels of education
+\item \textbf{My focus: dramatic expansion in college openings and enrollment}
+\end{wideitemize}
 \end{frame}
 
-
-\begin{frame}{Questions}
+\begin{frame}{Research Question}
 \begin{wideitemize}
-    \item \textbf{How did the founding of public colleges change access to college?}
-    \item How did the founding of public colleges change the labor force of local economies?
+\item Do supply-side expansions of colleges drive increased educational attainment?
+\item Specifically: How did new college openings affect local college attainment?
 \end{wideitemize}
 \end{frame}
 
@@ -310,21 +310,39 @@ fill=green!30]
 
 \begin{frame}{Literature}
   \begin{itemize}
-    \item \textbf{History of US higher education (1900-1940)}: \cite{goldinAmericasGraduationHigh1998}, \cite{goldinOriginsStateLevelDifferences1998}, \cite{goldinHumanCapitalCenturyAmerican2001}
+    \item \textbf{History of US higher education (1900-1940)}
     \begin{itemize}
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Quantify the causal effect of university expansion on education access
+      \item \textcolor{gray}{\cite{goldinAmericasGraduationHigh1998}, \cite{goldinOriginsStateLevelDifferences1998}, \cite{goldinHumanCapitalCenturyAmerican2001}}
     \end{itemize}
 
-    \item \textbf{Effects of university building in non-US countries}: \cite{dufloSchoolingLaborMarket2001}, \cite{nimier-davidLocalHumanCapital2023}
+    \item \textbf{Effects of school building in non-US countries}
     \begin{itemize}
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} US university foundings and variation in public vs private control
+      \item \textcolor{gray}{\cite{dufloSchoolingLaborMarket2001}, \cite{nimier-davidLocalHumanCapital2023}}
     \end{itemize}
 
-    \item \textbf{How proximity to college affects attainment and earnings}: \cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}
+    \item \textbf{How proximity to college affects attainment and earnings}
     \begin{itemize}
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Examine extensive margin of college access via new university foundings
+      \item \textcolor{gray}{\cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}}
+    \end{itemize}
+
+    \item \textbf{Historical census analysis to answer current questions in economics}
+    \begin{itemize}
+      \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Create a dataset of university expansions and link them to the census data
+      \item \textcolor{gray}{\cite{abramitzkyNationImmigrantsAssimilation2014}, \cite{derenoncourtCanYouMove2022}, \cite{bleemerChangesCollegeMobility2025}}
     \end{itemize}
   \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Data}
+  \begin{wideitemize}
+    \item \textbf{1900-1940 Decennial, Linked Full-Count US Censuses} \cite{rugglesIPUMSUSAVersion2025}: occupation, income, education, pre- and post-college-age location
+    \item \textbf{1947 College Blue Book} \cite{hurt1947college}: college founding year, enrollment, student capacity, state or private control
+    \item \textbf{Biennial Surveys of Education and Commissioner's on US Education}: college-level data on enrollment, finances, faculty, and programs (novel data in the process of being digitized by me)  
+  \end{wideitemize}
 \end{frame}
 
 
@@ -353,8 +371,8 @@ fill=green!30]
 \end{frame}
 
 
-\begin{frame}{Estimating the effect of a university founding on college attainment}
-  Cross sectional regression, identifying variation is at the cohort-by-county level.
+\begin{frame}{Estimating the effect of a university founding on college attainment: cohort DD approach}
+  Cross sectional regression, identifying variation is at the age cohort-by-county level.
   \begin{equation}
     y_{ick} = \alpha_c + \lambda_k + \beta \text{New college}_{ck}\times \lambda_k +\xi \bm{X}_{ick} + \epsilon_{ick}
   \end{equation}
@@ -364,12 +382,57 @@ fill=green!30]
   \end{wideitemize}
 \end{frame}
 
-\begin{frame}{The identification assumption}
+\begin{frame}{The cohort DD identification assumption}
 \begin{wideitemize}
   \item Compare the gap in attainment between older cohorts and younger cohorts in counties that have a new college versus those that do not
-  \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college would have experienced parallel trends in attainment across cohorts absent the new college.
+ \begin{align}
+ \tau_{DD} &= \underbrace{\left[\mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 1, k = \text{young}] - \mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 1, k = \text{old}]\right]}_{\text{Cohort difference in treated counties}} \nonumber \\
+ &\quad - \underbrace{\left[\mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 0, k = \text{young}] - \mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 0, k = \text{old}]\right]}_{\text{Cohort difference in control counties}}
+\end{align}
+  \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college would have experienced parallel trends in attainment across cohorts absent the new college
 \end{wideitemize}
 \end{frame}
+
+
+\begin{frame}{Alternative approach using county-specific trends}
+
+
+\begin{equation}
+y_{ick} = \alpha_c + \gamma_c \cdot k + \beta \text{New college}_{ck} + \xi \mathbf{X}_{ick} + \epsilon_{ick}
+\end{equation}
+
+\vspace{0.5cm}
+
+where:
+\begin{itemize}
+    \item $c$: county, $k$: age cohort, $i$: person
+    \item $\gamma_c \cdot k$: county-specific linear trends in cohort outcomes
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Key feature:} Identification uses only within-county variation, comparing young (exposed) vs. old (unexposed) cohorts in the same county
+
+\end{frame}
+
+\begin{frame}{The county-specific trend identifying assumption}
+
+For each county $c$ that gets a college, the treatment effect is deviations from the county-specific linear trend:
+
+\begin{equation}
+  {\tau}_c = \left[\mathbb{E}[y_{ick} \mid c, k = \text{young}] - \mathbb{E}[y_{ick} \mid c, k = \text{old}]\right] - \gamma_c \cdot \Delta k
+\end{equation}
+
+$\beta$ averages these within-county effects across all treated counties.
+
+\vspace{0.5cm}
+
+\textbf{Identifying assumption:} Absent the college, outcomes for cohorts within county $c$ would follow a linear trend.
+\end{frame}
+
+
+
+
 
 \begin{frame}[label=isolating]{Isolating treated and control counties}
   \begin{wideitemize}
@@ -394,17 +457,29 @@ fill=green!30]
   \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex"}
 \end{frame}
 
-\begin{frame}{Identifying treated individuals in the census}
-  We only observe education in 1940, after individuals either received or did not receive a college education \vspace{.4cm}
+
+\begin{frame}{The treated counties}
+   \begin{figure}
+        \centering
+        \includegraphics[scale=.15]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png"}
+        \caption{The treated counties}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Determining which individuals experiences a college expansion}
+  We only observe education and location in 1940, after individuals either received or did not receive a college education \vspace{.4cm}
   \begin{enumerate}
-    \item Identify individuals who are at least 25 in the 1940 census
-    \item Link back to the latest census for which they are below the age of 18
-    \item Assign the individual that county of residence for the purposes of treatment assignment
+    \item Identify adults (age 25+) in the 1940 census
+    \item Link back to the censuses for which they are below the age of 18 using \cite{rugglesIPUMSUSAVersion2025} longitudinal linkage
+    \item If an individual is observed twice before 18, take the latest observation
+    \item Assign the individual that county of residence for the purposes of treatment assignment 
   \end{enumerate}
 \end{frame}
 
 \begin{frame}{Comparing linked versus unlinked individuals in the census}
-  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex"}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex"}
 \end{frame}
 
 
@@ -433,12 +508,12 @@ fill=green!30]
 \end{frame}
 
 \begin{frame}[label=countycrosswalk]{Creating a county crosswalk}
-We need consistent county boundaries to accurately assign college locations across census years.
+We need consistent county boundaries to accurately assign which people experience a college creation versus which do not.
 
 \textbf{Approach:}
 \begin{enumerate}
-\item Use 1900 as the reference year (counties typically split into smaller units over time, rather than merging)
-\item Spatially intersect 1910, 1920, 1930, and 1940 boundaries with 1900 boundaries
+\item Use 1940 as the reference year
+\item Spatially intersect 1900, 1910, 1920, and 1930 boundaries with 1940 boundaries
 \item Match counties where the intersection exceeds 70\% overlap
 \item Retain only counties that appear consistently across all census years
 \end{enumerate}

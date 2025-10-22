@@ -47,11 +47,19 @@ print("="*70)
 print("\nProcessing census data in chunks to minimize memory usage...")
 print(f"Input file: {input_path}")
 
+# Define columns to drop to save memory
+cols_to_drop = [
+    'SERIAL', 'PERNUM', 'VERSIONHIST', 'HISTID', 'RELATED', 'HISPAND',
+    'RACED', 'MBPLD', 'FBPLD', 'MTONGUED', 'HIGRADED', 'HIGRADE', 'EDUCD',
+    'EMPSTATD', 'CLASSWKRD', 'LINK1900', 'LINK1910', 'LINK1920', 'LINK1930',
+    'LINK1940', 'VERSIONHIK'
+]
+
 # PASS 1: Identify valid HIKs (people aged 25-70 in 1940 with non-missing education)
 print("\nPass 1: Identifying valid individuals from 1940 census...")
 valid_hiks = set()
 total_rows_scanned = 0
-chunk_size = 100000
+chunk_size = 1000000
 
 for chunk in pd.read_csv(input_path, chunksize=chunk_size):
     total_rows_scanned += len(chunk)
@@ -74,9 +82,10 @@ for chunk in pd.read_csv(input_path, chunksize=chunk_size):
 
 print(f"   Scanned {total_rows_scanned:,} total rows")
 print(f"   Identified {len(valid_hiks):,} valid individuals (aged 25-70 in 1940 with valid education)")
+print(f"\nDropping unnecessary columns to save memory: {len(cols_to_drop)} columns")
 
 # PASS 2: Load only relevant observations in chunks
-print("\nPass 2: Loading relevant observations...")
+print("Pass 2: Loading relevant observations...")
 print("   For 1940: keeping ages 25-70")
 print("   For other years: keeping ages under 18")
 
@@ -84,6 +93,9 @@ df_chunks = []
 total_kept = 0
 
 for chunk in pd.read_csv(input_path, chunksize=chunk_size):
+    # Drop unnecessary columns immediately to save memory
+    chunk = chunk.drop(columns=[col for col in cols_to_drop if col in chunk.columns])
+
     # Filter to valid HIKs only
     chunk = chunk[chunk['HIK'].isin(valid_hiks)]
 

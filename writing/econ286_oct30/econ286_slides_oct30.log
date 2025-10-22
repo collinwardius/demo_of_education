@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  19 OCT 2025 20:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  21 OCT 2025 11:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1443,129 +1443,152 @@ LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
 (Font)              scaled to size 4.0pt on input line 286.
  [1
 
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_y72t7m.enc}] [2
-
-]
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_y72t7m.enc}]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 301.
- [3
+(Font)              scaled to size 10.95pt on input line 294.
+ [2
+
+] [3
 
 ] [4
 
 ]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 328.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 328.
+(Font)              scaled to size 10.0pt on input line 337.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 337.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 328.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 337.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 328.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 337.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <5> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <7> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <7> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <5> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <5> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 328.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 337.
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 328.
+(Font)              scaled to size 10.0pt on input line 337.
  [5
 
-{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=47, 1011.78pt x 433.62pt>
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}] [6
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=52, 1011.78pt x 433.62pt>
 File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png Graphic file (type png)
 <use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png  used on input line 337.
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png  used on input line 355.
 (pdftex.def)             Requested size: 346.67151pt x 148.5735pt.
- [6
-
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=53, 1004.0712pt x 569.7285pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png  used on input line 345.
-(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
  [7
 
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=62, 1004.0712pt x 569.7285pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png  used on input line 353.
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=59, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png  used on input line 363.
 (pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
  [8
 
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=67, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png  used on input line 371.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [9
+
  </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <6> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 365.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 383.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <6> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 365.
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 365.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 383.
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 383.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [9
+) [10
 
-{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] [10
-
-] [11
-
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex)
-Overfull \vbox (17.42876pt too high) detected at line 395
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+Overfull \hbox (2.3189pt too wide) detected at line 394
+[]
  []
 
-[12
+[11
+
+] [12
 
 ] [13
 
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex) [14
+] [14
+
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex)
+Overfull \vbox (17.42876pt too high) detected at line 458
+ []
+
+[15
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png, id=121, 1292.9103pt x 1292.6694pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png  used on input line 467.
+(pdftex.def)             Requested size: 193.92818pt x 193.89204pt.
+
+Overfull \vbox (15.23909pt too high) detected at line 467
+ []
+
+[16
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png>] [17
+
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex) [18
 
 ]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 422.
- [15
+(Font)              scaled to size 10.95pt on input line 497.
+ [19
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 424.
+(hyperref)                removing `\translate ' on input line 499.
 
-(/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [16
+(/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [20
 
-] [17
+] [21
 
-] [18
+] [22
 
 ]
 \tf@nav=\write8
@@ -1585,18 +1608,18 @@ Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45952 strings out of 476025
- 1011073 string characters out of 5790016
+ 45998 strings out of 476025
+ 1012883 string characters out of 5790016
  1864388 words of memory out of 5000000
- 65511 multiletter control sequences out of 15000+600000
- 581121 words of font info for 127 fonts, out of 8000000 for 9000
+ 65545 multiletter control sequences out of 15000+600000
+ 585434 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,122p,892b,1106s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on econ286_slides_oct30.pdf (18 pages, 1019091 bytes).
+ 128i,20n,122p,1413b,1254s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on econ286_slides_oct30.pdf (22 pages, 2450650 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 181 compressed objects within 2 object streams
+ 55 named destinations out of 1000 (max. 500000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 
