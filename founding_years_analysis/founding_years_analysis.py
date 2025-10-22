@@ -3,6 +3,69 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+def load_secdr_data():
+    """Load SECDR main data file."""
+    secdr_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/secdr/SECDR_main.dta"
+    secdr_df = pd.read_stata(secdr_path)
+
+    print(f"\nLoaded SECDR data: {len(secdr_df)} observations")
+    print(f"Years available: {secdr_df['year'].min()} to {secdr_df['year'].max()}")
+
+    return secdr_df
+
+def create_ppexpend_line_graph(secdr_df):
+    """Create line graph of weighted average per-pupil expenditure over time."""
+
+    # Filter out missing values for ppexpend_adj and students
+    df_filtered = secdr_df[secdr_df['ppexpend_adj'].notna() & secdr_df['students'].notna()].copy()
+
+    print(f"\nCreating per-pupil expenditure graph...")
+    print(f"Records with valid ppexpend_adj and students: {len(df_filtered)}")
+
+    # Calculate weighted average by year
+    weighted_avg_by_year = []
+    years = []
+
+    for year in sorted(df_filtered['year'].unique()):
+        year_data = df_filtered[df_filtered['year'] == year]
+
+        # Calculate weighted average: sum(ppexpend_adj * students) / sum(students)
+        total_weighted_expenditure = (year_data['ppexpend_adj'] * year_data['students']).sum()
+        total_students = year_data['students'].sum()
+
+        if total_students > 0:
+            weighted_avg = total_weighted_expenditure / total_students
+            weighted_avg_by_year.append(weighted_avg)
+            years.append(year)
+
+    # Create the plot
+    plt.figure(figsize=(14, 8))
+
+    plt.plot(years, weighted_avg_by_year, linewidth=3, color='#1f77b4',
+            alpha=0.8, marker='o', markersize=8)
+
+    plt.title('National Average Per-Pupil Expenditure Over Time\n(Student-weighted, inflation-adjusted)',
+              fontsize=16, fontweight='bold')
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('Per-Pupil Expenditure (Adjusted Dollars)', fontsize=12)
+    plt.grid(True, alpha=0.3)
+
+    # Format y-axis as currency
+    ax = plt.gca()
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x:,.0f}'))
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "ppexpend_adj_national_weighted.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Per-pupil expenditure graph saved to: {output_path}")
+
+    # Print summary statistics
+    print("\nWeighted Average Per-Pupil Expenditure by Year:")
+    for year, avg in zip(years, weighted_avg_by_year):
+        print(f"  {year}: ${avg:,.2f}")
+
 def create_founding_years_cdf():
     """Create CDF of college founding years for colleges existing as of 1944."""
 
@@ -718,6 +781,131 @@ def create_public_colleges_per_capita_by_decade(df_clean, regional_pop):
             per_capita = (college_count / population) * 100000
             print(f"  {region}: {per_capita:.2f} public colleges per 100,000 residents ({college_count} colleges, {population:,} population)")
 
+def create_total_operating_colleges_by_decade(df_clean, secdr_df):
+    """Create figure showing total number of operating colleges by decade from 1900-1940, broken down by type,
+    with per-pupil expenditure overlaid on a second y-axis."""
+
+    # Load the full dataset (including junior colleges)
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/colleges_with_counties_1940.csv"
+    df = pd.read_csv(data_path)
+
+    # Clean founding years
+    df['founding_year'] = pd.to_numeric(df['Founded_Year'], errors='coerce')
+    df_all = df[(df['founding_year'] >= 1600) & (df['founding_year'].notna())].copy()
+
+    # Define decades to analyze (from 1900 to 1940)
+    decades = list(range(1900, 1950, 10))
+
+    # Categorize colleges by type
+    # Teachers colleges: includes Teacher, Teachers, T., Teach
+    df_all['is_teachers'] = df_all['College_Name'].str.contains(r'Teacher|Teachers|T\.|Teach', case=False, na=False, regex=True)
+
+    # Junior colleges
+    df_all['is_junior'] = df_all['College_Type'] == 'Junior Colleges'
+
+    # Normal schools: includes Normal, Nor.
+    df_all['is_normal'] = df_all['College_Name'].str.contains(r'Normal|Nor\.', case=False, na=False, regex=True)
+
+    # Calculate counts by decade for each category
+    teachers_by_decade = []
+    junior_by_decade = []
+    normal_by_decade = []
+    other_by_decade = []
+    total_by_decade = []
+
+    for decade in decades:
+        df_decade = df_all[df_all['founding_year'] <= decade]
+
+        teachers_count = len(df_decade[df_decade['is_teachers']])
+        junior_count = len(df_decade[df_decade['is_junior']])
+        normal_count = len(df_decade[df_decade['is_normal']])
+
+        # Other colleges (excluding teachers, junior, and normal)
+        other_count = len(df_decade[~df_decade['is_teachers'] & ~df_decade['is_junior'] & ~df_decade['is_normal']])
+
+        total_count = len(df_decade)
+
+        teachers_by_decade.append(teachers_count)
+        junior_by_decade.append(junior_count)
+        normal_by_decade.append(normal_count)
+        other_by_decade.append(other_count)
+        total_by_decade.append(total_count)
+
+    # Calculate per-pupil expenditure for overlapping years (1920-1940)
+    df_filtered = secdr_df[secdr_df['ppexpend_adj'].notna() & secdr_df['students'].notna()].copy()
+
+    expenditure_years = []
+    expenditure_values = []
+
+    for year in decades:
+        if year >= 1920:  # SECDR data starts in 1920
+            year_data = df_filtered[df_filtered['year'] == year]
+            if len(year_data) > 0:
+                total_weighted_expenditure = (year_data['ppexpend_adj'] * year_data['students']).sum()
+                total_students = year_data['students'].sum()
+                if total_students > 0:
+                    weighted_avg = total_weighted_expenditure / total_students
+                    expenditure_years.append(year)
+                    expenditure_values.append(weighted_avg)
+
+    # Create the plot with dual y-axes
+    fig, ax1 = plt.subplots(figsize=(14, 8))
+
+    # Plot college counts on primary y-axis
+    ax1.plot(decades, teachers_by_decade, linewidth=2.5, color='#e41a1c',
+            alpha=0.8, marker='d', markersize=8, label='Teachers Colleges')
+    ax1.plot(decades, junior_by_decade, linewidth=2.5, color='#377eb8',
+            alpha=0.8, marker='d', markersize=8, label='Junior Colleges')
+    ax1.plot(decades, other_by_decade, linewidth=2.5, color='#984ea3',
+            alpha=0.8, marker='d', markersize=8, label='Conventional Colleges')
+
+    ax1.set_xlabel('Year', fontsize=12)
+    ax1.set_ylabel('Number of Operating Colleges', fontsize=12, color='black')
+    ax1.tick_params(axis='y', labelcolor='black')
+    ax1.set_xticks(decades)
+    ax1.grid(True, alpha=0.3)
+
+    # Create secondary y-axis for expenditure
+    ax2 = ax1.twinx()
+    ax2.plot(expenditure_years, expenditure_values, linewidth=3, color='#ff7f00',
+            alpha=0.8, marker='o', markersize=10, label='K-12 Per-Student Expenditure', linestyle='--')
+
+    ax2.set_ylabel('K-12 Expenditures per Student (2022 dollars)', fontsize=12, color='#ff7f00')
+    ax2.tick_params(axis='y', labelcolor='#ff7f00')
+
+    # Format y-axis as currency
+    ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x:,.0f}'))
+
+    # Combine legends
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, fontsize=11, loc='upper left')
+
+    plt.title('Number of Operating Colleges and K-12 expenditures per student',
+              fontsize=16, fontweight='bold')
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "operating_colleges_and_k12_expend.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Total operating colleges by decade plot saved to: {output_path}")
+
+    # Print summary statistics
+    print("\nOperating Colleges by Type and Decade:")
+    for i, decade in enumerate(decades):
+        print(f"  {decade}:")
+        print(f"    Teachers Colleges: {teachers_by_decade[i]}")
+        print(f"    Junior Colleges: {junior_by_decade[i]}")
+        print(f"    Normal Schools: {normal_by_decade[i]}")
+        print(f"    Other Colleges: {other_by_decade[i]}")
+        print(f"    Total: {total_by_decade[i]}")
+
+        # Add expenditure if available
+        if decade in expenditure_years:
+            idx = expenditure_years.index(decade)
+            print(f"    Per-Student Expenditure: ${expenditure_values[idx]:,.2f}")
+
 def create_regional_capacity_per_capita_histogram(regional_pop):
     """Create histogram of student capacity per capita by region in 1945."""
 
@@ -919,7 +1107,7 @@ def create_city_timeline_scatter(df_clean):
     df_filtered = df_filtered[df_filtered['City'].notna()].copy()
 
     # Exclude normal schools, teachers colleges, junior colleges, and related abbreviations
-    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
 
     # Filter for colleges with capacity over 100
     df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
@@ -928,7 +1116,7 @@ def create_city_timeline_scatter(df_clean):
 
     # Find cities that had 0 active colleges before 1900 and got their first college 1900-1940
     # First, identify all cities with colleges before 1900 (excluding normal schools/teachers colleges/jr/nor/teach)
-    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
     cities_before_1900 = set(df_clean_no_normal[(df_clean_no_normal['founding_year'] < 1900) &
                                                  (df_clean_no_normal['City'].notna())]['City'].unique())
 
@@ -1026,7 +1214,7 @@ def create_county_timeline_scatter(df_clean):
     df_filtered = df_filtered[df_filtered['ICPSRNAM'].notna()].copy()
 
     # Exclude normal schools, teachers colleges, junior colleges, and related abbreviations
-    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_filtered = df_filtered[~df_filtered['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
 
     # Filter for colleges with capacity over 100
     df_filtered['Student_Capacity'] = pd.to_numeric(df_filtered['Student_Capacity'], errors='coerce')
@@ -1035,7 +1223,7 @@ def create_county_timeline_scatter(df_clean):
 
     # Find counties that had 0 active colleges before 1900 and got their first college 1900-1940
     # First, identify all counties with colleges before 1900 (excluding normal schools/teachers colleges/jr/nor/teach)
-    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
 
     # Filter for colleges with capacity > 100 in the historical data as well
     df_clean_no_normal['Student_Capacity'] = pd.to_numeric(df_clean_no_normal['Student_Capacity'], errors='coerce')
@@ -1133,8 +1321,7 @@ def create_county_analysis_table(df_clean):
     print(f"\nCreating county analysis table...")
 
     # Load 1940 county shapefile to get total number of counties
-    shape_dir = Path('/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files')
-    shapefile_path = shape_dir / 'nhgis0003_shapefile_tl2008_us_county_1940' / 'US_county_1940_conflated.shp'
+    shapefile_path = Path('/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files/nhgis0004_shapefile_tl2000_us_county_1940/US_county_1940.shp')
 
     import geopandas as gpd
     counties_gdf = gpd.read_file(shapefile_path)
@@ -1142,7 +1329,7 @@ def create_county_analysis_table(df_clean):
     print(f"Total counties in 1940: {total_counties_1940}")
 
     # Filter out normal schools, teachers colleges, junior colleges
-    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\\.|Nor\\.|Teach', case=False, na=False, regex=True)].copy()
+    df_clean_no_normal = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False, regex=True)].copy()
 
     # Filter for colleges with capacity > 100
     df_clean_no_normal['Student_Capacity'] = pd.to_numeric(df_clean_no_normal['Student_Capacity'], errors='coerce')
@@ -1249,7 +1436,7 @@ def create_capacity_share_bar_chart(df_clean, year=1930):
     """Create bar chart showing share of public (state) student capacity by census region for a specific year."""
 
     # Filter out normal schools, teachers colleges, and related abbreviations
-    df_filtered = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
 
     # Filter for colleges founded by specified year
     df_filtered = df_filtered[df_filtered['founding_year'] <= year].copy()
@@ -1345,7 +1532,7 @@ def create_capacity_share_by_control_and_region(df_clean):
     """Create figure showing share of public (state) student capacity by census region from 1890-1940."""
 
     # Filter out normal schools, teachers colleges, and related abbreviations
-    df_filtered = df_clean[~df_clean['College_Name'].str.contains('Normal|Teachers|Teacher|Jr\.|Nor\.|Teach', case=False, na=False)].copy()
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
 
     # Filter for colleges founded by 1940
     df_filtered = df_filtered[df_filtered['founding_year'] <= 1940].copy()
@@ -1444,6 +1631,12 @@ def create_capacity_share_by_control_and_region(df_clean):
 def main():
     print("Creating founding years CDF analysis...")
 
+    # Load SECDR data
+    secdr_df = load_secdr_data()
+
+    # Create per-pupil expenditure graph
+    create_ppexpend_line_graph(secdr_df)
+
     # Create overall CDF
     df_clean = create_founding_years_cdf()
 
@@ -1463,6 +1656,9 @@ def main():
 
     # Create operating public colleges by region and decade plot
     create_regional_operating_public_colleges_by_decade(df_clean)
+
+    # Create total operating colleges by decade plot
+    create_total_operating_colleges_by_decade(df_clean, secdr_df)
 
     # Load population data and create per capita figures
     regional_pop = load_and_aggregate_population_data()
