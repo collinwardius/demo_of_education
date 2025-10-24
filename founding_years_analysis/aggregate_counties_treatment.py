@@ -16,20 +16,6 @@ print(f"Loaded {len(colleges_df)} colleges")
 colleges_df = colleges_df.dropna(subset=['ICPSRST', 'ICPSRCTY'])
 print(f"Colleges with county assignments: {len(colleges_df)}")
 
-# Filter out Junior Colleges
-colleges_df = colleges_df[colleges_df['College_Type'] != 'Junior Colleges'].copy()
-print(f"Colleges after removing Junior Colleges: {len(colleges_df)}")
-
-# Filter out Normal Schools and Teachers Colleges by name
-# Note: T\. only matches uppercase T (Teachers college), (?i:...) is case-insensitive for other patterns
-colleges_df = colleges_df[~colleges_df['College_Name'].str.contains('(?i:Normal|Teachers|Teacher|Jr\\.|Nor\\.|Teach)|T\\.', na=False, regex=True)].copy()
-print(f"Colleges after removing Normal/Teachers colleges: {len(colleges_df)}")
-
-# Convert Student_Capacity to numeric and filter for capacity > 100
-colleges_df['Student_Capacity'] = pd.to_numeric(colleges_df['Student_Capacity'], errors='coerce')
-colleges_df = colleges_df[colleges_df['Student_Capacity'] > 100].copy()
-print(f"Colleges with capacity > 100: {len(colleges_df)}")
-
 # Convert Founded_Year to numeric, handling any non-numeric values
 colleges_df['Founded_Year'] = pd.to_numeric(colleges_df['Founded_Year'], errors='coerce')
 print(f"Colleges with valid founding year: {colleges_df['Founded_Year'].notna().sum()}")
@@ -58,6 +44,7 @@ for (icpsrst, icpsrcty, icpsrnam, statenam), group in county_groups:
     # Year and name (conditional on treated)
     year_founding = colleges_1900_1940.iloc[0]['Founded_Year'] if treated == 1 else None
     name = colleges_1900_1940.iloc[0]['College_Name'] if treated == 1 else None
+    college_type = colleges_1900_1940.iloc[0]['College_Type'] if treated == 1 else None
 
     county_data.append({
         'ICPSRST': icpsrst,
@@ -67,7 +54,8 @@ for (icpsrst, icpsrcty, icpsrnam, statenam), group in county_groups:
         'has_college': has_college,
         'treated': treated,
         'year_founding': year_founding,
-        'name': name
+        'name': name,
+        'college_type': college_type
     })
 
 # Create DataFrame
