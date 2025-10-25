@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  22 OCT 2025 15:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  24 OCT 2025 19:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -981,6 +981,50 @@ File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \tikz@expandcount=\count498
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/local/texlive/2023/texmf-dist/tex/latex/pgfplots/pgfplots.sty (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks50
+\t@pgfplots@tokb=\toks51
+\t@pgfplots@tokc=\toks52
+\pgfplots@tmpa=\dimen345
+\c@pgfplots@coordindex=\count499
+\c@pgfplots@scanlineindex=\count500
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_loader.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks53
+\t@pgf@tokb=\toks54
+\t@pgf@tokc=\toks55
+(/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructureext.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count501
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count502
+\t@pgfplotstable@a=\toks56
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count503
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen346
+\pgfdecoratedremainingdistance=\dimen347
+\pgfdecoratedinputsegmentcompleteddistance=\dimen348
+\pgfdecoratedinputsegmentremainingdistance=\dimen349
+\pgf@decorate@distancetomove=\dimen350
+\pgf@decorate@repeatstate=\count504
+\pgfdecorationsegmentamplitude=\dimen351
+\pgfdecorationsegmentlength=\dimen352
+)
+\tikz@lib@dec@box=\box96
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count505
+\pgfplots@xmin@reg=\dimen353
+\pgfplots@xmax@reg=\dimen354
+\pgfplots@ymin@reg=\dimen355
+\pgfplots@ymax@reg=\dimen356
+\pgfplots@zmin@reg=\dimen357
+\pgfplots@zmax@reg=\dimen358
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
@@ -1005,55 +1049,44 @@ File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box96
-\pgfnodeparttwobox=\box97
-\pgfnodepartthreebox=\box98
-\pgfnodepartfourbox=\box99
-\pgfnodeparttwentybox=\box100
-\pgfnodepartnineteenbox=\box101
-\pgfnodeparteighteenbox=\box102
-\pgfnodepartseventeenbox=\box103
-\pgfnodepartsixteenbox=\box104
-\pgfnodepartfifteenbox=\box105
-\pgfnodepartfourteenbox=\box106
-\pgfnodepartthirteenbox=\box107
-\pgfnodeparttwelvebox=\box108
-\pgfnodepartelevenbox=\box109
-\pgfnodeparttenbox=\box110
-\pgfnodepartninebox=\box111
-\pgfnodeparteightbox=\box112
-\pgfnodepartsevenbox=\box113
-\pgfnodepartsixbox=\box114
-\pgfnodepartfivebox=\box115
+\pgfnodepartlowerbox=\box97
+\pgfnodeparttwobox=\box98
+\pgfnodepartthreebox=\box99
+\pgfnodepartfourbox=\box100
+\pgfnodeparttwentybox=\box101
+\pgfnodepartnineteenbox=\box102
+\pgfnodeparteighteenbox=\box103
+\pgfnodepartseventeenbox=\box104
+\pgfnodepartsixteenbox=\box105
+\pgfnodepartfifteenbox=\box106
+\pgfnodepartfourteenbox=\box107
+\pgfnodepartthirteenbox=\box108
+\pgfnodeparttwelvebox=\box109
+\pgfnodepartelevenbox=\box110
+\pgfnodeparttenbox=\box111
+\pgfnodepartninebox=\box112
+\pgfnodeparteightbox=\box113
+\pgfnodepartsevenbox=\box114
+\pgfnodepartsixbox=\box115
+\pgfnodepartfivebox=\box116
 ))) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\arrowsize=\dimen345
+\arrowsize=\dimen359
 )) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen346
-\pgfdecoratedremainingdistance=\dimen347
-\pgfdecoratedinputsegmentcompleteddistance=\dimen348
-\pgfdecoratedinputsegmentremainingdistance=\dimen349
-\pgf@decorate@distancetomove=\dimen350
-\pgf@decorate@repeatstate=\count499
-\pgfdecorationsegmentamplitude=\dimen351
-\pgfdecorationsegmentlength=\dimen352
-)
-\tikz@lib@dec@box=\box116
-) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2022-07-02 v1.5u LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks50
-\verbatim@line=\toks51
+\every@verbatim=\toks57
+\verbatim@line=\toks58
 \verbatim@in@stream=\read4
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/changepage/changepage.sty
 Package: changepage 2009/10/20 v1.0c check page and change page layout
-\c@cp@cntr=\count500
-\cp@tempcnt=\count501
+\c@cp@cntr=\count506
+\cp@tempcnt=\count507
 LaTeX Info: Redefining \checkoddpage on input line 59.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/appendixnumberbeamer/appendixnumberbeamer.sty) (/usr/local/texlive/2023/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write6
@@ -1061,7 +1094,7 @@ LaTeX Info: Redefining \checkoddpage on input line 59.
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legacy)
 Package grffile Info: This package is an empty stub for compatibility on input line 40.
 )
-Package hyperref Info: Option `colorlinks' set `false' on input line 82.
+Package hyperref Info: Option `colorlinks' set `false' on input line 84.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
  (/usr/local/texlive/2023/texmf-dist/tex/latex/trimspaces/trimspaces.sty
@@ -1074,23 +1107,23 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 (Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
-\c@tracingmulticols=\count502
+\c@tracingmulticols=\count508
 \mult@box=\box117
-\multicol@leftmargin=\dimen353
-\c@unbalance=\count503
-\c@collectmore=\count504
-\doublecol@number=\count505
-\multicoltolerance=\count506
-\multicolpretolerance=\count507
-\full@width=\dimen354
-\page@free=\dimen355
-\premulticols=\dimen356
-\postmulticols=\dimen357
+\multicol@leftmargin=\dimen360
+\c@unbalance=\count509
+\c@collectmore=\count510
+\doublecol@number=\count511
+\multicoltolerance=\count512
+\multicolpretolerance=\count513
+\full@width=\dimen361
+\page@free=\dimen362
+\premulticols=\dimen363
+\postmulticols=\dimen364
 \multicolsep=\skip92
 \multicolbaselineskip=\skip93
 \partial@page=\box118
 \last@line=\box119
-\maxbalancingoverflow=\dimen358
+\maxbalancingoverflow=\dimen365
 \mult@rightbox=\box120
 \mult@grightbox=\box121
 \mult@firstbox=\box122
@@ -1131,37 +1164,37 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \@tempa=\box157
 \@tempa=\box158
 \@tempa=\box159
-\c@minrows=\count508
-\c@columnbadness=\count509
-\c@finalcolumnbadness=\count510
-\last@try=\dimen359
-\multicolovershoot=\dimen360
-\multicolundershoot=\dimen361
+\c@minrows=\count514
+\c@columnbadness=\count515
+\c@finalcolumnbadness=\count516
+\last@try=\dimen366
+\multicolovershoot=\dimen367
+\multicolundershoot=\dimen368
 \mult@nat@firstbox=\box160
 \colbreak@box=\box161
-\mc@col@check@num=\count511
+\mc@col@check@num=\count517
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
  (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count512
-\l_MT_multwidth_dim=\dimen362
+\g_MT_multlinerow_int=\count518
+\l_MT_multwidth_dim=\dimen369
 \origjot=\skip94
-\l_MT_shortvdotswithinadjustabove_dim=\dimen363
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen364
-\l_MT_above_intertext_sep=\dimen365
-\l_MT_below_intertext_sep=\dimen366
-\l_MT_above_shortintertext_sep=\dimen367
-\l_MT_below_shortintertext_sep=\dimen368
+\l_MT_shortvdotswithinadjustabove_dim=\dimen370
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen371
+\l_MT_above_intertext_sep=\dimen372
+\l_MT_below_intertext_sep=\dimen373
+\l_MT_above_shortintertext_sep=\dimen374
+\l_MT_below_shortintertext_sep=\dimen375
 \xmathstrut@box=\box162
-\xmathstrut@dim=\dimen369
+\xmathstrut@dim=\dimen376
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip95
-\multirow@cntb=\count513
+\multirow@cntb=\count519
 \multirow@dima=\skip96
-\bigstrutjot=\dimen370
+\bigstrutjot=\dimen377
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
  (/usr/local/texlive/2023/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
@@ -1174,23 +1207,23 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package: caption 2023/03/12 v3.6j Customizing captions (AR)
  (/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
-\caption@tempdima=\dimen371
-\captionmargin=\dimen372
-\caption@leftmargin=\dimen373
-\caption@rightmargin=\dimen374
-\caption@width=\dimen375
-\caption@indent=\dimen376
-\caption@parindent=\dimen377
-\caption@hangindent=\dimen378
+\caption@tempdima=\dimen378
+\captionmargin=\dimen379
+\caption@leftmargin=\dimen380
+\caption@rightmargin=\dimen381
+\caption@width=\dimen382
+\caption@indent=\dimen383
+\caption@parindent=\dimen384
+\caption@hangindent=\dimen385
 Package caption Info: beamer document class detected.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption-beamer.sto
 File: caption-beamer.sto 2022/01/06 v2.0c Adaption of the caption package to the beamer document classes (AR)
 ))
-\c@caption@flags=\count514
-\c@continuedfloat=\count515
+\c@caption@flags=\count520
+\c@continuedfloat=\count521
 Package caption Info: changepage package is loaded.
-\caption@adjustwidth@hsize=\dimen379
-\caption@adjustwidth@linewidth=\dimen380
+\caption@adjustwidth@hsize=\dimen386
+\caption@adjustwidth@linewidth=\dimen387
 Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
@@ -1198,49 +1231,49 @@ Package caption Info: threeparttable package is loaded.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/02/19 v1.6 Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 239.
-\c@subfigure=\count516
+\c@subfigure=\count522
 Package caption Info: New subtype `subtable' on input line 239.
-\c@subtable=\count517
+\c@subtable=\count523
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
-\everycr=\toks52
+\everycr=\toks59
 \minrowclearance=\skip97
-\rownum=\count518
+\rownum=\count524
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/cancel/cancel.sty
 Package: cancel 2013/04/12 v2.2 Cancel math terms
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/soul/soul.sty
 Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/soul/soul-ori.sty
 Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
-\SOUL@word=\toks53
-\SOUL@lasttoken=\toks54
-\SOUL@syllable=\toks55
-\SOUL@cmds=\toks56
-\SOUL@buffer=\toks57
-\SOUL@token=\toks58
-\SOUL@syllgoal=\dimen381
-\SOUL@syllwidth=\dimen382
-\SOUL@charkern=\dimen383
-\SOUL@hyphkern=\dimen384
-\SOUL@dimen=\dimen385
-\SOUL@dimeni=\dimen386
-\SOUL@minus=\count519
-\SOUL@comma=\count520
-\SOUL@apo=\count521
-\SOUL@grave=\count522
+\SOUL@word=\toks60
+\SOUL@lasttoken=\toks61
+\SOUL@syllable=\toks62
+\SOUL@cmds=\toks63
+\SOUL@buffer=\toks64
+\SOUL@token=\toks65
+\SOUL@syllgoal=\dimen388
+\SOUL@syllwidth=\dimen389
+\SOUL@charkern=\dimen390
+\SOUL@hyphkern=\dimen391
+\SOUL@dimen=\dimen392
+\SOUL@dimeni=\dimen393
+\SOUL@minus=\count525
+\SOUL@comma=\count526
+\SOUL@apo=\count527
+\SOUL@grave=\count528
 \SOUL@spaceskip=\skip98
-\SOUL@ttwidth=\dimen387
-\SOUL@uldp=\dimen388
-\SOUL@ulht=\dimen389
+\SOUL@ttwidth=\dimen394
+\SOUL@uldp=\dimen395
+\SOUL@ulht=\dimen396
 )) (/usr/local/texlive/2023/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2023/02/12 version 6.0.1 text color boxes
 \tcb@titlebox=\box163
 \tcb@upperbox=\box164
 \tcb@lowerbox=\box165
 \tcb@phantombox=\box166
-\c@tcbbreakpart=\count523
-\c@tcblayer=\count524
-\c@tcolorbox@number=\count525
+\c@tcbbreakpart=\count529
+\c@tcblayer=\count530
+\c@tcolorbox@number=\count531
 \tcb@temp=\box167
 \tcb@temp=\box168
 \tcb@temp=\box169
@@ -1250,46 +1283,59 @@ File: tikzlibrarypatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibrarypatterns.code.tex
 File: pgflibrarypatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))
-\c@hyp=\count526
+\c@hyp=\count532
  (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfarrowinset=\dimen390
-\pgfarrowlength=\dimen391
-\pgfarrowwidth=\dimen392
-\pgfarrowlinewidth=\dimen393
+\pgfarrowinset=\dimen397
+\pgfarrowlength=\dimen398
+\pgfarrowwidth=\dimen399
+\pgfarrowlinewidth=\dimen400
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
 File: tikzlibrarymatrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
-\@quotelevel=\count527
-\@quotereset=\count528
-Package translations Info: No language package found. I am going to use `english' as default language. on input line 282.
-LaTeX Font Info:    Trying to load font information for OT1+lato-TLF on input line 282.
+\@quotelevel=\count533
+\@quotereset=\count534
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 284.
+LaTeX Font Info:    Trying to load font information for OT1+lato-TLF on input line 284.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/lato/OT1lato-TLF.fd
 File: OT1lato-TLF.fd 2019/06/24 Font definitions for OT1/lato-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 282.
- (./econ286_slides_oct30.aux)
+(Font)              scaled to size 10.95pt on input line 284.
+ (./econ286_slides_oct30.aux
+
+LaTeX Warning: Label `effects<1>' multiply defined.
+
+
+LaTeX Warning: Label `effects' multiply defined.
+
+
+LaTeX Warning: Label `effects<1>' multiply defined.
+
+
+LaTeX Warning: Label `effects' multiply defined.
+
+)
 \openout1 = `econ286_slides_oct30.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 282.
-LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 284.
+LaTeX Font Info:    ... okay on input line 284.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1327,75 +1373,75 @@ LaTeX Font Info:    ... okay on input line 282.
 
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count529
-\scratchdimen=\dimen394
+\scratchcounter=\count535
+\scratchdimen=\dimen401
 \scratchbox=\box171
-\nofMPsegments=\count530
-\nofMParguments=\count531
-\everyMPshowfont=\toks59
-\MPscratchCnt=\count532
-\MPscratchDim=\dimen395
-\MPnumerator=\count533
-\makeMPintoPDFobject=\count534
-\everyMPtoPDFconversion=\toks60
+\nofMPsegments=\count536
+\nofMParguments=\count537
+\everyMPshowfont=\toks66
+\MPscratchCnt=\count538
+\MPscratchDim=\dimen402
+\MPnumerator=\count539
+\makeMPintoPDFobject=\count540
+\everyMPtoPDFconversion=\toks67
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 282.
+Package hyperref Info: Link coloring OFF on input line 284.
  (./econ286_slides_oct30.out) (./econ286_slides_oct30.out)
 \@outlinefile=\write7
 \openout7 = `econ286_slides_oct30.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 282.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 284.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 282.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 284.
 \symnumbers=\mathgroup11
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 282.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 284.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/phv/m/it on input line 282.
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/phv/m/it on input line 284.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/m/it on input line 282.
+(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/m/it on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 282.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 282.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 282.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 284.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 284.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/phv/m/n on input line 282.
+(Font)                  OT1/cmss/m/n --> OT1/phv/m/n on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/phv/m/n on input line 282.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 282.
+(Font)                  OT1/cmss/bx/n --> OT1/phv/m/n on input line 284.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/phv/m/it on input line 282.
+(Font)                  OT1/cmr/m/it --> OT1/phv/m/it on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/phv/m/it on input line 282.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 282.
+(Font)                  OT1/cmr/bx/it --> OT1/phv/m/it on input line 284.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 282.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 282.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 284.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 282.
+(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 284.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 282.
+(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 282.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/phv/b/n --> OT1/phv/b/n on input line 282.
+(Font)                  OT1/phv/b/n --> OT1/phv/b/n on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 282.
+(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 282.
+(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 284.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 282.
-LaTeX Font Info:    Redeclaring symbol font `boldpureletters' on input line 282.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 284.
+LaTeX Font Info:    Redeclaring symbol font `boldpureletters' on input line 284.
 LaTeX Font Info:    Overwriting symbol font `boldpureletters' in version `normal'
-(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/bx/it on input line 282.
+(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/bx/it on input line 284.
 LaTeX Font Info:    Overwriting symbol font `boldpureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/bx/it on input line 282.
+(Font)                  OT1/mathkerncmss/bx/sl --> OT1/phv/bx/it on input line 284.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -1422,177 +1468,293 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'econ286_slides_oct30.bbl' found.
  (./econ286_slides_oct30.bbl)
-Package biblatex Info: Reference section=0 on input line 282.
-Package biblatex Info: Reference segment=0 on input line 282.
+Package biblatex Info: Reference section=0 on input line 284.
+Package biblatex Info: Reference segment=0 on input line 284.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 282.
-\c@mv@tabular=\count535
-\c@mv@boldtabular=\count536
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 284.
+\c@mv@tabular=\count541
+\c@mv@boldtabular=\count542
+
+Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (./econ286_slides_oct30.nav)
+(./econ286_slides_oct30.nav)
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 282.
+(Font)              scaled to size 6.0pt on input line 284.
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 286.
+(Font)              scaled to size 14.4pt on input line 288.
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 286.
+(Font)              scaled to size 8.0pt on input line 288.
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 4.0pt on input line 286.
+(Font)              scaled to size 4.0pt on input line 288.
  [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_y72t7m.enc}]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 294.
+(Font)              scaled to size 10.95pt on input line 296.
  [2
 
 ]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png, id=30, 1003.8303pt x 569.7285pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png  used on input line 302.
-(pdftex.def)             Requested size: 289.08147pt x 164.0695pt.
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png, id=30, 860.4948pt x 426.6339pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png  used on input line 303.
+(pdftex.def)             Requested size: 330.93044pt x 164.07553pt.
  [3
 
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>] [4
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png, id=38, 1003.8303pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png  used on input line 312.
+(pdftex.def)             Requested size: 289.08147pt x 164.0695pt.
+ [4
 
-] [5
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>] [5
+
+] [6
 
 ]
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 345.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 345.
+(Font)              scaled to size 10.0pt on input line 355.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 355.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 345.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 355.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 345.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 355.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <5> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <7> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <7> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <5> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <5> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 345.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 355.
 LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 345.
- [6
+(Font)              scaled to size 10.0pt on input line 355.
+ [7
 
-{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}] [7
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}] [8
 
 ]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png, id=61, 1011.78pt x 433.62pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png  used on input line 363.
-(pdftex.def)             Requested size: 346.67151pt x 148.5735pt.
- [8
-
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png, id=67, 1004.0712pt x 569.7285pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png  used on input line 371.
-(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png, id=68, 714.9912pt x 497.6994pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png  used on input line 371.
+(pdftex.def)             Requested size: 285.99141pt x 199.07623pt.
  [9
 
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png>]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png, id=74, 1004.0712pt x 569.7285pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png  used on input line 379.
-(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png, id=75, 714.9912pt x 497.6994pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png  used on input line 378.
+(pdftex.def)             Requested size: 285.99141pt x 199.07623pt.
  [10
 
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png>]
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png>]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <6> not available
-(Font)              Font shape `OT1/phv/b/it' tried instead on input line 391.
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 394.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <6> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 391.
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 391.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 394.
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 394.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [11
+)
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
+(Font)              scaled to size 10.95pt on input line 394.
+ [11
 
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-Overfull \hbox (2.3189pt too wide) detected at line 402
-[]
- []
-
-[12
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 493.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <9> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 493.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <9> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 493.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <9> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 493.
+ [12
 
 ] [13
 
-] [14
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex) [14
 
-] [15
-
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex)
-Overfull \vbox (17.42876pt too high) detected at line 466
- []
-
-[16
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/college_opening_regs.tex) [15
 
 ]
-</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png, id=128, 1292.9103pt x 985.5219pt>
-File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png Graphic file (type png)
-<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png>
-Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png  used on input line 475.
-(pdftex.def)             Requested size: 193.92818pt x 147.8219pt.
+pdfTeX warning (ext4): destination with the same identifier (name{effects<1>}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.524 \end{frame}
+                 
+pdfTeX warning (ext4): destination with the same identifier (name{effects}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.524 \end{frame}
+                 
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png, id=126, 1639.12375pt x 983.675pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png  used on input line 524.
+(pdftex.def)             Requested size: 273.39505pt x 164.07051pt.
+ [16
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png>]
+pdfTeX warning (ext4): destination with the same identifier (name{effects<1>}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.532 \end{frame}
+                 
+pdfTeX warning (ext4): destination with the same identifier (name{effects}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.532 \end{frame}
+                 
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png, id=132, 1644.1425pt x 986.68625pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png  used on input line 532.
+(pdftex.def)             Requested size: 273.37917pt x 164.06087pt.
  [17
 
- </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png>] [18
-
-] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex) [19
-
-]
-LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 505.
- [20
-
-]
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 507.
+(hyperref)                removing `\translate ' on input line 535.
 
-(/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [21
+(/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [18
 
-] [22
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/lit_estimates.tex
+Overfull \hbox (3.19347pt too wide) in paragraph at lines 9--9
+[]|\OT1/lato-TLF/b/n/10.95 Intervention| 
+ []
 
-] [23
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+[]|\OT1/lato-TLF/m/n/10.95 INPRES
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+\OT1/lato-TLF/m/n/10.95 pri-mary
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+[]|\OT1/lato-TLF/m/n/10.95 0.12-0.19 (0.025-0.029)
+ []
+
+
+Underfull \hbox (badness 4205) in paragraph at lines 13--13
+\OT1/lato-TLF/m/n/10.95 per school/1,000; Wage
+ []
+
+
+Underfull \hbox (badness 2302) in paragraph at lines 13--14
+[]|\OT1/lato-TLF/m/n/10.95 Log wages: 0.015-0.027
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/lato-TLF/m/n/10.95 (0.007-0.009); Re-turns
+ []
+
+
+Underfull \hbox (badness 2564) in paragraph at lines 13--14
+\OT1/lato-TLF/m/n/10.95 (IV): 0.068-0.106 (0.028-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+[]|\OT1/lato-TLF/m/n/10.95 Same IN-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+[]|\OT1/lato-TLF/m/n/10.95 Full: 0.085 (0.036);
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+\OT1/lato-TLF/m/n/10.95 Wage: 0.099 (0.039)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+[]|\OT1/lato-TLF/m/n/10.95 Akresh et al.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+[]|\OT1/lato-TLF/m/n/10.95 Same IN-
+ []
+
+
+Underfull \hbox (badness 3343) in paragraph at lines 17--17
+[]|\OT1/lato-TLF/m/n/10.95 M: +0.27; F: +0.23 per
+ []
+
+
+Underfull \hbox (badness 6078) in paragraph at lines 17--18
+\OT1/lato-TLF/m/n/10.95 Mi-gra-tion: +0.7-0.8 pp;
+ []
+
+
+Underfull \hbox (badness 6461) in paragraph at lines 17--18
+\OT1/lato-TLF/m/n/10.95 Ex-pen-di-ture: +2.1-3.2%;
+ []
+
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 23.
+
+Overfull \hbox (150.80554pt too wide) in paragraph at lines 6--26
+ [] 
+ []
+
+)
+Overfull \vbox (19.74985pt too high) detected at line 553
+ []
+
+[19
+
+] [20
+
+] [21
 
 ]
 \tf@nav=\write8
@@ -1605,6 +1767,9 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \openout10 = `econ286_slides_oct30.snm'.
 
  (./econ286_slides_oct30.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `econ286_slides_oct30.out' has not changed.
 (rerunfilecheck)             Checksum: 5BCEA9CF7D2D9AECE7CAC4018E9F6C5B;81.
 Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
@@ -1612,18 +1777,21 @@ Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 46010 strings out of 476025
- 1013896 string characters out of 5790016
- 1863388 words of memory out of 5000000
- 65554 multiletter control sequences out of 15000+600000
- 585434 words of font info for 134 fonts, out of 8000000 for 9000
+ 56045 strings out of 476025
+ 1352731 string characters out of 5790016
+ 2141050 words of memory out of 5000000
+ 75449 multiletter control sequences out of 15000+600000
+ 599485 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,20n,122p,1413b,1254s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on econ286_slides_oct30.pdf (23 pages, 2512811 bytes).
+ 128i,18n,122p,1413b,2302s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{isolating} has been referenced but does not exist, replaced by a fixed one
+
+ </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on econ286_slides_oct30.pdf (21 pages, 1287381 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
- 185 compressed objects within 2 object streams
- 57 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 260 PDF objects out of 1000 (max. 8388607)
+ 186 compressed objects within 2 object streams
+ 56 named destinations out of 1000 (max. 500000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

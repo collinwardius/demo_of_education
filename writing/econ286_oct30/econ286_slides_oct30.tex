@@ -34,6 +34,8 @@ style=authoryear,
 \usepackage{adjustbox}
 \newcommand{\tabnotes}[2]{\bottomrule \multicolumn{#1}{@{}p{0.7\linewidth}@{}}{\footnotesize #2 }\end{tabular}\end{table}}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usetikzlibrary{positioning,shapes,arrows,calc,decorations.pathreplacing,fit}
 \usepackage{verbatim}
 \setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}
@@ -293,11 +295,19 @@ fill=green!30]
 \end{wideitemize}
 \end{frame}
 
+\begin{frame}{By 1940, younger Americans were much more college educated than their parents}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png"}
+    \end{figure}
+\end{frame}
+
+
+
 \begin{frame}{The great expansion of educational resources}
   \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png"}
-        
     \end{figure}
 \end{frame}
 
@@ -311,8 +321,8 @@ fill=green!30]
 \begin{frame}{Preview of identification approach}
   \begin{wideitemize}
     \item \textbf{Identifying variation}: quasi-random founding date of a university
-    \item Some people are lucky as they are born just late enough to access a new university
-    \item Some people are unlucky as they are born too early to access a new university
+    \item Some people are born just late enough to access a new university
+    \item Some people are born too early to access a new university
   \end{wideitemize}
 \end{frame}
 
@@ -347,133 +357,140 @@ fill=green!30]
 
 \begin{frame}{Data}
   \begin{wideitemize}
-    \item \textbf{1900-1940 Decennial, Linked Full-Count US Censuses} \cite{rugglesIPUMSUSAVersion2025}: occupation, income, education, pre- and post-college-age location
-    \item \textbf{1947 College Blue Book} \cite{hurt1947college}: college founding year, enrollment, student capacity, state or private control
+    \item \textbf{1900-1940 Decennial, Linked Full-Count US Censuses} \cite{rugglesIPUMSUSAVersion2025}: Adult outcomes measured in 1940 (occupation, income, education, location); childhood location (pre-18) linked from earlier censuses to assign treatment
+    \item \textbf{1947 College Blue Book} \cite{hurt1947college}: college founding year, enrollment, student capacity, state or private control, location
     \item \textbf{Biennial Surveys of Education and Commissioner's on US Education}: college-level data on enrollment, finances, faculty, and programs (novel data in the process of being digitized by me)  
   \end{wideitemize}
 \end{frame}
 
-
-\begin{frame}{BA Completion: 1900 vs 1936 Birth Cohorts}
-    \begin{figure}
+\begin{frame}{New college types}
+  \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/ba_completion_1900_vs_1936.png"}
-        \caption{BA Completion: 1900 vs 1936 Birth Cohorts}
+        \includegraphics[scale=.4]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png"}
     \end{figure}
 \end{frame}
 
-\begin{frame}{College Founding Years by Region}
-    \begin{figure}
+\begin{frame}{New college founding dates}
+  \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_regional.png"}
-        \caption{Regional Distribution of College Founding Years}
+        \includegraphics[scale=.4]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png"}
     \end{figure}
 \end{frame}
 
-\begin{frame}{College Founding Years by Control}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/founding_years_cdf_control_type_1800_plus.png"}
-        \caption{Regional Distribution of College Founding Years (1800+)}
-    \end{figure}
-\end{frame}
+
 
 
 \begin{frame}{Estimating the effect of a university founding on college attainment: cohort DD approach}
   Cross sectional regression, identifying variation is at the age cohort-by-county level.
   \begin{equation}
-    y_{ick} = \alpha_c + \lambda_k + \beta \text{New college}_{ck}\times \lambda_k +\xi \bm{X}_{ick} + \epsilon_{ick}
+    y_{ick} = \alpha_c + \lambda_k + \sum_{j \neq -1} \beta_j \mathbbm{1}\{\text{Cohort } k \text{ born } j \text{ years relative to college founding in } c\} + \xi \bm{X}_{ick} + \epsilon_{ick}
   \end{equation}
   \begin{wideitemize}
-    \item $c$: county, $k$: age cohort, $i$: person
-    \item $\text{New college}_{ck} = \mathbbm{1}\{\text{There is a college founded in $c$ before $k$ graduates high school}\}$
+    \item $i$: individual, $c$: pre-18 county, $k$: birth cohort
+    \item $j < 0$: Cohorts born \textit{before} college founding (test for pre-trends)
+    \item $j \geq 0$: Cohorts born \textit{after} college founding (treatment effects)
+    \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college would have experienced parallel trends in attainment across cohorts absent the new college
   \end{wideitemize}
 \end{frame}
 
-\begin{frame}{The cohort DD identification assumption}
-\begin{wideitemize}
-  \item Compare the gap in attainment between older cohorts and younger cohorts in counties that have a new college versus those that do not
- \begin{align}
- \tau_{DD} &= \underbrace{\left[\mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 1, k = \text{young}] - \mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 1, k = \text{old}]\right]}_{\text{Cohort difference in treated counties}} \nonumber \\
- &\quad - \underbrace{\left[\mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 0, k = \text{young}] - \mathbb{E}[y_{ick} \mid \text{New college}_{ck} = 0, k = \text{old}]\right]}_{\text{Cohort difference in control counties}}
-\end{align}
-  \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college would have experienced parallel trends in attainment across cohorts absent the new college
-\end{wideitemize}
-\end{frame}
-
-
-\begin{frame}{Alternative approach using county-specific trends}
-
-
-\begin{equation}
-y_{ick} = \alpha_c + \gamma_c \cdot k + \beta \text{New college}_{ck} + \xi \mathbf{X}_{ick} + \epsilon_{ick}
-\end{equation}
-
-\vspace{0.5cm}
-
-where:
-\begin{itemize}
-    \item $c$: county, $k$: age cohort, $i$: person
-    \item $\gamma_c \cdot k$: county-specific linear trends in cohort outcomes
-\end{itemize}
-
-\vspace{0.3cm}
-
-\textbf{Key feature:} Identification uses only within-county variation, comparing young (exposed) vs. old (unexposed) cohorts in the same county
-
-\end{frame}
-
-\begin{frame}{The county-specific trend identifying assumption}
-
-For each county $c$ that gets a college, the treatment effect is deviations from the county-specific linear trend:
-
-\begin{equation}
-  {\tau}_c = \left[\mathbb{E}[y_{ick} \mid c, k = \text{young}] - \mathbb{E}[y_{ick} \mid c, k = \text{old}]\right] - \gamma_c \cdot \Delta k
-\end{equation}
-
-$\beta$ averages these within-county effects across all treated counties.
-
-\vspace{0.5cm}
-
-\textbf{Identifying assumption:} Absent the college, outcomes for cohorts within county $c$ would follow a linear trend.
-\end{frame}
-
-
-
-
-
-\begin{frame}[label=isolating]{Isolating treated and control counties}
-  \begin{wideitemize}
-    \item Restrict attention to ``conventional'' colleges: exclude junior colleges, normal schools, teachers colleges, and colleges with capacity $\leq$ 100.
-    \item Treated counties gain exactly one college over this period
-    \item Three natural control groups:
-    \begin{wideitemize}
-      \item Counties that never get a college (never-treated)
-      \item Counties that get a college later in the period (not yet treated)
-      \item Counties that received a college before 1900 and do not receive a college during this period (already treated)
-    \end{wideitemize}
-  \end{wideitemize}
-
-  \vspace{1em}
+\begin{frame}{Visualization of the identification assumption}
   \centering
-  \hyperlink{spatialstability}{\beamerbutton{County spatial stability over 1900-1940}}
-  \raggedright
-  \hyperlink{countycrosswalk}{\beamerbutton{County crosswalk construction}}
+\begin{tikzpicture}
+
+% Define colors
+\definecolor{countyA}{RGB}{0,158,115}  % Green color
+\definecolor{countyB}{RGB}{64, 114, 190}  % Blue color
+
+\begin{axis}[
+    width=11cm,
+    height=6.5cm,
+    xlabel={Year Cohort Turns 18},
+    ylabel={College Attainment Rate (\%)},
+    xlabel style={font=\small},
+    ylabel style={font=\small},
+    xmin=1916,
+    xmax=1930,
+    ymin=5,
+    ymax=35,
+    xtick={1917,1918,1919,1920,1921,1922,1923,1924,1925,1926,1927,1928,1929},
+    xticklabels={1917,1918,1919,1920,1921,1922,1923,1924,1925,1926,1927,1928,1929},
+    x tick label style={rotate=45, anchor=east, font=\tiny},
+    ytick={5,10,15,20,25,30,35},
+    yticklabel style={font=\small},
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=south east,
+    legend style={font=\footnotesize, fill=white, fill opacity=0.8, draw=black},
+]
+
+% County A - Actual line (University A founded 1920)
+\addplot[
+    countyA,
+    ultra thick,
+    mark=o,
+    mark size=2.5pt,
+    solid
+] coordinates {
+    (1917, 10)
+    (1918, 11)
+    (1919, 12)
+    (1920, 18)  % Jump at founding
+    (1921, 19.5)
+    (1922, 21)
+    (1923, 22.5)
+    (1924, 24)
+    (1925, 25.5)
+    (1926, 27)
+    (1927, 28.5)
+    (1928, 30)
+    (1929, 31.5)
+};
+\addlegendentry{County A (Univ. A: 1920)}
+
+% County B - Actual line (University B founded 1925)
+\addplot[
+    countyB,
+    ultra thick,
+    mark=square,
+    mark size=2.5pt,
+    solid
+] coordinates {
+    (1917, 8)
+    (1918, 9)
+    (1919, 10)
+    (1920, 11)  % No jump - no university yet
+    (1921, 12)
+    (1922, 13)
+    (1923, 14)
+    (1924, 15)
+    (1925, 20)  % Jump at founding
+    (1926, 21.5)
+    (1927, 23)
+    (1928, 24.5)
+    (1929, 26)
+};
+\addlegendentry{County B (Univ. B: 1925)}
+
+% Vertical lines for university founding years
+\draw[thick, red!70, dashdotted] (axis cs:1920,5) -- (axis cs:1920,35);
+\draw[thick, red!70, dashdotted] (axis cs:1925,5) -- (axis cs:1925,35);
+
+% Labels for university founding - placed at the top with arrows
+\node[red!70, font=\footnotesize, fill=white, inner sep=2pt] at (axis cs:1920,33) {University A};
+\node[red!70, font=\footnotesize, fill=white, inner sep=2pt] at (axis cs:1925,33) {University B};
+\node[red!70, font=\footnotesize] at (axis cs:1920,31) {Founded};
+\node[red!70, font=\footnotesize] at (axis cs:1925,31) {Founded};
+
+% DD estimate annotation
+\draw[decoration={brace, amplitude=5pt}, decorate, thick]
+    (axis cs:1916,28) -- (axis cs:1916,33);
+\node[left, align=left, font=\footnotesize] at (axis cs:1915.5,30.5) 
+    {DD = $(\Delta_A^{1920} - \Delta_B^{1920})$\\
+     \small Treatment effect\\
+     \small of Univ. A};
+\end{axis}
+\end{tikzpicture}
 \end{frame}
-
-\begin{frame}{Quantifying the treated and control counties}
-  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_classification_table.tex"}
-\end{frame}
-
-
-\begin{frame}{The treated counties}
-   \begin{figure}
-        \centering
-        \includegraphics[scale=.15]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/county_timeline_scatter_1900_1940.png"}
-        \caption{The treated counties}
-    \end{figure}
-\end{frame}
-
 
 
 \begin{frame}{Determining which individuals experiences a college expansion}
@@ -490,19 +507,30 @@ $\beta$ averages these within-county effects across all treated counties.
   \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex"}
 \end{frame}
 
-
-\begin{frame}{Testing parallel trends: Event study specification}
-  To test for pre-trends and trace out dynamic effects, estimate:
-  \begin{equation}
-    y_{ick} = \alpha_c + \lambda_k + \sum_{j \neq -1} \beta_j \mathbbm{1}\{\text{Cohort } k \text{ born } j \text{ years relative to college founding in } c\} + \xi \bm{X}_{ick} + \epsilon_{ick}
-  \end{equation}
-  \begin{wideitemize}
-    \item $j < 0$: Cohorts born \textit{before} college founding (test for pre-trends)
-    \item $j \geq 0$: Cohorts born \textit{after} college founding (treatment effects)
-    \item Omit $j = -1$ as reference category
-    \item Null hypothesis: $\beta_j = 0$ for all $j < 0$ (no pre-trends)
-  \end{wideitemize}
+\begin{frame}[label=effects]{Effects on college and BA attainment}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/college_opening_regs.tex"}
+  \vspace{1em}
+  \centering
+  \hyperlink{reviewestimates}{\beamerbutton{Review of estimates of school construction on attainment}}
 \end{frame}
+
+
+
+\begin{frame}[label=effects]{Dynamic effects on college attendance}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png"}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}[label=effects]{Dynamic effects adjusting for treatment heterogeneity}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png"}
+    \end{figure}
+\end{frame}
+
 
 \appendix
 \setbeamertemplate{headline}{}
@@ -513,6 +541,15 @@ $\beta$ averages these within-county effects across all treated counties.
     \vspace{1em}
     \centering
     \hyperlink{isolating}{\beamerbutton{Back to Isolating treated and control counties}}
+\end{frame}
+
+
+\begin{frame}[label=reviewestimates]{Review of estimates of school construction on attainment}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/lit_estimates.tex"}
+
+  \vspace{1em}
+  \centering
+  \hyperlink{effects}{\beamerbutton{Back to Effects on college and BA attainment}}
 \end{frame}
 
 \begin{frame}[label=countycrosswalk]{Creating a county crosswalk}
