@@ -15,10 +15,13 @@ cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/
 g has_new_college = (year_founding <= year_at_18) // year founding is going to depend on the county of the person and year_at_18 is essentially just an age cohort.
 
 
+
 * prakash's recommendation is to recode people that are well older / younger to the max / min age
 
 replace age_at_founding = 25 if age_at_founding > 25
 replace age_at_founding = 9 if age_at_founding < 9
+
+
 
 
 est clear
@@ -49,7 +52,6 @@ coefplot, ///
                 9.age_at_founding = "9") ///
     xlabel(, angle(0)) ///
     ytitle("Effect on College Attendance") ///
-    subtitle("Region by Cohort Trends") ///
     xtitle("Age at College Founding") ///
     graphregion(color(white)) bgcolor(white) ///
     legend(off) ///
@@ -89,7 +91,6 @@ coefplot, ///
                 9.age_at_founding = "9") ///
     xlabel(, angle(0)) ///
     ytitle("Effect on College Attendance") ///
-    subtitle("Region by Cohort Trends") ///
     xtitle("Age at College Founding") ///
     graphregion(color(white)) bgcolor(white) ///
     legend(off) ///
@@ -127,7 +128,6 @@ coefplot, ///
                 9.age_at_founding = "9") ///
     xlabel(, angle(0)) ///
     ytitle("Effect on College Attendance") ///
-    subtitle("Region by Cohort Trends") ///
     xtitle("Age at College Founding") ///
     graphregion(color(white)) bgcolor(white) ///
     legend(off) ///
@@ -149,8 +149,22 @@ did_imputation college hik year_at_18 year_founding ///
     cluster(g_state_county_pre_18) ///
     autosample
 event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Average causal effect on college attainment") ///
-	title("") legend(position(6) rows(1)) xlabel(-8 "23" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
+	title("") legend(position(6) rows(1)) xlabel(-8 "25" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
 graph export "figures/did_imputation_college_attainment_baseline.png", replace
+
+
+
+did_imputation college hik year_at_18 year_founding ///
+    , horizons(0/8) pretrend(8)  ///
+    fe(year_at_18 g_state_county_pre_18 nativity race hispan sex moved_pre_18 state_moved_pre_18) ///
+    hbalance ///
+    cluster(g_state_county_pre_18) 
+
+event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Average causal effect on college attainment") ///
+	title("") legend(position(6) rows(1)) xlabel(-8 "25" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
+graph export "figures/did_imputation_college_attainment_baseline_hbalance.png", replace
+
+
 
 
 did_imputation college hik year_at_18 year_founding ///
@@ -159,21 +173,35 @@ did_imputation college hik year_at_18 year_founding ///
     cluster(g_state_county_pre_18) ///
     autosample
 event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Average causal effect on college attainment") ///
-	title("") legend(position(6) rows(1)) xlabel(-8 "23" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
+	title("") legend(position(6) rows(1)) xlabel(-8 "25" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
 graph export "figures/did_imputation_college_attainment_regional_trends.png", replace
 
 
 did_imputation college hik year_at_18 year_founding ///
     , horizons(0/8) pretrend(8)  ///
-    fe(year_at_18 g_state_county_pre_18 nativity race hispan sex moved_pre_18 state_moved_pre_18 region_pre_18#c.age_at_founding) ///
+    fe(year_at_18 g_state_county_pre_18 nativity race hispan sex moved_pre_18 state_moved_pre_18 g_state_county_pre_18#c.age_at_founding) ///
     cluster(g_state_county_pre_18) ///
     autosample
 event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Average causal effect on college attainment") ///
-	title("") legend(position(6) rows(1)) xlabel(-8 "23" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
+	title("") legend(position(6) rows(1)) xlabel(-8 "25" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
 graph export "figures/did_imputation_college_attainment_county_trends.png", replace
 
 
+/*
+Robustness check where all cohorts for a given county are required to have at least
+30 people over all periods.
+*/
 
+g count = 1
+egen count_by_event = total(count), by(college_id age_at_founding)
+egen min_count_by_event = min(count_by_event), by(college_id)
+g flag_low_cohort = min_count_by_event < 30
+
+
+preserve
+drop if flag_low_cohort
+eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+restore
 
 
 /*
