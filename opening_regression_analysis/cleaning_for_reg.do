@@ -66,7 +66,8 @@ rename age age_pre_18
 rename birthyr birthyr_pre_18
 rename icpsrnam icpsrnam_pre_18
 rename statenam statenam_pre_18
-keep hik statefip_pre_18 countyicp_pre_18 g_state_county_pre_18 year_before_18 college_name year_founding college_type treated icpsrnam_pre_18 statenam_pre_18
+rename region region_pre_18
+keep hik statefip_pre_18 countyicp_pre_18 g_state_county_pre_18 year_before_18 college_name year_founding college_type treated icpsrnam_pre_18 statenam_pre_18 region_pre_18
 tempfile before_data
 save `before_data'
 restore
