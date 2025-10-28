@@ -14,15 +14,57 @@ cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/
 
 g has_new_college = (year_founding <= year_at_18) // year founding is going to depend on the county of the person and year_at_18 is essentially just an age cohort.
 
+* robustness exercise where we look at old and even older cohorts
+
+preserve
+replace age_at_founding = 34 if age_at_founding > 34
+replace age_at_founding = 18 if age_at_founding < 18
+
+est clear
+est clear
+eststo: reghdfe college  ib26.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+estadd ysumm
+estadd scalar N_counties=e(N_clust)
+
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(34.age_at_founding = "34" ///
+                33.age_at_founding = "33" ///
+                32.age_at_founding = "32" ///
+                31.age_at_founding = "31" ///
+                30.age_at_founding = "30" ///
+                29.age_at_founding = "29" ///
+                28.age_at_founding = "28" ///
+                27.age_at_founding = "27" ///
+                26.age_at_founding = "26" ///
+                25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on College Attendance") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+
+graph export "figures/placebo_twfe_college_attainment_baseline.png", replace
+restore
+
 
 
 * prakash's recommendation is to recode people that are well older / younger to the max / min age
 
 replace age_at_founding = 25 if age_at_founding > 25
 replace age_at_founding = 9 if age_at_founding < 9
-
-
-
 
 est clear
 eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
@@ -64,7 +106,7 @@ graph export "figures/twfe_college_attainment_baseline.png", replace
 
 
 est clear
-eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18 region_pre_18#c.age_at_founding) vce(cl g_state_county_pre_18)
+eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18 region_pre_18#c.birthyr) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
 
@@ -100,8 +142,10 @@ coefplot, ///
 
 graph export "figures/twfe_college_attainment_regional_trends.png", replace
 
+
+
 est clear
-eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18 g_state_county_pre_18#c.age_at_founding) vce(cl g_state_county_pre_18)
+eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18 g_state_county_pre_18#c.birthyr) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
 
@@ -201,7 +245,43 @@ g flag_low_cohort = min_count_by_event < 30
 preserve
 drop if flag_low_cohort
 eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+
+
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18" ///
+                17.age_at_founding = "17" ///
+                16.age_at_founding = "16" ///
+                15.age_at_founding = "15" ///
+                14.age_at_founding = "14" ///
+                13.age_at_founding = "13" ///
+                12.age_at_founding = "12" ///
+                11.age_at_founding = "11" ///
+                10.age_at_founding = "10" ///
+                9.age_at_founding = "9") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on College Attendance") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+
+graph export "figures/twfe_college_attainment_minimum30_in_bin.png", replace
 restore
+
+
+
 
 
 /*

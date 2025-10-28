@@ -51,7 +51,7 @@ class CensusDataLoader:
         """
         try:
             # Only read the columns we need for efficiency
-            cols_to_read = ['YEAR', 'EDUC', 'BIRTHYR']
+            cols_to_read = ['YEAR', 'EDUC', 'BIRTHYR', 'BPL']
             for chunk in pd.read_csv(self.file_path, chunksize=self.chunksize, usecols=cols_to_read):
                 chunk_filtered = chunk[chunk['YEAR'] == self.year_filter]
                 if len(chunk_filtered) > 0:
@@ -139,9 +139,47 @@ class CensusDataLoader:
         return info
 
 
+def map_bpl_to_region(bpl_code):
+    """
+    Map BPL codes to Census regions.
+
+    Parameters:
+    -----------
+    bpl_code : int
+        BPL code from IPUMS (can be state code like 13 for Georgia, or full code like 1300)
+
+    Returns:
+    --------
+    str
+        Region name: 'Northeast', 'Midwest', 'South', 'West', or 'Other'
+    """
+    # Handle both formats: if > 100, extract state code; otherwise use as-is
+    state_code = bpl_code // 100 if bpl_code >= 100 else bpl_code
+
+    regions = {
+        # Northeast
+        'Northeast': [9, 23, 25, 33, 44, 50, 34, 36, 42],  # CT, ME, MA, NH, RI, VT, NJ, NY, PA
+
+        # Midwest
+        'Midwest': [17, 18, 19, 20, 26, 27, 29, 31, 38, 39, 46, 55],  # IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI
+
+        # South
+        'South': [1, 5, 10, 11, 12, 13, 21, 22, 24, 28, 37, 40, 45, 47, 48, 51, 54],  # AL, AR, DE, DC, FL, GA, KY, LA, MD, MS, NC, OK, SC, TN, TX, VA, WV
+
+        # West
+        'West': [2, 4, 6, 8, 15, 16, 30, 32, 35, 41, 49, 53, 56]  # AK, AZ, CA, CO, HI, ID, MT, NV, NM, OR, UT, WA, WY
+    }
+
+    for region, states in regions.items():
+        if state_code in states:
+            return region
+
+    return 'Other'
+
+
 def process_chunk_college_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
     """
-    Process a chunk to calculate college and HS attainment by cohort.
+    Process a chunk to calculate college and HS attainment by cohort and region.
 
     Parameters:
     -----------
@@ -151,10 +189,13 @@ def process_chunk_college_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
     Returns:
     --------
     pd.DataFrame
-        Aggregated data with columns: hs_cohort, college_count, hs_count, total_count
+        Aggregated data with columns: hs_cohort, region, college_count, hs_count, total_count
     """
     # Make a copy to avoid SettingWithCopyWarning
     chunk = chunk.copy()
+
+    # Map BPL to region
+    chunk['region'] = chunk['BPL'].apply(map_bpl_to_region)
 
     # Create college attainment variable (EDUC between 7 and 11)
     chunk['college'] = ((chunk['EDUC'] >= 7) & (chunk['EDUC'] <= 11)).astype(int)
@@ -165,8 +206,8 @@ def process_chunk_college_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
     # Create high school cohort (birth year + 18)
     chunk['hs_cohort'] = chunk['BIRTHYR'] + 18
 
-    # Aggregate by cohort
-    cohort_stats = chunk.groupby('hs_cohort').agg(
+    # Aggregate by cohort and region
+    cohort_stats = chunk.groupby(['hs_cohort', 'region']).agg(
         college_count=('college', 'sum'),
         hs_count=('hs_attainment', 'sum'),
         total_count=('college', 'size')
@@ -187,13 +228,13 @@ def combine_college_results(results: list) -> pd.DataFrame:
     Returns:
     --------
     pd.DataFrame
-        Combined and aggregated data
+        Combined and aggregated data by region
     """
     # Concatenate all results
     combined = pd.concat(results, ignore_index=True)
 
     # Re-aggregate across all chunks
-    final = combined.groupby('hs_cohort').agg(
+    final = combined.groupby(['hs_cohort', 'region']).agg(
         college_count=('college_count', 'sum'),
         hs_count=('hs_count', 'sum'),
         total_count=('total_count', 'sum')
@@ -205,8 +246,8 @@ def combine_college_results(results: list) -> pd.DataFrame:
     # Create 5-year bins
     final['cohort_5year'] = (final['hs_cohort'] // 5) * 5
 
-    # Aggregate by 5-year bins
-    final_binned = final.groupby('cohort_5year').agg(
+    # Aggregate by 5-year bins and region
+    final_binned = final.groupby(['cohort_5year', 'region']).agg(
         college_count=('college_count', 'sum'),
         hs_count=('hs_count', 'sum'),
         total_count=('total_count', 'sum')
@@ -246,30 +287,49 @@ if __name__ == "__main__":
     # Process chunks for college attainment analysis
     cohort_data = loader.process_chunks(process_chunk_college_attainment, combine_college_results)
 
-    # Sort by cohort
-    cohort_data = cohort_data.sort_values('cohort_5year')
+    # Sort by cohort and region
+    cohort_data = cohort_data.sort_values(['region', 'cohort_5year'])
 
-    print(f"\nProcessed {len(cohort_data):,} 5-year cohort bins")
+    print(f"\nProcessed {len(cohort_data):,} 5-year cohort bins by region")
     print(f"Cohort range: {cohort_data['cohort_5year'].min()} - {cohort_data['cohort_5year'].max()}")
     print(f"Overall college attainment rate: {cohort_data['college_count'].sum() / cohort_data['total_count'].sum() * 100:.2f}%")
     print(f"Overall HS attainment rate: {cohort_data['hs_count'].sum() / cohort_data['total_count'].sum() * 100:.2f}%")
 
-    # Create plot
+    # Print by region
+    print("\nBy Region:")
+    for region in ['Northeast', 'Midwest', 'South', 'West']:
+        region_data = cohort_data[cohort_data['region'] == region]
+        if len(region_data) > 0:
+            print(f"  {region}: {region_data['college_count'].sum() / region_data['total_count'].sum() * 100:.2f}% college attainment")
+
+    # Define consistent colors for regions
+    region_colors = {
+        'Northeast': '#1f77b4',  # blue
+        'Midwest': '#ff7f0e',    # orange
+        'South': '#2ca02c',      # green
+        'West': '#d62728'        # red
+    }
+
+    # Create plot: College attainment by region
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    ax.plot(cohort_data['cohort_5year'], cohort_data['college_rate'],
-            linewidth=2, marker='o', markersize=5, label='College')
+    for region in ['Northeast', 'Midwest', 'South', 'West']:
+        region_data = cohort_data[cohort_data['region'] == region]
+        if len(region_data) > 0:
+            ax.plot(region_data['cohort_5year'], region_data['college_rate'],
+                    linewidth=2, marker='o', markersize=5, label=region,
+                    color=region_colors[region])
 
     ax.set_xlabel('High School Cohort (5-Year Bins)', fontsize=12)
-    ax.set_ylabel('Attainment Rate (%)', fontsize=12)
-    ax.set_title(f'College Attainment by High School Cohort, 1890-1935 ({args.year} Census)', fontsize=14)
-    ax.legend(fontsize=14)
+    ax.set_ylabel('College Attainment Rate (%)', fontsize=12)
+    ax.set_title(f'College Attainment by High School Cohort and Region, 1890-1935 ({args.year} Census)', fontsize=14)
+    ax.legend(fontsize=12)
     ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
 
     # Save figure
-    output_path = os.path.join(args.output, "college_attainment_by_cohort.png")
+    output_path = os.path.join(args.output, "college_attainment_by_cohort_region.png")
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"\nFigure saved to: {output_path}")
 

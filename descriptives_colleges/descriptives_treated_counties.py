@@ -22,11 +22,23 @@ print(type_counts)
 # Create bar graph by college type
 fig, ax = plt.subplots(figsize=(10, 7))
 
+# Combine Historically Black colleges with Regular colleges
+df_grouped = df.copy()
+df_grouped['college_type'] = df_grouped['college_type'].replace(
+    'Colleges Especially for Negroes', 'Regular'
+)
+
 # Get counts and sort them
-type_counts = df['college_type'].value_counts().sort_values(ascending=False)
+type_counts = df_grouped['college_type'].value_counts().sort_values(ascending=False)
+
+# Rename labels for display
+label_mapping = {
+    'Regular': 'Conventional'
+}
+type_counts.index = type_counts.index.map(lambda x: label_mapping.get(x, x))
 
 # Create bar plot with simple colors
-colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
+colors = ['#1f77b4', '#ff7f0e']
 bars = ax.bar(range(len(type_counts)), type_counts.values, color=colors, width=0.6)
 
 # Customize the plot

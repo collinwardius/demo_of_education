@@ -1432,7 +1432,7 @@ def create_county_analysis_table(df_clean):
         'n_total': total_counties_1940
     }
 
-def create_capacity_share_bar_chart(df_clean, year=1930):
+def create_capacity_share_bar_chart(df_clean, year=1940):
     """Create bar chart showing share of public (state) student capacity by census region for a specific year."""
 
     # Filter out normal schools, teachers colleges, and related abbreviations
@@ -1457,10 +1457,10 @@ def create_capacity_share_bar_chart(df_clean, year=1930):
 
     # Create consistent region colors
     region_colors = {
-        'Northeast': '#e41a1c',
-        'South': '#377eb8',
-        'Midwest': '#4daf4a',
-        'West': '#984ea3'
+        'Northeast': '#377eb8',  # blue
+        'South': '#4daf4a',      # green
+        'Midwest': '#ff7f00',    # orange
+        'West': '#e41a1c'        # red
     }
 
     # Calculate state share for each region
@@ -1503,7 +1503,7 @@ def create_capacity_share_bar_chart(df_clean, year=1930):
     ax.set_xticks(x_positions)
     ax.set_xticklabels(regions, fontsize=12)
     ax.set_ylabel('State Share of Student Capacity (%)', fontsize=12)
-    ax.set_title(f'Share of Public (State) Student Capacity by Region ({year})\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
+    ax.set_title(f'Share of Total Capacity that is Public by Region ({year})\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
                 fontsize=14, fontweight='bold')
     ax.set_ylim(0, 100)
     ax.grid(True, alpha=0.3, axis='y')

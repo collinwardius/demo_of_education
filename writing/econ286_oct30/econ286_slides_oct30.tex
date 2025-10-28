@@ -62,10 +62,11 @@ style=authoryear,
    \addtocounter{framenumber}{\value{framenumbervorappendix}}
 }
 
-\PassOptionsToPackage{table}{xcolor}
+\PassOptionsToPackage{table,dvipsnames}{xcolor}
 \usepackage{comment}
 \usepackage{graphicx}
 \usepackage[space]{grffile}
+\usepackage{xcolor}
 \usepackage{booktabs}
 
 % These are my colors -- there are many like them, but these ones are mine.
@@ -73,6 +74,7 @@ style=authoryear,
 \definecolor{red}{RGB}{213, 60, 50}
 \definecolor{yellow}{RGB}{240,228,66}
 \definecolor{green}{RGB}{0,158,115}
+\definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{chiffon}{RGB}{235,179,121}
 \definecolor{peach}{RGB}{228,167,125}
 \definecolor{lilac}{RGB}{180,125,228}
@@ -272,12 +274,12 @@ fill=green!30]
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[]{The effect of college expansion on college attainment: evidence from historical US censuses}
+\title[]{The democratization of US higher education (1900-1940)}
 \author{Collin J Wardius} % Your name
 \institute{
   Department of Economics, UC San Diego
   \newline
-  Approved by
+  Read by Fabian E, Gaurav, and Julian
 }
 \date[]{October 30, 2025}
 
@@ -295,10 +297,10 @@ fill=green!30]
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{By 1940, younger Americans were much more college educated than their parents}
+\begin{frame}{By 1940, younger Americans were much more educated than their parents}
   \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort.png"}
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png"}
     \end{figure}
 \end{frame}
 
@@ -311,13 +313,14 @@ fill=green!30]
     \end{figure}
 \end{frame}
 
-\begin{frame}{Research Question}
+\begin{frame}{Research question}
 \begin{wideitemize}
 \item Do supply-side expansions of colleges drive increased educational attainment?
 \item Specifically: How did new college openings affect local college attainment?
+\item \textbf{Answer: Yes}
+\item Individuals below age 18 at the time of a college founding are \textbf{5-10\% more likely to attend college} compared to those above age 18
 \end{wideitemize}
 \end{frame}
-
 
 
 \begin{frame}{Literature}
@@ -340,7 +343,7 @@ fill=green!30]
       \item \textcolor{gray}{\cite{cardUsingGeographicVariation1993}, \cite{actonDistanceDegreesHow2025}}
     \end{itemize}
 
-    \item \textbf{Historical census analysis to answer current questions in economics}
+    \item \textbf{Historical US census analysis to answer current questions in economics}
     \begin{itemize}
       \item[\textcolor{blue}{$\rightarrow$}] \textit{My contribution:} Create a dataset of university expansions and link them to the census data
       \item \textcolor{gray}{\cite{abramitzkyNationImmigrantsAssimilation2014}, \cite{derenoncourtCanYouMove2022}, \cite{bleemerChangesCollegeMobility2025}}
@@ -351,32 +354,114 @@ fill=green!30]
 
 \begin{frame}{Data}
   \begin{wideitemize}
-    \item \textbf{1900-1940 Decennial, Linked Full-Count US Censuses} \cite{rugglesIPUMSUSAVersion2025}: Adult outcomes measured in 1940 (occupation, income, education, location); childhood location (pre-18) linked from earlier censuses to assign treatment
-    \item \textbf{1947 College Blue Book} \cite{hurt1947college}: college founding year, enrollment, student capacity, state or private control, location
-    \item \textbf{Biennial Surveys of Education and Commissioner's on US Education}: college-level data on enrollment, finances, faculty, and programs (novel data in the process of being digitized by me)  
+    \item \textbf{1900-1940 Decennial, Linked Full-Count US Censuses} \cite{rugglesIPUMSUSAVersion2025}: Adult outcomes measured in 1940 (occupation, income, education, location); childhood location (pre-18) linked from earlier censuses to determine exposure to college foundings
+    \item \textbf{1947 College Blue Book} (CBB) \cite{hurt1947college}: college founding year, enrollment, student capacity, state or private control, location
+    \item \textbf{Biennial Surveys of Education and Commissioner's Reports on US Education}: college-level data on enrollment, finances, faculty, and programs (novel data in the process of being digitized by me)  
   \end{wideitemize}
 \end{frame}
+
+
+\begin{frame}{Digitizing the College Blue Book}
+    Digitize using Claude Sonnet 4.5 (\cite{anthropicClaudeSonnet452025}) with the prompting approach of \cite{backer-peralCanLLMsCredibly2025}
+\begin{figure}
+   \centering
+        \includegraphics[scale=.4]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png"}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Digitizing the College Blue Book: Example Prompt}
+\begin{block}{Prompt to Claude Sonnet 4.5}
+\small
+``Use your OCR vision for this task. Please extract the tabular data here to a CSV.
+\begin{itemize}
+    \item Extra large headers are \textbf{state names} -- apply to all colleges until the next state
+    \item Bold headers without numbers classify the \textbf{type of college} -- apply to succeeding colleges until the next bold header or state name
+    \item No rows should be blank except for the first column
+    \item Verify text outputs to the correct column (watch for nested headers)''
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Biennial Surveys / Commissioner's Reports: Enrollments}
+  \begin{figure}
+   \centering
+        \includegraphics[scale=.1]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey1928_1930_enrollment.png"}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Biennial Surveys / Commissioner's Reports: Income}
+  \begin{figure}
+   \centering
+   \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png"}
+   \end{minipage}
+   \hfill
+   \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png"}
+   \end{minipage}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Digitizing Biennial Surveys / Commissioner's Reports}
+\begin{wideitemize}
+  \item Claude-based digitization is not reliable
+  \item Feed PDFs into Amazon Textract, which returns a CSV file
+  \item Post-processing is very time-intensive:
+  \begin{wideitemize}
+    \item Checking back to the original documents to create variable names
+    \item Harmonizing variable names across CSVs
+    \item Correcting for formatting variations (tables split across multiple pages, tables without headers, ...)
+  \end{wideitemize}
+  \item I think this would be a tremendous public good if completed. It would essentially be an IPEDS for early years of US higher education. A similar project has been recently completed for K-12 education at the state level: \cite{walsemannStateEducationContextual2025}, using manual entry.
+\end{wideitemize}
+\end{frame}
+
+
+
+
+
+
 
 \begin{frame}{Preview of identification approach}
   \begin{wideitemize}
-    \item \textbf{Identifying variation}: quasi-random founding date of a university
-    \item Some people are born just late enough to access a new university
-    \item Some people are born too early to access a new university
+    \item \textbf{Identifying variation}: Local exposure to a college founding
+    \item Some people are born in counties just late enough to access a new university
+    \item Some people are born in counties too early to access a new university
   \end{wideitemize}
 \end{frame}
 
-\begin{frame}{What data do we need to}
-  
+\begin{frame}{What data do we need to perform this analysis?}
+  \begin{enumerate}
+    \item \color{orange}{\textbf{Counties where a college opens}}
+    \vspace{2cm}
+    \item \color{ForestGreen}{\textbf{Where people were before they turned 18}}
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}{New college types}
+\begin{frame}[label=isolating]{\color{orange}{Identifying counties that experienced a college expansion}}
+  \begin{wideitemize}
+    \item Harmonize county boundaries across census years
+    \item Intersect county boundaries with geocoded college coordinates from the CBB
+    \item Restrict to counties that \textbf{gained exactly one college} between 1900 and 1940 and \textbf{had no colleges prior}
+    \item \textbf{The final sample includes 296 county-level ``experiments''}
+  \end{wideitemize}
+  \vspace{1em}
+  \centering
+  \hyperlink{spatialstability}{\beamerbutton{County spatial stability}} \quad
+  \hyperlink{countycrosswalk}{\beamerbutton{Creating county crosswalk}}
+\end{frame}
+
+\begin{frame}{\color{orange}{New college types}}
   \begin{figure}
         \centering
         \includegraphics[scale=.4]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png"}
     \end{figure}
 \end{frame}
 
-\begin{frame}{New college founding dates}
+\begin{frame}{\color{orange}{New college founding dates}}
   \begin{figure}
         \centering
         \includegraphics[scale=.4]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png"}
@@ -384,17 +469,38 @@ fill=green!30]
 \end{frame}
 
 
+\begin{frame}{\color{orange}{Colleges specific to certain demographics}}
+  \small I am not currently using this dimension of the data, but many colleges were founded during this period that served specific demographics. This could also be used as a source of identifying variation.
+  \begin{figure}
+        \centering
+        \includegraphics[scale=.35]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png"}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{\color{ForestGreen}{Determining whether an individual lived near a college founding}}
+  \begin{enumerate}
+    \item Identify adults (age 25-70) in the 1940 census, observe time-invariant demographics and educational attainment
+    \item Link back to the censuses for which they are below the age of 18 using \cite{rugglesIPUMSUSAVersion2025} longitudinal linkage
+    \item If an individual is observed twice before 18, take the latest observation
+    \item Assign the individual that county of residence for the purposes of treatment assignment 
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{\color{ForestGreen}{Comparing linked versus unlinked individuals in the census}}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex"}
+\end{frame}
 
 
 \begin{frame}{Estimating the effect of a university founding on college attainment: cohort DD approach}
-  Cross sectional regression, identifying variation is at the age cohort-by-county level.
+  Cross-sectional regression; identifying variation is at the age cohort-by-county level.
   \begin{equation}
-    y_{ick} = \alpha_c + \lambda_k + \sum_{j \neq -1} \beta_j \mathbbm{1}\{\text{Cohort } k \text{ born } j \text{ years relative to college founding in } c\} + \xi \bm{X}_{ick} + \epsilon_{ick}
+    y_{ick} = \alpha_c + \lambda_k + \sum_{j \neq 17} \beta_j \mathbbm{1}\{\text{Cohort } k \text{ age } j \text{ at time of college founding in } c\} + \xi \bm{X}_{ick} + \epsilon_{ick}
   \end{equation}
   \begin{wideitemize}
     \item $i$: individual, $c$: pre-18 county, $k$: birth cohort
-    \item $j < 0$: Cohorts born \textit{before} college founding (test for pre-trends)
-    \item $j \geq 0$: Cohorts born \textit{after} college founding (treatment effects)
+    \item $j < 17$: Cohorts young enough to benefit from the new college (treatment effects)
+    \item $j > 17$: Cohorts too old to benefit (test for pre-trends)
     \item \textbf{Identifying assumption}: Conditional on controls, counties that gained a college would have experienced parallel trends in attainment across cohorts absent the new college
   \end{wideitemize}
 \end{frame}
@@ -498,42 +604,35 @@ fill=green!30]
 \end{tikzpicture}
 \end{frame}
 
-
-\begin{frame}{Determining which individuals experiences a college expansion}
-  We only observe education and location in 1940, after individuals either received or did not receive a college education \vspace{.4cm}
-  \begin{enumerate}
-    \item Identify adults (age 25+) in the 1940 census
-    \item Link back to the censuses for which they are below the age of 18 using \cite{rugglesIPUMSUSAVersion2025} longitudinal linkage
-    \item If an individual is observed twice before 18, take the latest observation
-    \item Assign the individual that county of residence for the purposes of treatment assignment 
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Comparing linked versus unlinked individuals in the census}
-  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex"}
-\end{frame}
-
-\begin{frame}[label=effects]{Effects on college and BA attainment}
-  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/college_opening_regs.tex"}
-  \vspace{1em}
-  \centering
-  \hyperlink{reviewestimates}{\beamerbutton{Review of estimates of school construction on attainment}}
-\end{frame}
-
-
-
-\begin{frame}[label=effects]{Dynamic effects on college attendance}
+\begin{frame}[label=baseline]{Effect of college founding on college attendance}
   \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment.png"}
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png"}
+        \caption{Standard errors clustered at the county level. All specifications include birth year, county, nativity, race, mother's birth place, father's birth place, and sex fixed effects along with controls for pre-18 residential moves.}
     \end{figure}
 \end{frame}
 
 
-\begin{frame}[label=effects]{Dynamic effects adjusting for treatment heterogeneity}
+
+\begin{frame}[label=robustness]{Robustness exercises}
+  \begin{wideitemize}
+    \item TWFE variation in treatment timing bias \hyperlink{borusyak}{\beamerbutton{here}}
+    \item Controlling for county-by-cohort linear time trends \hyperlink{county_trends}{\beamerbutton{here}}
+    \item Restricting the sample to only counties that have minimum 30 observations in each age bin \hyperlink{min30}{\beamerbutton{here}}
+  \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Exploring how people born in the West became swiftly more educated than the rest of the US}
   \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment.png"}
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png"}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Correlationally seems to line up with the West's focus on affordable public education}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/capacity_share_by_region_bar_1930.png"}
     \end{figure}
 \end{frame}
 
@@ -550,16 +649,9 @@ fill=green!30]
 \end{frame}
 
 
-\begin{frame}[label=reviewestimates]{Review of estimates of school construction on attainment}
-  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/lit_estimates.tex"}
-
-  \vspace{1em}
-  \centering
-  \hyperlink{effects}{\beamerbutton{Back to Effects on college and BA attainment}}
-\end{frame}
-
 \begin{frame}[label=countycrosswalk]{Creating a county crosswalk}
 We need consistent county boundaries to accurately assign which people experience a college creation versus which do not.
+\vspace{.5cm}
 
 \textbf{Approach:}
 \begin{enumerate}
@@ -573,12 +665,45 @@ We need consistent county boundaries to accurately assign which people experienc
 \hyperlink{isolating}{\beamerbutton{Back to Isolating treated and control counties}}
 \end{frame}
 
-\begin{frame}{My reference on how the spatial join is performed}
-  Consider $A$ and $B$ from 1900 (the base year) and 1940 (the target year) respectively. Then get the area of $A\cap B$. We then compare this to the area of the target to calculate 
-  \begin{equation}
-  \frac{A\cap B}{B}  
-  \end{equation}
-  and we map B to A if this is above some threshold. I am using 70\% as of right now but this could be modified. In practice, almost 90\% of the counties have close to 100\% overlap.
+
+\begin{frame}[label=borusyak]{Effects adjusting for treatment effect heterogeneity \cite{borusyakRevisitingEventStudyDesigns2024}}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png"}
+    \end{figure}
+    \centering
+    \hyperlink{robustness}{\beamerbutton{Back to robustness}}
 \end{frame}
 
+
+\begin{frame}[label=county_trends]{Effects controlling for county-by-cohort linear trends}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png"}
+    \end{figure}
+    \centering
+    \hyperlink{robustness}{\beamerbutton{Back to robustness}}
+\end{frame}
+
+\begin{frame}[label=min30]{Effects restricting the sample to counties with more than 30 observations in each age bin}
+  \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth,height=0.7\textheight,keepaspectratio]{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png"}
+    \end{figure}
+    \centering
+    \hyperlink{robustness}{\beamerbutton{Back to robustness}}
+\end{frame}
+
+
+\begin{frame}[label=reviewestimates]{Review of estimates of school construction on attainment}
+  \input{"/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/lit_estimates.tex"}
+  \vspace{1em}
+  \centering
+  \hyperlink{effects}{\beamerbutton{Back to Effects on college and BA attainment}}
+\end{frame}
+
+
+
+
 \end{document}
+

@@ -127,6 +127,64 @@
       \verb 10.1016/j.econedurev.2025.102724
       \endverb
     \endentry
+    \entry{anthropicClaudeSonnet452025}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f431db65cea024a5f19eab835afefee2}{%
+           family={Anthropic},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{f431db65cea024a5f19eab835afefee2}
+      \strng{fullhash}{f431db65cea024a5f19eab835afefee2}
+      \strng{bibnamehash}{f431db65cea024a5f19eab835afefee2}
+      \strng{authorbibnamehash}{f431db65cea024a5f19eab835afefee2}
+      \strng{authornamehash}{f431db65cea024a5f19eab835afefee2}
+      \strng{authorfullhash}{f431db65cea024a5f19eab835afefee2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Claude {{Sonnet}} 4.5}
+      \field{year}{2025}
+    \endentry
+    \entry{backer-peralCanLLMsCredibly2025}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=91e6b6dd5344acb31c6d52a5a6d2c4df}{%
+           family={{Backer-Peral}},
+           familyi={B\bibinitperiod},
+           given={Veronica},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=01eb6756d26ee026fcf7e62f4c2a074b}{%
+           family={Meursault},
+           familyi={M\bibinitperiod},
+           given={Vitaly},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1ed20152afc365ba12eb30bb383b62d2}{%
+           family={Severen},
+           familyi={S\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ce81427e3f227d8a85d284f796245d00}
+      \strng{fullhash}{ce81427e3f227d8a85d284f796245d00}
+      \strng{bibnamehash}{ce81427e3f227d8a85d284f796245d00}
+      \strng{authorbibnamehash}{ce81427e3f227d8a85d284f796245d00}
+      \strng{authornamehash}{ce81427e3f227d8a85d284f796245d00}
+      \strng{authorfullhash}{ce81427e3f227d8a85d284f796245d00}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Multimodal LLMs offer a watershed change for the digitization of historical tables, enabling low-cost processing centered on domain expertise rather than technical skills. We rigorously validate an LLM-based pipeline on a new panel of historical county-level vehicle registrations. This pipeline is 100 times less expensive than outsourcing, reduces critical parsing errors from 40\% to 0.3\%, and matches human-validated gold standard data with an R2 of 98.6\%. Analyses of growth and persistence in vehicle adoption are statistically indistinguishable whether using LLM or gold standard data. LLM-based digitization unlocks complex historical tables, enabling new economic analyses and broader researcher participation.}
+      \field{title}{Can {{LLMs Credibly Transform}} the {{Creation}} of {{Panel Data}} from {{Diverse Historical Tables}}?}
+      \field{year}{2025}
+    \endentry
     \entry{bleemerChangesCollegeMobility2025}{misc}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=82f06f67f04ab357560d069ad7ddcd50}{%
@@ -174,6 +232,59 @@
       \endverb
       \verb{eprint}
       \verb 33797
+      \endverb
+    \endentry
+    \entry{borusyakRevisitingEventStudyDesigns2024}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=bd786f74596fee4b3890f929e06a0f8a}{%
+           family={Borusyak},
+           familyi={B\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bf9f59745c80d75e4b28c948d6b49032}{%
+           family={Jaravel},
+           familyi={J\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e249611355f88583165432eab0ba4e1}{%
+           family={Spiess},
+           familyi={S\bibinitperiod},
+           given={Jann},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{fullhash}{088786d88490d4ebdcd781569cc02694}
+      \strng{bibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authorbibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authornamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authorfullhash}{088786d88490d4ebdcd781569cc02694}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Abstract We develop a framework for difference-in-differences designs with staggered treatment adoption and heterogeneous causal effects. We show that conventional regression-based estimators fail to provide unbiased estimates of relevant estimands absent strong restrictions on treatment-effect homogeneity. We then derive the efficient estimator addressing this challenge, which takes an intuitive ``imputation'' form when treatment-effect heterogeneity is unrestricted. We characterize the asymptotic behaviour of the estimator, propose tools for inference, and develop tests for identifying assumptions. Our method applies with time-varying controls, in triple-difference designs, and with certain non-binary treatments. We show the practical relevance of our results in a simulation study and an application. Studying the consumption response to tax rebates in the U.S., we find that the notional marginal propensity to consume is between 8 and 11\% in the first quarter---about half as large as benchmark estimates used to calibrate macroeconomic models---and predominantly occurs in the first month after the rebate.}
+      \field{issn}{0034-6527, 1467-937X}
+      \field{journaltitle}{Review of Economic Studies}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{number}{6}
+      \field{shorttitle}{Revisiting {{Event-Study Designs}}}
+      \field{title}{Revisiting {{Event-Study Designs}}: {{Robust}} and {{Efficient Estimation}}}
+      \field{urlday}{25}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{91}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{3253\bibrangedash 3285}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1093/restud/rdae007
       \endverb
     \endentry
     \entry{cardUsingGeographicVariation1993}{report}{}
@@ -591,6 +702,67 @@
       \verb{doi}
       \verb 10.18128/D010.V16.0
       \endverb
+    \endentry
+    \entry{walsemannStateEducationContextual2025}{misc}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=46755c5f960f3c13cf21e75d9c1095be}{%
+           family={Walsemann},
+           familyi={W\bibinitperiod},
+           given={Katrina\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=336a55517950271cc3faee4947020340}{%
+           family={Abbruzzi},
+           familyi={A\bibinitperiod},
+           given={Emily},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b968b1d835334a03052327607b8698d7}{%
+           family={Tyagi},
+           familyi={T\bibinitperiod},
+           given={Pallavi},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=be235593dc6bb50fc2dcc9259880846d}{%
+           family={Jackson},
+           familyi={J\bibinitperiod},
+           given={Heide},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ae0af7ee68c45a7fd45318045f196086}{%
+           family={Ailshire},
+           familyi={A\bibinitperiod},
+           given={Jennifer\bibnamedelima A.},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ICPSR - Interuniversity Consortium for Political and Social Research}%
+      }
+      \strng{namehash}{fa4680903fc6a5bbce0aa6057f0000a8}
+      \strng{fullhash}{0ed87d17678d414d19b53c053c3f8764}
+      \strng{bibnamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
+      \strng{authorbibnamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
+      \strng{authornamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
+      \strng{authorfullhash}{0ed87d17678d414d19b53c053c3f8764}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The State Education Contextual Data Resource (S-ECDR) is a historical dataset that compiles state-level indicators of public education systems in the United States from 1919/20 through 1973/74. The dataset includes measures related to public school financing, teacher characteristics, school and classroom contexts, and segregation and desegregation in the U.S. South. Data were drawn from four historical sources: the Biennial Surveys of Education, the Statistics of State School Systems, a 1967 Southern Education Reporting Service report, and U.S. Census Abstracts. {$<$}br{$><$}br{$>$}The dataset was created to support research on how early-life education contexts influence long-term outcomes in adulthood, particularly for cohorts who attended school during a period of significant expansion in U.S. public education. S-ECDR includes indicators that enable comparisons of state-level education investment, teacher workforce composition, and access to education across time and geographic region. The resource is designed to facilitate linkage to individual-level surveys containing state and year identifiers, enabling analysis of how historical education environments shaped later-life well-being.}
+      \field{langid}{english}
+      \field{title}{State {{Education Contextual Data Resource}} ({{S-ECDR}})}
+      \field{urlday}{27}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.3886/E233063V1-187381
+      \endverb
+      \keyw{education policy,educational finance,historical data,k-12,public schools,school desegregation,school segregation,state government,teachers,United States}
     \endentry
   \enddatalist
 \endrefsection
