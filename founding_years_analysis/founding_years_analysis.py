@@ -44,10 +44,10 @@ def create_ppexpend_line_graph(secdr_df):
     plt.plot(years, weighted_avg_by_year, linewidth=3, color='#1f77b4',
             alpha=0.8, marker='o', markersize=8)
 
-    plt.title('National Average Per-Pupil Expenditure Over Time\n(Student-weighted, inflation-adjusted)',
+    plt.title('National Average Per-Pupil Expenditure Over Time\n',
               fontsize=16, fontweight='bold')
     plt.xlabel('Year', fontsize=12)
-    plt.ylabel('Per-Pupil Expenditure (Adjusted Dollars)', fontsize=12)
+    plt.ylabel('K-12 Per-Pupil Expenditure (2022 Dollars)', fontsize=12)
     plt.grid(True, alpha=0.3)
 
     # Format y-axis as currency
@@ -65,6 +65,85 @@ def create_ppexpend_line_graph(secdr_df):
     print("\nWeighted Average Per-Pupil Expenditure by Year:")
     for year, avg in zip(years, weighted_avg_by_year):
         print(f"  {year}: ${avg:,.2f}")
+
+def create_k12_expenditure_by_region(secdr_df):
+    """Create line graph of average K-12 expenditures by region over time."""
+
+    # Filter out missing values for ppexpend_adj and students, and restrict to 1920-1950
+    df_filtered = secdr_df[secdr_df['ppexpend_adj'].notna() &
+                           secdr_df['students'].notna() &
+                           secdr_df['region'].notna() &
+                           (secdr_df['year'] >= 1920) &
+                           (secdr_df['year'] <= 1950)].copy()
+
+    print(f"\nCreating K-12 expenditure by region graph...")
+    print(f"Records with valid data: {len(df_filtered)}")
+
+    # Define consistent colors for each region
+    region_colors = {
+        'Northeast': '#1f77b4',  # blue
+        'Midwest': '#ff7f0e',    # orange
+        'South': '#2ca02c',      # green
+        'West': '#d62728'        # red
+    }
+
+    # Get all unique regions and years
+    regions = sorted(df_filtered['region'].unique())
+    years = sorted(df_filtered['year'].unique())
+
+    print(f"Regions: {regions}")
+    print(f"Years: {years[0]} to {years[-1]}")
+
+    # Create the plot
+    plt.figure(figsize=(14, 8))
+
+    # Calculate and plot weighted average for each region
+    for region in regions:
+        region_data = df_filtered[df_filtered['region'] == region]
+
+        weighted_avg_by_year = []
+        region_years = []
+
+        for year in years:
+            year_data = region_data[region_data['year'] == year]
+
+            if len(year_data) > 0:
+                # Calculate weighted average: sum(ppexpend_adj * students) / sum(students)
+                total_weighted_expenditure = (year_data['ppexpend_adj'] * year_data['students']).sum()
+                total_students = year_data['students'].sum()
+
+                if total_students > 0:
+                    weighted_avg = total_weighted_expenditure / total_students
+                    weighted_avg_by_year.append(weighted_avg)
+                    region_years.append(year)
+
+        # Plot the line for this region
+        plt.plot(region_years, weighted_avg_by_year, linewidth=2.5,
+                color=region_colors.get(region, '#666666'),
+                alpha=0.8, marker='o', markersize=6, label=region)
+
+        print(f"\n{region}:")
+        print(f"  Years: {len(region_years)}")
+        if len(weighted_avg_by_year) > 0:
+            print(f"  Average expenditure range: ${min(weighted_avg_by_year):,.0f} - ${max(weighted_avg_by_year):,.0f}")
+
+    plt.title('Average K-12 Per-Student Expenditure by Region\n(Student-weighted, 2022 dollars)',
+              fontsize=16, fontweight='bold')
+    plt.xlabel('Year', fontsize=12)
+    plt.ylabel('K-12 Expenditures per Student (2022 dollars)', fontsize=12)
+    plt.legend(fontsize=11, loc='upper left')
+    plt.grid(True, alpha=0.3)
+
+    # Format y-axis as currency
+    ax = plt.gca()
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x:,.0f}'))
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "k12_expenditure_by_region.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"\nK-12 expenditure by region plot saved to: {output_path}")
 
 def create_founding_years_cdf():
     """Create CDF of college founding years for colleges existing as of 1944."""
@@ -781,6 +860,115 @@ def create_public_colleges_per_capita_by_decade(df_clean, regional_pop):
             per_capita = (college_count / population) * 100000
             print(f"  {region}: {per_capita:.2f} public colleges per 100,000 residents ({college_count} colleges, {population:,} population)")
 
+def create_junior_colleges_per_capita_by_decade(regional_pop):
+    """Create figure showing junior colleges per hundred thousand residents by region and decade."""
+
+    # Load the full dataset (including junior colleges)
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/colleges_with_counties_1940.csv"
+    df = pd.read_csv(data_path)
+
+    # Clean founding years
+    df['founding_year'] = pd.to_numeric(df['Founded_Year'], errors='coerce')
+    df = df[(df['founding_year'] >= 1600) & (df['founding_year'].notna())].copy()
+
+    # Filter for junior colleges only
+    df_junior = df[df['College_Type'] == 'Junior Colleges'].copy()
+
+    # Regional mapping
+    regional_mapping = {
+        'MAINE': 'Northeast', 'NEW HAMPSHIRE': 'Northeast', 'VERMONT': 'Northeast',
+        'MASSACHUSETTS': 'Northeast', 'RHODE ISLAND': 'Northeast', 'CONNECTICUT': 'Northeast',
+        'NEW YORK': 'Northeast', 'NEW JERSEY': 'Northeast', 'PENNSYLVANIA': 'Northeast',
+
+        'DELAWARE': 'South', 'MARYLAND': 'South', 'VIRGINIA': 'South', 'WEST VIRGINIA': 'South',
+        'KENTUCKY': 'South', 'TENNESSEE': 'South', 'NORTH CAROLINA': 'South', 'SOUTH CAROLINA': 'South',
+        'GEORGIA': 'South', 'FLORIDA': 'South', 'ALABAMA': 'South', 'MISSISSIPPI': 'South',
+        'ARKANSAS': 'South', 'LOUISIANA': 'South', 'TEXAS': 'South', 'OKLAHOMA': 'South',
+        'DISTRICT OF COLUMBIA': 'South',
+
+        'OHIO': 'Midwest', 'INDIANA': 'Midwest', 'ILLINOIS': 'Midwest', 'MICHIGAN': 'Midwest',
+        'WISCONSIN': 'Midwest', 'MINNESOTA': 'Midwest', 'IOWA': 'Midwest', 'MISSOURI': 'Midwest',
+        'NORTH DAKOTA': 'Midwest', 'SOUTH DAKOTA': 'Midwest', 'NEBRASKA': 'Midwest', 'KANSAS': 'Midwest',
+
+        'MONTANA': 'West', 'IDAHO': 'West', 'WYOMING': 'West', 'COLORADO': 'West', 'NEW MEXICO': 'West',
+        'ARIZONA': 'West', 'UTAH': 'West', 'NEVADA': 'West', 'WASHINGTON': 'West', 'OREGON': 'West',
+        'CALIFORNIA': 'West', 'ALASKA': 'West', 'HAWAII': 'West'
+    }
+
+    # Map states to regions
+    df_junior['region'] = df_junior['State'].str.upper().map(regional_mapping)
+    df_junior = df_junior[df_junior['region'].notna()].copy()
+
+    # Define decades to analyze (from 1900 to 1940, since population data starts at 1900)
+    decades = list(range(1900, 1950, 10))
+
+    # Define regions
+    regions = ['Northeast', 'South', 'Midwest', 'West']
+
+    # Define consistent colors for regions
+    region_colors = {
+        'Northeast': '#1f77b4',
+        'Midwest': '#ff7f0e',
+        'South': '#2ca02c',
+        'West': '#d62728'
+    }
+
+    # Calculate junior colleges per hundred thousand residents by decade for each region
+    per_capita_by_decade = {region: [] for region in regions}
+
+    for decade in decades:
+        for region in regions:
+            # Count junior colleges founded on or before this decade
+            college_count = len(df_junior[(df_junior['region'] == region) & (df_junior['founding_year'] <= decade)])
+
+            # Get population for this region at this decade
+            pop_data = regional_pop[(regional_pop['region'] == region) & (regional_pop['year'] == decade)]
+
+            if len(pop_data) > 0:
+                population = pop_data['population'].values[0]
+                # Calculate per hundred thousand residents
+                per_capita = (college_count / population) * 100000
+                per_capita_by_decade[region].append(per_capita)
+            else:
+                per_capita_by_decade[region].append(None)
+
+    # Create the plot
+    plt.figure(figsize=(14, 8))
+
+    for region in regions:
+        # Filter out None values
+        valid_decades = [d for d, v in zip(decades, per_capita_by_decade[region]) if v is not None]
+        valid_values = [v for v in per_capita_by_decade[region] if v is not None]
+
+        if len(valid_values) > 0:
+            plt.plot(valid_decades, valid_values, linewidth=2.5,
+                    label=region, color=region_colors[region], alpha=0.8, marker='o', markersize=8)
+
+    plt.title('Junior Colleges per 100,000 Residents by Region and Decade',
+              fontsize=16, fontweight='bold')
+    plt.xlabel('Decade', fontsize=12)
+    plt.ylabel('Junior Colleges per 100,000 Residents', fontsize=12)
+    plt.grid(True, alpha=0.3)
+    plt.legend(fontsize=11, loc='upper left')
+    plt.xticks(decades)
+
+    plt.tight_layout()
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / "junior_colleges_per_capita_by_region_decade.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Junior colleges per capita by region/decade plot saved to: {output_path}")
+
+    # Print summary statistics
+    print("\nJunior Colleges per 100,000 Residents by Region in 1940:")
+    for region in regions:
+        college_count = len(df_junior[(df_junior['region'] == region) & (df_junior['founding_year'] <= 1940)])
+        pop_data = regional_pop[(regional_pop['region'] == region) & (regional_pop['year'] == 1940)]
+        if len(pop_data) > 0:
+            population = pop_data['population'].values[0]
+            per_capita = (college_count / population) * 100000
+            print(f"  {region}: {per_capita:.2f} junior colleges per 100,000 residents ({college_count} colleges, {population:,} population)")
+
 def create_total_operating_colleges_by_decade(df_clean, secdr_df):
     """Create figure showing total number of operating colleges by decade from 1900-1940, broken down by type,
     with per-pupil expenditure overlaid on a second y-axis."""
@@ -852,8 +1040,8 @@ def create_total_operating_colleges_by_decade(df_clean, secdr_df):
     fig, ax1 = plt.subplots(figsize=(14, 8))
 
     # Plot college counts on primary y-axis
-    ax1.plot(decades, teachers_by_decade, linewidth=2.5, color='#e41a1c',
-            alpha=0.8, marker='d', markersize=8, label='Teachers Colleges')
+    # ax1.plot(decades, teachers_by_decade, linewidth=2.5, color='#e41a1c',
+    #         alpha=0.8, marker='d', markersize=8, label='Teachers Colleges')
     ax1.plot(decades, junior_by_decade, linewidth=2.5, color='#377eb8',
             alpha=0.8, marker='d', markersize=8, label='Junior Colleges')
     ax1.plot(decades, other_by_decade, linewidth=2.5, color='#984ea3',
@@ -1528,6 +1716,234 @@ def create_capacity_share_bar_chart(df_clean, year=1940):
                 state_share = (state_capacity / total_capacity) * 100
                 print(f"  {region}: {state_share:.1f}% State (Total capacity: {total_capacity:,.0f})")
 
+def create_public_college_share_bar_chart(df_clean, year=1940):
+    """Create bar chart showing share of public colleges (by count) by census region for a specific year."""
+
+    # Filter out normal schools, teachers colleges, and related abbreviations
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
+
+    # Filter for colleges founded by specified year
+    df_filtered = df_filtered[df_filtered['founding_year'] <= year].copy()
+
+    print(f"\nColleges (founded by {year}, excluding normal/teachers colleges): {len(df_filtered)}")
+
+    # Define regional mapping based on state
+    regional_mapping = {
+        'MAINE': 'Northeast', 'NEW HAMPSHIRE': 'Northeast', 'VERMONT': 'Northeast',
+        'MASSACHUSETTS': 'Northeast', 'RHODE ISLAND': 'Northeast', 'CONNECTICUT': 'Northeast',
+        'NEW YORK': 'Northeast', 'NEW JERSEY': 'Northeast', 'PENNSYLVANIA': 'Northeast',
+
+        'DELAWARE': 'South', 'MARYLAND': 'South', 'VIRGINIA': 'South', 'WEST VIRGINIA': 'South',
+        'KENTUCKY': 'South', 'TENNESSEE': 'South', 'NORTH CAROLINA': 'South', 'SOUTH CAROLINA': 'South',
+        'GEORGIA': 'South', 'FLORIDA': 'South', 'ALABAMA': 'South', 'MISSISSIPPI': 'South',
+        'ARKANSAS': 'South', 'LOUISIANA': 'South', 'TEXAS': 'South', 'OKLAHOMA': 'South',
+        'DISTRICT OF COLUMBIA': 'South',
+
+        'OHIO': 'Midwest', 'INDIANA': 'Midwest', 'ILLINOIS': 'Midwest', 'MICHIGAN': 'Midwest',
+        'WISCONSIN': 'Midwest', 'MINNESOTA': 'Midwest', 'IOWA': 'Midwest', 'MISSOURI': 'Midwest',
+        'NORTH DAKOTA': 'Midwest', 'SOUTH DAKOTA': 'Midwest', 'NEBRASKA': 'Midwest', 'KANSAS': 'Midwest',
+
+        'MONTANA': 'West', 'WYOMING': 'West', 'COLORADO': 'West', 'NEW MEXICO': 'West',
+        'IDAHO': 'West', 'UTAH': 'West', 'NEVADA': 'West', 'ARIZONA': 'West',
+        'WASHINGTON': 'West', 'OREGON': 'West', 'CALIFORNIA': 'West', 'ALASKA': 'West', 'HAWAII': 'West'
+    }
+
+    # Map regions
+    df_filtered['region'] = df_filtered['State'].map(regional_mapping)
+
+    # Create control type categories
+    df_filtered['control_type'] = df_filtered['Control'].apply(lambda x: 'State' if x == 'State' else 'Non-State')
+
+    # Define regions
+    regions = ['Northeast', 'South', 'Midwest', 'West']
+
+    # Create consistent region colors
+    region_colors = {
+        'Northeast': '#1f77b4',  # blue
+        'Midwest': '#ff7f0e',    # orange
+        'South': '#2ca02c',      # green
+        'West': '#d62728'        # red
+    }
+
+    # Calculate state share for each region
+    state_shares = []
+    colors = []
+
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region].copy()
+
+        if len(regional_data) == 0:
+            state_shares.append(0)
+        else:
+            # Count colleges by control type
+            state_count = len(regional_data[regional_data['control_type'] == 'State'])
+            total_count = len(regional_data)
+
+            if total_count > 0:
+                state_share = (state_count / total_count) * 100
+            else:
+                state_share = 0
+
+            state_shares.append(state_share)
+
+        colors.append(region_colors[region])
+
+    # Create bar chart
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    x_positions = np.arange(len(regions))
+    bars = ax.bar(x_positions, state_shares, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add value labels on top of bars
+    for i, (bar, value) in enumerate(zip(bars, state_shares)):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{value:.1f}%',
+                ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+    # Set labels and title
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(regions, fontsize=12)
+    ax.set_ylabel('Public Share of Colleges (%)', fontsize=12)
+    ax.set_title(f'Share of Total Colleges that are Public by Region ({year})\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
+                fontsize=14, fontweight='bold')
+
+    # Set y-axis limit based on max value with some padding
+    max_value = max(state_shares) if state_shares else 0
+    ax.set_ylim(0, max_value * 1.2)  # 20% padding above max value
+    ax.grid(True, alpha=0.3, axis='y')
+
+    plt.tight_layout()
+
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / f"public_college_share_by_region_bar_{year}.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Bar chart saved to: {output_path}")
+
+    # Print summary statistics
+    print(f"\nPublic College Share by Region in {year}:")
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region]
+        if len(regional_data) > 0:
+            state_count = len(regional_data[regional_data['control_type'] == 'State'])
+            total_count = len(regional_data)
+
+            if total_count > 0:
+                state_share = (state_count / total_count) * 100
+                print(f"  {region}: {state_share:.1f}% Public ({state_count}/{total_count} colleges)")
+
+def create_colleges_per_capita_bar_chart(df_clean, regional_pop, year=1930):
+    """Create bar chart showing colleges per 100,000 residents by region for a specific year."""
+
+    # Filter out normal schools, teachers colleges, and related abbreviations
+    df_filtered = df_clean[~df_clean['College_Name'].str.contains(r'Normal|Teachers|Teacher|Jr\.|Nor\.|Teach|T\.', case=False, na=False)].copy()
+
+    # Filter for colleges founded by specified year
+    df_filtered = df_filtered[df_filtered['founding_year'] <= year].copy()
+
+    print(f"\nColleges (founded by {year}, excluding normal/teachers colleges): {len(df_filtered)}")
+
+    # Define regional mapping based on state
+    regional_mapping = {
+        'MAINE': 'Northeast', 'NEW HAMPSHIRE': 'Northeast', 'VERMONT': 'Northeast',
+        'MASSACHUSETTS': 'Northeast', 'RHODE ISLAND': 'Northeast', 'CONNECTICUT': 'Northeast',
+        'NEW YORK': 'Northeast', 'NEW JERSEY': 'Northeast', 'PENNSYLVANIA': 'Northeast',
+
+        'DELAWARE': 'South', 'MARYLAND': 'South', 'VIRGINIA': 'South', 'WEST VIRGINIA': 'South',
+        'KENTUCKY': 'South', 'TENNESSEE': 'South', 'NORTH CAROLINA': 'South', 'SOUTH CAROLINA': 'South',
+        'GEORGIA': 'South', 'FLORIDA': 'South', 'ALABAMA': 'South', 'MISSISSIPPI': 'South',
+        'ARKANSAS': 'South', 'LOUISIANA': 'South', 'TEXAS': 'South', 'OKLAHOMA': 'South',
+        'DISTRICT OF COLUMBIA': 'South',
+
+        'OHIO': 'Midwest', 'INDIANA': 'Midwest', 'ILLINOIS': 'Midwest', 'MICHIGAN': 'Midwest',
+        'WISCONSIN': 'Midwest', 'MINNESOTA': 'Midwest', 'IOWA': 'Midwest', 'MISSOURI': 'Midwest',
+        'NORTH DAKOTA': 'Midwest', 'SOUTH DAKOTA': 'Midwest', 'NEBRASKA': 'Midwest', 'KANSAS': 'Midwest',
+
+        'MONTANA': 'West', 'WYOMING': 'West', 'COLORADO': 'West', 'NEW MEXICO': 'West',
+        'IDAHO': 'West', 'UTAH': 'West', 'NEVADA': 'West', 'ARIZONA': 'West',
+        'WASHINGTON': 'West', 'OREGON': 'West', 'CALIFORNIA': 'West', 'ALASKA': 'West', 'HAWAII': 'West'
+    }
+
+    # Map regions
+    df_filtered['region'] = df_filtered['State'].map(regional_mapping)
+
+    # Define regions
+    regions = ['Northeast', 'South', 'Midwest', 'West']
+
+    # Create consistent region colors
+    region_colors = {
+        'Northeast': '#1f77b4',  # blue
+        'Midwest': '#ff7f0e',    # orange
+        'South': '#2ca02c',      # green
+        'West': '#d62728'        # red
+    }
+
+    # Calculate colleges per capita for each region
+    per_capita_values = []
+    colors = []
+
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region]
+        college_count = len(regional_data)
+
+        # Get population for this region and year
+        pop_data = regional_pop[(regional_pop['region'] == region) & (regional_pop['year'] == year)]
+
+        if len(pop_data) > 0:
+            population = pop_data['population'].values[0]
+            per_capita = (college_count / population) * 100000
+        else:
+            per_capita = 0
+
+        per_capita_values.append(per_capita)
+        colors.append(region_colors[region])
+
+    # Create bar chart
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    x_positions = np.arange(len(regions))
+    bars = ax.bar(x_positions, per_capita_values, color=colors, alpha=0.8, edgecolor='black', linewidth=1.5)
+
+    # Add value labels on top of bars
+    for i, (bar, value) in enumerate(zip(bars, per_capita_values)):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{value:.2f}',
+                ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+    # Set labels and title
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(regions, fontsize=12)
+    ax.set_ylabel('Colleges per 100,000 Residents', fontsize=12)
+    ax.set_title(f'Colleges per 100,000 Residents by Region ({year})\n(Excluding Junior Colleges, Normal Schools, and Teachers Colleges)',
+                fontsize=14, fontweight='bold')
+
+    # Set y-axis limit based on max value with some padding
+    max_value = max(per_capita_values) if per_capita_values else 0
+    ax.set_ylim(0, max_value * 1.2)  # 20% padding above max value
+    ax.grid(True, alpha=0.3, axis='y')
+
+    plt.tight_layout()
+
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    output_path = Path(output_dir) / f"colleges_per_capita_by_region_bar_{year}.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Bar chart saved to: {output_path}")
+
+    # Print summary statistics
+    print(f"\nColleges per 100,000 Residents by Region in {year}:")
+    for region in regions:
+        regional_data = df_filtered[df_filtered['region'] == region]
+        college_count = len(regional_data)
+
+        pop_data = regional_pop[(regional_pop['region'] == region) & (regional_pop['year'] == year)]
+        if len(pop_data) > 0:
+            population = pop_data['population'].values[0]
+            per_capita = (college_count / population) * 100000
+            print(f"  {region}: {per_capita:.2f} colleges per 100,000 ({college_count} colleges, {population:,} population)")
+
 def create_capacity_share_by_control_and_region(df_clean):
     """Create figure showing share of public (state) student capacity by census region from 1890-1940."""
 
@@ -1637,6 +2053,9 @@ def main():
     # Create per-pupil expenditure graph
     create_ppexpend_line_graph(secdr_df)
 
+    # Create K-12 expenditure by region graph
+    create_k12_expenditure_by_region(secdr_df)
+
     # Create overall CDF
     df_clean = create_founding_years_cdf()
 
@@ -1664,6 +2083,7 @@ def main():
     regional_pop = load_and_aggregate_population_data()
     create_colleges_per_capita_by_decade(df_clean, regional_pop)
     create_public_colleges_per_capita_by_decade(df_clean, regional_pop)
+    create_junior_colleges_per_capita_by_decade(regional_pop)
 
     # Create regional capacity per capita histogram
     create_regional_capacity_per_capita_histogram(regional_pop)

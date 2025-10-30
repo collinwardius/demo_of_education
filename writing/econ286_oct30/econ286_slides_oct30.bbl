@@ -412,6 +412,47 @@
       \verb 10.1257/aer.91.4.795
       \endverb
     \endentry
+    \entry{eckertGeographyOpportunityEducation2024}{misc}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=d40d450e9cfaa59daf032a5cd9c55205}{%
+           family={Eckert},
+           familyi={E\bibinitperiod},
+           given={Fabian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9eb890903417ef0fecdb1d63cd49760b}{%
+           family={Kleineberg},
+           familyi={K\bibinitperiod},
+           given={Tatjana},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Federal Reserve Bank of Minneapolis}%
+      }
+      \strng{namehash}{6afd17032984fbc0260ab5f103a26dac}
+      \strng{fullhash}{6afd17032984fbc0260ab5f103a26dac}
+      \strng{bibnamehash}{6afd17032984fbc0260ab5f103a26dac}
+      \strng{authorbibnamehash}{6afd17032984fbc0260ab5f103a26dac}
+      \strng{authornamehash}{6afd17032984fbc0260ab5f103a26dac}
+      \strng{authorfullhash}{6afd17032984fbc0260ab5f103a26dac}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{howpublished}{https://doi.org/10.21034/iwp.47}
+      \field{month}{4}
+      \field{shorttitle}{The {{Geography}} of {{Opportunity}}}
+      \field{title}{The {{Geography}} of {{Opportunity}}: {{Education}}, {{Work}}, and {{Intergenerational Mobility Across US Counties}}}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2025}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \keyw{E24 - Employment; Unemployment; Wages; Intergenerational Income Distribution; Aggregate Human Capital; Aggregate Labor Productivity,E62 - Fiscal Policy,I24 - Education and Inequality,I28 - Education: Government Policy,R12 - Size and Spatial Distributions of Regional Economic Activity,R23 - Urban Rural Regional Real Estate and Transportation Economics: Regional Migration; Regional Labor Markets; Population; Neighborhood Characteristics}
+    \endentry
     \entry{goldinAmericasGraduationHigh1998}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=a18c02f3c78d81d8178faf1ae63981ee}{%
@@ -548,6 +589,30 @@
       \verb 116938
       \endverb
     \endentry
+    \entry{hsiaoEducationalInvestmentSpatial2024}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9d9e9a2c919322da945c856a6f11f8ad}{%
+           family={Hsiao},
+           familyi={H\bibinitperiod},
+           given={Allan},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \strng{fullhash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \strng{bibnamehash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \strng{authorbibnamehash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \strng{authornamehash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \strng{authorfullhash}{9d9e9a2c919322da945c856a6f11f8ad}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Educational {{Investment}} in {{Spatial Equilibrium}}: {{Evidence}} from {{Indonesia}}}
+      \field{year}{2024}
+    \endentry
     \entry{hurt1947college}{book}{}
       \name{author}{3}{}{%
         {{un=2,uniquepart=given,hash=622f4891fd0dc4f1d5d7ab4573a070ae}{%
@@ -587,6 +652,46 @@
       \field{number}{v. 1}
       \field{title}{The College Blue Book}
       \field{year}{1947}
+    \endentry
+    \entry{khannaLargeScaleEducationReform2023}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5602444a4806dd18d675513702112ec8}{%
+           family={Khanna},
+           familyi={K\bibinitperiod},
+           given={Gaurav},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5602444a4806dd18d675513702112ec8}
+      \strng{fullhash}{5602444a4806dd18d675513702112ec8}
+      \strng{bibnamehash}{5602444a4806dd18d675513702112ec8}
+      \strng{authorbibnamehash}{5602444a4806dd18d675513702112ec8}
+      \strng{authornamehash}{5602444a4806dd18d675513702112ec8}
+      \strng{authorfullhash}{5602444a4806dd18d675513702112ec8}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0022-3808, 1537-534X}
+      \field{journaltitle}{Journal of Political Economy}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{number}{2}
+      \field{shorttitle}{Large-{{Scale Education Reform}} in {{General Equilibrium}}}
+      \field{title}{Large-{{Scale Education Reform}} in {{General Equilibrium}}: {{Regression Discontinuity Evidence}} from {{India}}}
+      \field{urlday}{28}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{volume}{131}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{549\bibrangedash 591}
+      \range{pages}{43}
+      \verb{doi}
+      \verb 10.1086/721619
+      \endverb
     \endentry
     \entry{nimier-davidLocalHumanCapital2023}{article}{}
       \name{author}{1}{}{%
@@ -702,67 +807,6 @@
       \verb{doi}
       \verb 10.18128/D010.V16.0
       \endverb
-    \endentry
-    \entry{walsemannStateEducationContextual2025}{misc}{}
-      \name{author}{5}{}{%
-        {{un=0,uniquepart=base,hash=46755c5f960f3c13cf21e75d9c1095be}{%
-           family={Walsemann},
-           familyi={W\bibinitperiod},
-           given={Katrina\bibnamedelima M.},
-           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=336a55517950271cc3faee4947020340}{%
-           family={Abbruzzi},
-           familyi={A\bibinitperiod},
-           given={Emily},
-           giveni={E\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=b968b1d835334a03052327607b8698d7}{%
-           family={Tyagi},
-           familyi={T\bibinitperiod},
-           given={Pallavi},
-           giveni={P\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=be235593dc6bb50fc2dcc9259880846d}{%
-           family={Jackson},
-           familyi={J\bibinitperiod},
-           given={Heide},
-           giveni={H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=ae0af7ee68c45a7fd45318045f196086}{%
-           family={Ailshire},
-           familyi={A\bibinitperiod},
-           given={Jennifer\bibnamedelima A.},
-           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{publisher}{1}{%
-        {ICPSR - Interuniversity Consortium for Political and Social Research}%
-      }
-      \strng{namehash}{fa4680903fc6a5bbce0aa6057f0000a8}
-      \strng{fullhash}{0ed87d17678d414d19b53c053c3f8764}
-      \strng{bibnamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
-      \strng{authorbibnamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
-      \strng{authornamehash}{fa4680903fc6a5bbce0aa6057f0000a8}
-      \strng{authorfullhash}{0ed87d17678d414d19b53c053c3f8764}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The State Education Contextual Data Resource (S-ECDR) is a historical dataset that compiles state-level indicators of public education systems in the United States from 1919/20 through 1973/74. The dataset includes measures related to public school financing, teacher characteristics, school and classroom contexts, and segregation and desegregation in the U.S. South. Data were drawn from four historical sources: the Biennial Surveys of Education, the Statistics of State School Systems, a 1967 Southern Education Reporting Service report, and U.S. Census Abstracts. {$<$}br{$><$}br{$>$}The dataset was created to support research on how early-life education contexts influence long-term outcomes in adulthood, particularly for cohorts who attended school during a period of significant expansion in U.S. public education. S-ECDR includes indicators that enable comparisons of state-level education investment, teacher workforce composition, and access to education across time and geographic region. The resource is designed to facilitate linkage to individual-level surveys containing state and year identifiers, enabling analysis of how historical education environments shaped later-life well-being.}
-      \field{langid}{english}
-      \field{title}{State {{Education Contextual Data Resource}} ({{S-ECDR}})}
-      \field{urlday}{27}
-      \field{urlmonth}{10}
-      \field{urlyear}{2025}
-      \field{year}{2025}
-      \field{urldateera}{ce}
-      \verb{doi}
-      \verb 10.3886/E233063V1-187381
-      \endverb
-      \keyw{education policy,educational finance,historical data,k-12,public schools,school desegregation,school segregation,state government,teachers,United States}
     \endentry
   \enddatalist
 \endrefsection

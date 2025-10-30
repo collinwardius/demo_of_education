@@ -61,7 +61,7 @@ restore
 
 
 
-* prakash's recommendation is to recode people that are well older / younger to the max / min age
+* prakash's recommendation is to recode people that are well older / younger to the max / min age. This is allegedley a well founded thing to do based on Schmidheiny and Siegloch (2023)
 
 replace age_at_founding = 25 if age_at_founding > 25
 replace age_at_founding = 9 if age_at_founding < 9
@@ -70,6 +70,8 @@ est clear
 eststo: reghdfe college  ib17.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
+sum college if e(sample) & age_at_founding >= 18
+loc dep_mean = round(`r(mean)', .02)
 
 coefplot, ///
     keep(*age_at_founding) ///
@@ -92,6 +94,7 @@ coefplot, ///
                 11.age_at_founding = "11" ///
                 10.age_at_founding = "10" ///
                 9.age_at_founding = "9") ///
+    subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
     xlabel(, angle(0)) ///
     ytitle("Effect on College Attendance") ///
     xtitle("Age at College Founding") ///
