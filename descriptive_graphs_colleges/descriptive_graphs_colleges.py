@@ -69,12 +69,10 @@ def create_ppexpend_line_graph(secdr_df):
 def create_k12_expenditure_by_region(secdr_df):
     """Create line graph of average K-12 expenditures by region over time."""
 
-    # Filter out missing values for ppexpend_adj and students, and restrict to 1920-1950
+    # Filter out missing values for ppexpend_adj and students (all available years)
     df_filtered = secdr_df[secdr_df['ppexpend_adj'].notna() &
                            secdr_df['students'].notna() &
-                           secdr_df['region'].notna() &
-                           (secdr_df['year'] >= 1920) &
-                           (secdr_df['year'] <= 1950)].copy()
+                           secdr_df['region'].notna()].copy()
 
     print(f"\nCreating K-12 expenditure by region graph...")
     print(f"Records with valid data: {len(df_filtered)}")
@@ -140,7 +138,7 @@ def create_k12_expenditure_by_region(secdr_df):
 
     plt.tight_layout()
     output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
-    output_path = Path(output_dir) / "k12_expenditure_by_region.png"
+    output_path = Path(output_dir) / "k12_expenditure_by_region_all_years.png"
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
     print(f"\nK-12 expenditure by region plot saved to: {output_path}")
