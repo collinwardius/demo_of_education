@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  2 NOV 2025 12:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.21)  6 NOV 2025 18:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1468,4 +1468,403 @@ Dictionary: translator-theorem-dictionary, Language: English
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-File: english.lbx 2023/03/05 v3.19 biblatex loca
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout5 = `econ286_slides_oct30.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'econ286_slides_oct30.bbl' found.
+ (./econ286_slides_oct30.bbl)
+Package biblatex Info: Reference section=0 on input line 287.
+Package biblatex Info: Reference segment=0 on input line 287.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 287.
+\c@mv@tabular=\count541
+\c@mv@boldtabular=\count542
+
+Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+(./econ286_slides_oct30.nav)
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 287.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 14.4pt on input line 291.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 291.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 291.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 291.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 291.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <8> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <8> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <6> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <6> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 291.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 4.0pt on input line 291.
+ [1
+
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_y72t7m.enc}] [2
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png, id=29, 861.2175pt x 426.6339pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png  used on input line 305.
+(pdftex.def)             Requested size: 331.20837pt x 164.07553pt.
+ [3
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_hs_attainment_by_cohort.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png, id=37, 1003.8303pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png  used on input line 312.
+(pdftex.def)             Requested size: 289.08147pt x 164.0695pt.
+ [4
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/operating_colleges_and_k12_expend.png>] [5
+
+]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
+(Font)              scaled to size 10.95pt on input line 332.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/b/it' will be
+(Font)              scaled to size 10.95pt on input line 332.
+ [6
+
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lato/a_vc7epu.enc}]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png, id=56, 860.4948pt x 426.6339pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png  used on input line 340.
+(pdftex.def)             Requested size: 330.93044pt x 164.07553pt.
+ [7
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/figures/college_attainment_by_cohort_region.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_college_attainment_regression_coefficients.png, id=64, 1004.0712pt x 569.9694pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_college_attainment_regression_coefficients.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_college_attainment_regression_coefficients.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_college_attainment_regression_coefficients.png  used on input line 347.
+(pdftex.def)             Requested size: 289.02827pt x 164.0693pt.
+ [8
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_college_attainment_regression_coefficients.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_by_cohort_region.png, id=71, 859.7721pt x 425.4294pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_by_cohort_region.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_by_cohort_region.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_by_cohort_region.png  used on input line 354.
+(pdftex.def)             Requested size: 331.58395pt x 164.0732pt.
+ [9
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_by_cohort_region.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_regression_coefficients_log.png, id=78, 1004.0712pt x 569.9694pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_regression_coefficients_log.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_regression_coefficients_log.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_regression_coefficients_log.png  used on input line 361.
+(pdftex.def)             Requested size: 289.02827pt x 164.0693pt.
+ [10
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/state_income_regression_coefficients_log.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/public_college_share_by_region_bar_1930.png, id=85, 714.9912pt x 570.4512pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/public_college_share_by_region_bar_1930.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/public_college_share_by_region_bar_1930.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/public_college_share_by_region_bar_1930.png  used on input line 371.
+(pdftex.def)             Requested size: 205.6402pt x 164.06873pt.
+ [11
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/public_college_share_by_region_bar_1930.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/zero_cost_universities_1923_map.png, id=98, 1076.1003pt x 646.8165pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/zero_cost_universities_1923_map.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/zero_cost_universities_1923_map.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/zero_cost_universities_1923_map.png  used on input line 379.
+(pdftex.def)             Requested size: 272.9652pt x 164.07243pt.
+ [12
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/zero_cost_universities_1923_map.png>] [13
+
+]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/b/n' will be
+(Font)              scaled to size 10.95pt on input line 397.
+ [14
+
+] [15
+
+]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <5> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <10> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <7> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <7> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <5> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <5> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 438.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 438.
+ [16
+
+] [17
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png, id=133, 440.64626pt x 675.52374pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png  used on input line 456.
+(pdftex.def)             Requested size: 176.25537pt x 270.20471pt.
+
+Overfull \vbox (94.35593pt too high) detected at line 456
+ []
+
+[18
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/college_blue_book_example.png>]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 469.
+LaTeX Font Info:    Font shape `OT1/lato-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 469.
+ [19
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png, id=146, 2861.69125pt x 4662.41875pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png  used on input line 484.
+(pdftex.def)             Requested size: 208.00327pt x 338.85263pt.
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png, id=147, 2819.53375pt x 4655.3925pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png  used on input line 484.
+(pdftex.def)             Requested size: 208.00327pt x 343.3855pt.
+
+Overfull \vbox (138.73254pt too high) detected at line 484
+ []
+
+[20
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example1.png> </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/scans/scans_for_presentation/bi_survey_funding_example2.png>] [21
+
+] [22
+
+] [23
+
+] [24
+
+] [25
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png, id=188, 714.9912pt x 497.6994pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png  used on input line 546.
+(pdftex.def)             Requested size: 285.99141pt x 199.07623pt.
+ [26
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_by_type.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png, id=195, 714.9912pt x 497.6994pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png  used on input line 555.
+(pdftex.def)             Requested size: 285.99141pt x 199.07623pt.
+ [27
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/colleges_founding_cdf.png>] [28
+
+] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/results_from_cluster/tables/pre18_linking_analysis.tex) [29
+
+]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 582.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
+) [30
+
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 681.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <9> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 681.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <9> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 681.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <9> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 681.
+ [31
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png, id=235, 1644.1425pt x 986.68625pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png  used on input line 689.
+(pdftex.def)             Requested size: 273.37917pt x 164.06087pt.
+
+Overfull \vbox (9.40791pt too high) detected at line 689
+ []
+
+[32
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_baseline.png>] [33
+
+] [34
+
+]
+LaTeX Font Info:    Font shape `OT1/lato-TLF/m/n' will be
+(Font)              scaled to size 24.88pt on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <24.88> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <20.74> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <17.28> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <24.88> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <24.88> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <20.74> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <20.74> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/bx/it' in size <17.28> not available
+(Font)              Font shape `OT1/phv/b/it' tried instead on input line 732.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <17.28> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 732.
+ [35
+
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 736.
+
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/k12_expenditure_by_region.png, id=272, 1004.3121pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/k12_expenditure_by_region.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/k12_expenditure_by_region.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/k12_expenditure_by_region.png  used on input line 747.
+(pdftex.def)             Requested size: 289.22021pt x 164.0695pt.
+[36
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/k12_expenditure_by_region.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/junior_colleges_per_capita_by_region_decade.png, id=281, 1004.0712pt x 569.7285pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/junior_colleges_per_capita_by_region_decade.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/junior_colleges_per_capita_by_region_decade.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/junior_colleges_per_capita_by_region_decade.png  used on input line 757.
+(pdftex.def)             Requested size: 289.15083pt x 164.0695pt.
+ [37
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/junior_colleges_per_capita_by_region_decade.png>] (/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/county_boundary_overlap.tex) [38
+
+] [39
+
+]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png, id=306, 1644.1425pt x 986.68625pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png  used on input line 793.
+(pdftex.def)             Requested size: 273.37917pt x 164.06087pt.
+ [40
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/did_imputation_college_attainment_baseline.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png, id=315, 1644.1425pt x 986.68625pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png  used on input line 803.
+(pdftex.def)             Requested size: 273.37917pt x 164.06087pt.
+ [41
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_county_trends.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png, id=323, 1644.1425pt x 986.68625pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png  used on input line 812.
+(pdftex.def)             Requested size: 273.37917pt x 164.06087pt.
+ [42
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/twfe_college_attainment_minimum30_in_bin.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/placebo_twfe_college_attainment_baseline.png, id=331, 1639.12375pt x 983.675pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/placebo_twfe_college_attainment_baseline.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/placebo_twfe_college_attainment_baseline.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/placebo_twfe_college_attainment_baseline.png  used on input line 822.
+(pdftex.def)             Requested size: 273.39505pt x 164.07051pt.
+ [43
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/placebo_twfe_college_attainment_baseline.png>]
+</Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png, id=340, 714.9912pt x 497.6994pt>
+File: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png Graphic file (type png)
+<use /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png>
+Package pdftex.def Info: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png  used on input line 831.
+(pdftex.def)             Requested size: 285.99141pt x 199.07623pt.
+
+Overfull \vbox (8.02328pt too high) detected at line 831
+ []
+
+[44
+
+ </Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures/demographic_specific_colleges_1900_1940.png>] [45
+
+]
+\tf@nav=\write8
+\openout8 = `econ286_slides_oct30.nav'.
+
+\tf@toc=\write9
+\openout9 = `econ286_slides_oct30.toc'.
+
+\tf@snm=\write10
+\openout10 = `econ286_slides_oct30.snm'.
+
+ (./econ286_slides_oct30.aux)
+Package rerunfilecheck Info: File `econ286_slides_oct30.out' has not changed.
+(rerunfilecheck)             Checksum: 5BCEA9CF7D2D9AECE7CAC4018E9F6C5B;81.
+Package logreq Info: Writing requests to 'econ286_slides_oct30.run.xml'.
+\openout1 = `econ286_slides_oct30.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 56928 strings out of 476025
+ 1382545 string characters out of 5790016
+ 2158747 words of memory out of 5000000
+ 76235 multiletter control sequences out of 15000+600000
+ 623238 words of font info for 191 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 128i,18n,122p,1413b,2302s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/cjwardius/Library/texlive/2023/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Bold.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-BoldItalic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Italic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/typoland/lato/Lato-Regular.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on econ286_slides_oct30.pdf (45 pages, 9128821 bytes).
+PDF statistics:
+ 458 PDF objects out of 1000 (max. 8388607)
+ 333 compressed objects within 4 object streams
+ 124 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+

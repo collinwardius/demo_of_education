@@ -117,18 +117,18 @@ echo ""
 echo "Pre-18 linking analysis completed successfully!"
 echo ""
 
-# Step 4: Clean up temporary file
+# Step 4: Keep intermediate file (not deleted)
 echo "========================================================================"
-echo "CLEANUP"
+echo "INTERMEDIATE FILE PRESERVED"
 echo "========================================================================"
-echo "Removing temporary cleaned file: $OUTPUT_CLEANED"
-rm "$OUTPUT_CLEANED"
-echo "Temporary file removed"
+echo "Cleaned data file saved at: $OUTPUT_CLEANED"
+echo "This file contains the cleaned census data before filtering to linked individuals."
 echo ""
 
 # Final summary
 echo "========================================================================"
 echo "PIPELINE COMPLETED SUCCESSFULLY!"
 echo "========================================================================"
-echo "Final output saved to: $OUTPUT_FINAL"
+echo "Cleaned data (all individuals):  $OUTPUT_CLEANED"
+echo "Final linked data:               $OUTPUT_FINAL"
 echo ""

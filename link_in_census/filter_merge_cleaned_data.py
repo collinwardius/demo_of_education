@@ -12,8 +12,10 @@ Usage:
     python filter_merge_cleaned_data.py <input_path> <output_path> [treatment_path]
 
 Arguments:
-    input_path: Path to cleaned census data CSV
-    output_path: Path to save filtered and merged census data CSV
+    input_path: Path to cleaned census data (CSV or Parquet)
+    output_path: Path to save filtered and merged census data (CSV or Parquet)
+                 - Use .parquet extension for Parquet format (recommended)
+                 - Use .csv extension for CSV format
     treatment_path: (Optional) Path to county treatment status CSV
                    Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/county_treatment_status.csv
 
@@ -23,6 +25,7 @@ Output: linked-only census data
 
 import pandas as pd
 import sys
+import os
 
 # Parse command-line arguments
 if len(sys.argv) < 3:
@@ -30,8 +33,10 @@ if len(sys.argv) < 3:
     print("\nUsage:")
     print("  python filter_merge_cleaned_data.py <input_path> <output_path> [treatment_path]")
     print("\nArguments:")
-    print("  input_path:     Path to cleaned census data CSV")
-    print("  output_path:    Path to save filtered and merged census data CSV")
+    print("  input_path:     Path to cleaned census data (CSV or Parquet)")
+    print("  output_path:    Path to save filtered and merged census data (CSV or Parquet)")
+    print("                  - Use .parquet extension for Parquet format (recommended)")
+    print("                  - Use .csv extension for CSV format")
     print("  treatment_path: (Optional) Path to county treatment status CSV")
     sys.exit(1)
 
@@ -50,7 +55,19 @@ print("="*70)
 # Load the cleaned data
 print("\nLoading cleaned census data...")
 print(f"Input file: {input_path}")
-df = pd.read_csv(input_path)
+
+# Detect input file format
+input_ext = os.path.splitext(input_path)[1].lower()
+if input_ext == '.parquet':
+    print("Reading Parquet format...")
+    df = pd.read_parquet(input_path)
+elif input_ext == '.csv':
+    print("Reading CSV format...")
+    df = pd.read_csv(input_path)
+else:
+    print(f"Warning: Unrecognized file extension '{input_ext}', assuming CSV...")
+    df = pd.read_csv(input_path)
+
 print(f"Loaded {len(df):,} total observations")
 print(f"Unique individuals: {df['HIK'].nunique():,}")
 print(df.columns)
@@ -192,8 +209,31 @@ print("\n" + "="*70)
 print("SAVING FILTERED AND MERGED DATASET")
 print("="*70)
 print(f"Output file: {output_path}")
-df_linked.to_csv(output_path, index=False)
-print(f"Saved {len(df_linked):,} observations to linked-only file")
+
+# Determine output format based on file extension
+output_ext = os.path.splitext(output_path)[1].lower()
+
+if output_ext == '.parquet':
+    print("Saving as Parquet format...")
+    df_linked.to_parquet(output_path, index=False, engine='pyarrow')
+    print(f"Saved {len(df_linked):,} observations to Parquet file")
+
+    # Report file size
+    file_size_mb = os.path.getsize(output_path) / (1024 * 1024)
+    print(f"File size: {file_size_mb:.2f} MB")
+elif output_ext == '.csv':
+    print("Saving as CSV format...")
+    df_linked.to_csv(output_path, index=False)
+    print(f"Saved {len(df_linked):,} observations to CSV file")
+
+    # Report file size
+    file_size_mb = os.path.getsize(output_path) / (1024 * 1024)
+    print(f"File size: {file_size_mb:.2f} MB")
+else:
+    print(f"Warning: Unrecognized file extension '{output_ext}'")
+    print("Defaulting to CSV format...")
+    df_linked.to_csv(output_path, index=False)
+    print(f"Saved {len(df_linked):,} observations to CSV file")
 
 print("\n" + "="*70)
 print("Filtering and merging complete!")

@@ -201,6 +201,67 @@ def create_founding_years_cdf():
 
     return df_clean
 
+def create_junior_colleges_founding_cdf():
+    """Create CDF of junior college founding years for colleges existing as of 1944."""
+
+    # Load data
+    data_path = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/college_data/colleges_with_counties_1940.csv"
+    df = pd.read_csv(data_path)
+
+    # Filter for junior colleges only
+    df_junior = df[df['College_Type'] == 'Junior Colleges'].copy()
+
+    # Clean founding years - exclude missing, zero values, and unrealistic dates
+    # Restrict to 1850 onward
+    df_junior['founding_year'] = pd.to_numeric(df_junior['Founded_Year'], errors='coerce')
+    df_clean = df_junior[(df_junior['founding_year'] >= 1850) & (df_junior['founding_year'].notna())].copy()
+
+    print(f"\nTotal junior colleges: {len(df_junior)}")
+    print(f"Junior colleges with valid founding years: {len(df_clean)}")
+    print(f"Founding year range: {int(df_clean['founding_year'].min())} to {int(df_clean['founding_year'].max())}")
+
+    # Create output directory
+    output_dir = "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/figures"
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+
+    # Sort founding years
+    founding_years = df_clean['founding_year'].sort_values()
+
+    # Calculate CDF
+    n = len(founding_years)
+    cdf_values = np.arange(1, n + 1) / n
+
+    # Calculate actual cumulative count
+    cumulative_count = np.arange(1, n + 1)
+
+    # Create CDF plot with dual y-axis
+    fig, ax1 = plt.subplots(figsize=(14, 8))
+
+    # Left y-axis: Cumulative Proportion
+    ax1.plot(founding_years, cdf_values, linewidth=2, color='darkgreen', alpha=0.8)
+    ax1.fill_between(founding_years, cdf_values, alpha=0.3, color='lightgreen')
+    ax1.set_xlabel('Founding Year', fontsize=12)
+    ax1.set_ylabel('Cumulative Proportion', fontsize=12, color='darkgreen')
+    ax1.tick_params(axis='y', labelcolor='darkgreen')
+    ax1.grid(True, alpha=0.3)
+
+    # Right y-axis: Actual Number in Operation (axis only, no line)
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Number of Junior Colleges in Operation', fontsize=12, color='darkblue')
+    ax2.tick_params(axis='y', labelcolor='darkblue')
+    ax2.set_ylim(0, n)
+
+    plt.title('Cumulative Distribution of Junior College Founding Years (1850-1944)\n(Junior Colleges existing as of 1944)',
+              fontsize=16, fontweight='bold')
+
+    plt.tight_layout()
+    output_path = Path(output_dir) / "junior_colleges_founding_cdf.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Junior colleges CDF plot saved to: {output_path}")
+
+    return df_clean
+
 def create_regional_founding_cdf(df_clean):
     """Create regional CDF of college founding years for colleges existing as of 1944."""
 
@@ -2056,6 +2117,9 @@ def main():
 
     # Create overall CDF
     df_clean = create_founding_years_cdf()
+
+    # Create junior colleges CDF
+    create_junior_colleges_founding_cdf()
 
     # Create regional CDF
     create_regional_founding_cdf(df_clean)

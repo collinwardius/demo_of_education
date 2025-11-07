@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+
+% Packages for math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% Packages for formatting
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+
+% Title information
+\title{Simplified version of Hsiao 2024}
+\author{Collin Wardius}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+Individual $i$ with county of origin $j(i)$ and age group $k(i)$. There is some schooling shock $\epsilon$ and choose education $e$ (some school, completed high school, some college) to maximize utility.
+
+\begin{align}
+    u_{jk}(\epsilon) = \max_e\{\overbrace{\bar v_{jk}(e)}^{\text{labor utility}} - \underbrace{c_{jk}(e,\epsilon)}_{\text{education costs}}\}
+\end{align}
+
+\begin{align}
+    \bar v_{jk}(e) = \mathbb{E}[v_{jk}(e,\epsilon)\mid e], \quad c_{jk}(e,\epsilon) = e\tau_{jk}^e\epsilon
+\end{align}
+
+In the second stage, the individual considers locations $l$. They take education $e$ as given and realize skill shocks $\epsilon = \{\epsilon_l\}$ across locations. They choose a destination to maximize labor utility: 
+
+\begin{equation}
+    v_{jk}(e,\epsilon) = \max_l\{v_{jkl}(e,\epsilon_l)\}    
+\end{equation}
+
+Labor utility is modeled in the following way:
+
+\begin{equation}
+    v_{jkl}(e,\epsilon) = \frac{a_lw_{jkl}(e,\epsilon_l)}{\tau_{jkl}^m},\quad w_{jkl}(e,\epsilon_l) = r_lh_{jkl}(e,\epsilon_l),\quad h_{jkl}(e,\epsilon_l) = e^\eta s_{jkl} \epsilon_l
+\end{equation}
+
+Wages depend on the wage rates $r_l$ per unit of human capital $h_{jkl}$. Human capital increases with education $e$ subject to decreasing marginal returns $\eta <1$. Human capital also increases in skill $s_{jkl}$ and skill shock $\epsilon_l$. The skill shocks follow the Frechet distribution: 
+
+\begin{equation}
+    F(\epsilon_1,\ldots, \epsilon_L) = \exp \{-\sum_l\epsilon_l^{-\theta}\}
+\end{equation}
+A high value of the Frechet parameter $\theta$ implies low skill dispersion. Migration costs are $\tau^m_{jkl}$ which are all the moving costs associated with moving away from home.
+
+We can define how good a location is based on it's features other than idiosyncratic tastees by the following measure:
+
+\begin{align}
+    \tilde v_{jkl} = \frac{a_lr_ls_{jkl}}{\tau^m_{jkl}}, \quad MA_{jk} = \sum_l \tilde v_{jkl}^\theta
+\end{align}
+
+The reason for the weighting is as follows: when $\theta$ is high, there is relatively little skill dispersion, therefore the best locations will win out as locations with better fundamentals get more weight. The opposite happens when $\theta$ is small as there is more dispersion in skill and some people idiosyncratically like some locations worse or better.
+
+\begin{equation}
+    \bar e_{jk} = \mathbb{E}[e] = \left (\frac{\gamma\eta MA_{jk}^{\frac{1}{\theta}}}{\tau^e_{jk}} \right )^{\frac{1}{1-\eta}}\bar\epsilon
+\end{equation}
+
+\begin{align}
+    \bar w_{jkl} = \mathbb{E} [w\mid \text{choose } l] = \left (\frac{\gamma \tau_{jkl}^m MA_{jk}^{\frac{1}{\theta}}}{a_l}\right ) \left (\frac{\bar e_{jk}}{\bar \epsilon} \right )^\eta \tilde e 
+\end{align}
+
+Then, we have the migration equation: 
+
+\begin{align}
+    \bar m_{jkl} = \mathbb{P}[\tilde v_{jkl}\epsilon_l\geq \tilde v_{jkl'}\epsilon_{l'} \text{ for all }l'] = \frac{\tilde v_{jkl}^\theta}{\sum_{l'}\tilde v^\theta_{jkl'} }
+\end{align}
+
+
+On the production side, we have national production given by $Y$, which sums across locations. Perfectly competitive firms produce with human capital $H_l$ subject to productivity $A_l$ and production elasticity $\kappa$. The production function determines demand for human capital.
+
+\begin{equation}
+    Y = \sum_l Y_l, \quad Y_l = A_lH_l^\kappa
+\end{equation}
+
+Since firms are perfect competitors, they will equate the wage rate to the marginal product:
+
+
+
+
+\end{document}

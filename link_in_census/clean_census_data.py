@@ -10,7 +10,9 @@ Usage:
 
 Arguments:
     input_path: Path to raw census data CSV
-    output_path: Path to save cleaned census data CSV
+    output_path: Path to save cleaned census data (CSV or Parquet)
+                 - If ends with .parquet: saves as Parquet format (recommended for large files)
+                 - If ends with .csv: saves as CSV format
     crosswalk_dir: (Optional) Directory containing county crosswalk files
                    Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/county_shape_files
 
@@ -20,6 +22,7 @@ Output: Cleaned census data ready for linking analysis
 
 import pandas as pd
 import sys
+import os
 
 # Parse command-line arguments
 if len(sys.argv) < 3:
@@ -28,7 +31,9 @@ if len(sys.argv) < 3:
     print("  python clean_census_data.py <input_path> <output_path> [crosswalk_dir]")
     print("\nArguments:")
     print("  input_path:    Path to raw census data CSV")
-    print("  output_path:   Path to save cleaned census data CSV")
+    print("  output_path:   Path to save cleaned census data (CSV or Parquet)")
+    print("                 - Use .parquet extension for Parquet format (recommended)")
+    print("                 - Use .csv extension for CSV format")
     print("  crosswalk_dir: (Optional) Directory containing county crosswalk files")
     sys.exit(1)
 
@@ -148,7 +153,7 @@ else:
 print("\n" + "="*70)
 print("MERGING WITH COUNTY CROSSWALKS")
 print("="*70)
-print("Standardizing counties to 1900 boundaries across all years")
+print("Standardizing counties to 1940 boundaries across all years")
 print(f"Crosswalk directory: {crosswalk_dir}")
 
 # Track observations before merges
@@ -454,8 +459,31 @@ print("\n" + "="*70)
 print("SAVING CLEANED DATA")
 print("="*70)
 print(f"Output file: {output_path}")
-df.to_csv(output_path, index=False)
-print(f"Saved {len(df):,} observations to cleaned file")
+
+# Determine output format based on file extension
+file_ext = os.path.splitext(output_path)[1].lower()
+
+if file_ext == '.parquet':
+    print("Saving as Parquet format...")
+    df.to_parquet(output_path, index=False, engine='pyarrow')
+    print(f"Saved {len(df):,} observations to Parquet file")
+
+    # Report file size
+    file_size_mb = os.path.getsize(output_path) / (1024 * 1024)
+    print(f"File size: {file_size_mb:.2f} MB")
+elif file_ext == '.csv':
+    print("Saving as CSV format...")
+    df.to_csv(output_path, index=False)
+    print(f"Saved {len(df):,} observations to CSV file")
+
+    # Report file size
+    file_size_mb = os.path.getsize(output_path) / (1024 * 1024)
+    print(f"File size: {file_size_mb:.2f} MB")
+else:
+    print(f"Warning: Unrecognized file extension '{file_ext}'")
+    print("Defaulting to CSV format...")
+    df.to_csv(output_path, index=False)
+    print(f"Saved {len(df):,} observations to CSV file")
 
 print("\n" + "="*70)
 print("Cleaning complete!")

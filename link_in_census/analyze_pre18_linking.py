@@ -9,13 +9,14 @@ Usage:
     python analyze_pre18_linking.py <input_path> [output_path]
 
 Arguments:
-    input_path: Path to cleaned census data CSV
+    input_path: Path to cleaned census data (CSV or Parquet)
     output_path: (Optional) Path to save LaTeX table
                  Defaults to: /Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/output/tables/linked_vs_unlinked_comparison.tex
 """
 
 import pandas as pd
 import sys
+import os
 
 # Parse command-line arguments
 if len(sys.argv) < 2:
@@ -23,7 +24,7 @@ if len(sys.argv) < 2:
     print("\nUsage:")
     print("  python analyze_pre18_linking.py <input_path> [output_path]")
     print("\nArguments:")
-    print("  input_path:  Path to cleaned census data CSV")
+    print("  input_path:  Path to cleaned census data (CSV or Parquet)")
     print("  output_path: (Optional) Path to save LaTeX table")
     sys.exit(1)
 
@@ -36,7 +37,19 @@ output_path = sys.argv[2] if len(sys.argv) > 2 else default_output_path
 # Load the cleaned data
 print("Loading cleaned census data...")
 print(f"Input file: {data_path}")
-df = pd.read_csv(data_path)
+
+# Detect input file format
+input_ext = os.path.splitext(data_path)[1].lower()
+if input_ext == '.parquet':
+    print("Reading Parquet format...")
+    df = pd.read_parquet(data_path)
+elif input_ext == '.csv':
+    print("Reading CSV format...")
+    df = pd.read_csv(data_path)
+else:
+    print(f"Warning: Unrecognized file extension '{input_ext}', assuming CSV...")
+    df = pd.read_csv(data_path)
+
 print(f"Loaded {len(df):,} total observations")
 
 # Identify individuals age 25-70 in 1940
