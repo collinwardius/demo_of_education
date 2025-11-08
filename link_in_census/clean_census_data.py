@@ -127,8 +127,30 @@ del df_chunks  # Free memory
 
 print(f"   Loaded {len(df):,} total observations")
 
+# Verify required columns exist
+print("\n" + "="*70)
+print("VERIFYING REQUIRED COLUMNS")
+print("="*70)
+required_cols = ['INCWAGE', 'OCCSCORE']
+missing_cols = [col for col in required_cols if col not in df.columns]
+
+if missing_cols:
+    print(f"ERROR: Required columns missing from data: {missing_cols}")
+    print(f"Available columns: {sorted(df.columns.tolist())}")
+    print("\nPipeline cannot continue without these columns.")
+    sys.exit(1)
+else:
+    print(f"Verified: All required columns present")
+    for col in required_cols:
+        n_missing = df[col].isna().sum()
+        pct_missing = (n_missing / len(df)) * 100
+        print(f"  {col}: {len(df) - n_missing:,} non-missing values ({100-pct_missing:.2f}%)")
+
 # Create ICPSR state code from FIPS state code
-print("\nCreating ICPSR state code (stateicp) from STATEFIP...")
+print("\n" + "="*70)
+print("CREATING ICPSR STATE CODE")
+print("="*70)
+print("Creating ICPSR state code (stateicp) from STATEFIP...")
 fips_icp = {
     1: 41, 2: 81, 4: 61, 5: 42, 6: 71, 8: 62, 9: 1, 10: 11,
     11: 55, 12: 43, 13: 44, 15: 82, 16: 63, 17: 21, 18: 22, 19: 31,

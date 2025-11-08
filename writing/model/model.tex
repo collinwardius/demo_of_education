@@ -86,9 +86,41 @@ On the production side, we have national production given by $Y$, which sums acr
     Y = \sum_l Y_l, \quad Y_l = A_lH_l^\kappa
 \end{equation}
 
-Since firms are perfect competitors, they will equate the wage rate to the marginal product:
+Since firms are perfect competitors, they will equate the wage rate to the marginal product of human capital:
 
+\begin{equation}
+    r_l = \kappa A_lH_l^{\kappa-1} = \frac{\partial Y_l}{\partial H_l}
+\end{equation}
 
+Total human capital sums across people as does wages
+
+\begin{equation}
+    H_l = \sum_{j,k} N_{j,k}\bar m_{jkl}\bar h_{jkl}, \quad W_l = \sum_{j,k} N_{j,k}\bar m_{jkl}\bar w_{jkl}
+\end{equation}
+
+$\bar m_{jkl}$ is the share of people from cohort $k$ that migrate to $l$ and have average human capital $h_{jkl}$ and average wages $\bar w_{jkl}$. Since $\bar w_{jkl} = r_l \bar h_{jkl}$, we have
+
+\begin{equation}
+    Y_l = \frac{r_lH_l}{\kappa} = \frac{W_l}{\kappa}
+\end{equation}
+
+Equilibrium is defined as the wage rates that clear the market in every labor market:
+
+\begin{equation}
+    H_l^D(r_l) = H_l^S(r) \quad \forall l
+\end{equation}
+
+Firms demand human capital. Production is only local, so for each location we have the following demand for human capital and demand can therefore be evaluated separately for every market:
+
+\begin{equation}
+    H_l^Dr_l = \left (\frac{\kappa A_l}{r_l} \right )^{\frac{1}{1-\kappa}}
+\end{equation}
+
+Supply is upward sloping and since people are able to migrate, we have 
+
+\begin{align}
+    H_l^S(r) = \frac{W_l(r)}{r(l)}
+\end{align}
 
 
 \end{document}

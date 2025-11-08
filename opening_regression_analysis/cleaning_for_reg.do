@@ -7,7 +7,7 @@
 timer clear
 timer on 1
 cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/data/data_from_cluster/"
-import delimited "linked_1900_1940_census_treated_only.csv", clear
+import delimited "revised_linked_1900_1940_census_treated_only.csv", clear
 
 /*
 Need to drop observations that only lived in a county that got one college in 1940
