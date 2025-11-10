@@ -114,12 +114,11 @@ Redo this with wages conditional on employment
 
 est clear
 preserve
-keep if empstat==1
 drop if inlist(incwage, 999998, 999999)
 eststo: reghdfe incwage ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
-sum college if e(sample) & age_at_founding >= 18
+sum incwage if e(sample) & age_at_founding > 18
 loc dep_mean = round(`r(mean)', .02)
 
 coefplot, ///
@@ -154,6 +153,51 @@ coefplot, ///
     mcolor(navy) ciopts(lcolor(navy))
 graph export "figures/twfe_wages_baseline.png", replace
 restore
+
+
+
+est clear
+preserve
+eststo: reghdfe occscore ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+estadd ysumm
+estadd scalar N_counties=e(N_clust)
+sum college if e(sample) & age_at_founding > 18
+loc dep_mean = round(`r(mean)', .02)
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18" ///
+                17.age_at_founding = "17" ///
+                16.age_at_founding = "16" ///
+                15.age_at_founding = "15" ///
+                14.age_at_founding = "14" ///
+                13.age_at_founding = "13" ///
+                12.age_at_founding = "12" ///
+                11.age_at_founding = "11" ///
+                10.age_at_founding = "10" ///
+                9.age_at_founding = "9") ///
+    subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on occscore") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+graph export "figures/twfe_occscore_baseline.png", replace
+restore
+
+
+
 
 
 est clear
