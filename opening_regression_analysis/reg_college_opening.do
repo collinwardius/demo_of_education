@@ -114,7 +114,15 @@ Redo this with wages conditional on employment
 
 est clear
 preserve
+g count = 1
+
 drop if inlist(incwage, 999998, 999999)
+replace incwage = ln(incwage)
+drop if missing(incwage)
+egen count_by_event = total(count), by(college_id age_at_founding)
+egen min_count_by_event = min(count_by_event), by(college_id)
+g flag_low_cohort = min_count_by_event < 30
+drop if flag_low_cohort
 eststo: reghdfe incwage ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
@@ -144,7 +152,7 @@ coefplot, ///
                 9.age_at_founding = "9") ///
     subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
     xlabel(, angle(0)) ///
-    ytitle("Effect on Wages") ///
+    ytitle("Effect on Log Wages") ///
     xtitle("Age at College Founding") ///
     graphregion(color(white)) bgcolor(white) ///
     legend(off) ///
@@ -158,10 +166,19 @@ restore
 
 est clear
 preserve
+* keep the same restrictions as for wages
+drop if inlist(incwage, 999998, 999999)
+replace incwage = ln(incwage)
+drop if missing(incwage)
+g count =1
+egen count_by_event = total(count), by(college_id age_at_founding)
+egen min_count_by_event = min(count_by_event), by(college_id)
+g flag_low_cohort = min_count_by_event < 30
+drop if flag_low_cohort
 eststo: reghdfe occscore ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
-sum college if e(sample) & age_at_founding > 18
+sum occscore if e(sample) & age_at_founding > 18
 loc dep_mean = round(`r(mean)', .02)
 coefplot, ///
     keep(*age_at_founding) ///
