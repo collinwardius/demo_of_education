@@ -115,10 +115,11 @@ Redo this with wages conditional on employment
 est clear
 preserve
 g count = 1
-
+drop if occscore==0
 drop if inlist(incwage, 999998, 999999)
 replace incwage = ln(incwage)
 drop if missing(incwage)
+keep if empstat==1
 egen count_by_event = total(count), by(college_id age_at_founding)
 egen min_count_by_event = min(count_by_event), by(college_id)
 g flag_low_cohort = min_count_by_event < 30
@@ -167,10 +168,13 @@ restore
 est clear
 preserve
 * keep the same restrictions as for wages
+drop if occscore==0
 drop if inlist(incwage, 999998, 999999)
 replace incwage = ln(incwage)
 drop if missing(incwage)
+keep if empstat==1
 g count =1
+replace occscore = ln(occscore)
 egen count_by_event = total(count), by(college_id age_at_founding)
 egen min_count_by_event = min(count_by_event), by(college_id)
 g flag_low_cohort = min_count_by_event < 30
