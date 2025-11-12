@@ -14,59 +14,13 @@ cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/
 
 g has_new_college = (year_founding <= year_at_18) // year founding is going to depend on the county of the person and year_at_18 is essentially just an age cohort.
 
-* robustness exercise where we look at old and even older cohorts
-
-preserve
-replace age_at_founding = 34 if age_at_founding > 34
-replace age_at_founding = 18 if age_at_founding < 18
-
-est clear
-est clear
-eststo: reghdfe college  ib26.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
-estadd ysumm
-estadd scalar N_counties=e(N_clust)
-
-coefplot, ///
-    keep(*age_at_founding) ///
-    vertical ///
-    yline(0, lcolor(black) lpattern(dash)) ///
-    coeflabels(34.age_at_founding = "34" ///
-                33.age_at_founding = "33" ///
-                32.age_at_founding = "32" ///
-                31.age_at_founding = "31" ///
-                30.age_at_founding = "30" ///
-                29.age_at_founding = "29" ///
-                28.age_at_founding = "28" ///
-                27.age_at_founding = "27" ///
-                26.age_at_founding = "26" ///
-                25.age_at_founding = "25" ///
-                24.age_at_founding = "24" ///
-                23.age_at_founding = "23" ///
-                22.age_at_founding = "22" ///
-                21.age_at_founding = "21" ///
-                20.age_at_founding = "20" ///
-                19.age_at_founding = "19" ///
-                18.age_at_founding = "18") ///
-    xlabel(, angle(0)) ///
-    ytitle("Effect on College Attendance") ///
-    xtitle("Age at College Founding") ///
-    graphregion(color(white)) bgcolor(white) ///
-    legend(off) ///
-    baselevels ///
-    xscale(reverse) ///
-    mcolor(navy) ciopts(lcolor(navy))
-
-graph export "figures/placebo_twfe_college_attainment_baseline.png", replace
-restore
-
-
-
 * prakash's recommendation is to recode people that are well older / younger to the max / min age. This is allegedley a well founded thing to do based on Schmidheiny and Siegloch (2023)
 
 replace age_at_founding = 25 if age_at_founding > 25
 replace age_at_founding = 9 if age_at_founding < 9
 
 est clear
+preserve
 eststo: reghdfe college  ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
@@ -103,27 +57,131 @@ coefplot, ///
     baselevels ///
     xscale(reverse) ///
     mcolor(navy) ciopts(lcolor(navy))
-
 graph export "figures/twfe_college_attainment_baseline.png", replace
+restore
+
+/*
+Compare regions to see if it is clear whether certain regions experience stronger effects
+*/
+
+
+replace region_pre_18 = 1 if inrange(region_pre_18, 11,13)
+replace region_pre_18 = 2 if inrange(region_pre_18 , 21, 23)
+replace region_pre_18 = 3 if inrange(region_pre_18, 31, 34)
+replace region_pre_18 = 4 if inrange(region_pre_18, 41, 43)
+
+lab def reg_lab 1 "Northeast" 2 "Midwest" 3 "South" 4 "West"
+lab val region_pre_18 reg_lab
+
+levelsof region_pre_18, l(regions)
+
+foreach region of local regions{
+
+loc help_lab: label reg_lab `region'    
+eststo: reghdfe college  ib19.age_at_founding if region_pre_18 == `region', absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+estadd ysumm
+estadd scalar N_counties=e(N_clust)
+sum college if e(sample) & age_at_founding >= 18
+loc dep_mean = round(`r(mean)', .02)
+
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18" ///
+                17.age_at_founding = "17" ///
+                16.age_at_founding = "16" ///
+                15.age_at_founding = "15" ///
+                14.age_at_founding = "14" ///
+                13.age_at_founding = "13" ///
+                12.age_at_founding = "12" ///
+                11.age_at_founding = "11" ///
+                10.age_at_founding = "10" ///
+                9.age_at_founding = "9") ///
+    subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on College Attendance") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    title("`help_lab'") ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+graph export "figures/twfe_college_attainment_baseline_`help_lab'.png", replace    
+}
+
 
 
 /*
-Redo this with wages conditional on employment
+Assess effects on occupation
+*/
+
+* Create binary indicator for professional occupations
+
+gen professional = (occ >= 0 & occ <= 45)  // technically, this includes professional and semiprofessional
+
+
+est clear
+preserve
+drop if inrange(occ, 995,999)
+eststo: reghdfe professional ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+estadd ysumm
+estadd scalar N_counties=e(N_clust)
+sum professional if e(sample) & age_at_founding >= 18
+loc dep_mean = round(`r(mean)', .02)
+
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18" ///
+                17.age_at_founding = "17" ///
+                16.age_at_founding = "16" ///
+                15.age_at_founding = "15" ///
+                14.age_at_founding = "14" ///
+                13.age_at_founding = "13" ///
+                12.age_at_founding = "12" ///
+                11.age_at_founding = "11" ///
+                10.age_at_founding = "10" ///
+                9.age_at_founding = "9") ///
+    subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on College Attendance") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+
+graph export "figures/twfe_professional_baseline.png", replace
+restore
+
+
+/*
+Redo this with wages
 */
 
 
 est clear
 preserve
-g count = 1
-drop if occscore==0
 drop if inlist(incwage, 999998, 999999)
-replace incwage = ln(incwage)
-drop if missing(incwage)
-keep if empstat==1
-egen count_by_event = total(count), by(college_id age_at_founding)
-egen min_count_by_event = min(count_by_event), by(college_id)
-g flag_low_cohort = min_count_by_event < 30
-drop if flag_low_cohort
+keep if region_pre_18 ==4
 eststo: reghdfe incwage ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
@@ -153,7 +211,7 @@ coefplot, ///
                 9.age_at_founding = "9") ///
     subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
     xlabel(, angle(0)) ///
-    ytitle("Effect on Log Wages") ///
+    ytitle("Effect on Wages") ///
     xtitle("Age at College Founding") ///
     graphregion(color(white)) bgcolor(white) ///
     legend(off) ///
@@ -162,6 +220,57 @@ coefplot, ///
     mcolor(navy) ciopts(lcolor(navy))
 graph export "figures/twfe_wages_baseline.png", replace
 restore
+
+
+
+levelsof region_pre_18, l(regions)
+
+foreach region of local regions{
+    loc help_lab: label reg_lab `region'    
+    drop if inlist(incwage, 999998, 999999)
+    keep if region_pre_18 ==`region'
+    eststo: reghdfe incwage ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+    estadd ysumm
+    estadd scalar N_counties=e(N_clust)
+    sum incwage if e(sample) & age_at_founding > 18
+    loc dep_mean = round(`r(mean)', .02)
+
+    coefplot, ///
+        keep(*age_at_founding) ///
+        vertical ///
+        yline(0, lcolor(black) lpattern(dash)) ///
+        coeflabels(25.age_at_founding = "25" ///
+                    24.age_at_founding = "24" ///
+                    23.age_at_founding = "23" ///
+                    22.age_at_founding = "22" ///
+                    21.age_at_founding = "21" ///
+                    20.age_at_founding = "20" ///
+                    19.age_at_founding = "19" ///
+                    18.age_at_founding = "18" ///
+                    17.age_at_founding = "17" ///
+                    16.age_at_founding = "16" ///
+                    15.age_at_founding = "15" ///
+                    14.age_at_founding = "14" ///
+                    13.age_at_founding = "13" ///
+                    12.age_at_founding = "12" ///
+                    11.age_at_founding = "11" ///
+                    10.age_at_founding = "10" ///
+                    9.age_at_founding = "9") ///
+        subtitle("control mean: `dep_mean', N counties: `e(N_counties)'") ///
+        xlabel(, angle(0)) ///
+        ytitle("Effect on Wages") ///
+        xtitle("Age at College Founding") ///
+        title("`help_lab'") ///
+        graphregion(color(white)) bgcolor(white) ///
+        legend(off) ///
+        baselevels ///
+        xscale(reverse) ///
+        mcolor(navy) ciopts(lcolor(navy))
+    graph export "figures/twfe_wages_baseline_`help_lab'.png", replace
+}
+
+
+
 
 
 
@@ -313,6 +422,20 @@ event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Ave
 graph export "figures/did_imputation_college_attainment_baseline.png", replace
 
 
+preserve
+drop if inlist(incwage, 999998, 999999)
+did_imputation incwage hik year_at_18 year_founding ///
+    , horizons(0/8) pretrend(8)  ///
+    fe(year_at_18 g_state_county_pre_18 nativity race hispan sex moved_pre_18 state_moved_pre_18) ///
+    cluster(g_state_county_pre_18) ///
+    autosample
+event_plot, default_look graph_opt(xtitle("Age at college founding") ytitle("Average causal effect on wages") ///
+	title("") legend(position(6) rows(1)) xlabel(-8 "25" -7 "24" -6 "23" -5 "22" -4 "21" -3 "20" -2 "19" -1 "18" 0 "17" 1 "16" 2 "15" 3 "14" 4 "13" 5 "12" 6 "11" 7 "10" 8 "9")) 
+graph export "figures/did_imputation_wages_baseline.png", replace
+restore
+
+
+
 
 did_imputation college hik year_at_18 year_founding ///
     , horizons(0/8) pretrend(8)  ///
@@ -396,6 +519,52 @@ coefplot, ///
 graph export "figures/twfe_college_attainment_minimum30_in_bin.png", replace
 restore
 
+
+
+* robustness exercise where we look at old and even older cohorts
+
+preserve
+replace age_at_founding = 34 if age_at_founding > 34
+replace age_at_founding = 18 if age_at_founding < 18
+
+est clear
+est clear
+eststo: reghdfe college  ib26.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+estadd ysumm
+estadd scalar N_counties=e(N_clust)
+
+coefplot, ///
+    keep(*age_at_founding) ///
+    vertical ///
+    yline(0, lcolor(black) lpattern(dash)) ///
+    coeflabels(34.age_at_founding = "34" ///
+                33.age_at_founding = "33" ///
+                32.age_at_founding = "32" ///
+                31.age_at_founding = "31" ///
+                30.age_at_founding = "30" ///
+                29.age_at_founding = "29" ///
+                28.age_at_founding = "28" ///
+                27.age_at_founding = "27" ///
+                26.age_at_founding = "26" ///
+                25.age_at_founding = "25" ///
+                24.age_at_founding = "24" ///
+                23.age_at_founding = "23" ///
+                22.age_at_founding = "22" ///
+                21.age_at_founding = "21" ///
+                20.age_at_founding = "20" ///
+                19.age_at_founding = "19" ///
+                18.age_at_founding = "18") ///
+    xlabel(, angle(0)) ///
+    ytitle("Effect on College Attendance") ///
+    xtitle("Age at College Founding") ///
+    graphregion(color(white)) bgcolor(white) ///
+    legend(off) ///
+    baselevels ///
+    xscale(reverse) ///
+    mcolor(navy) ciopts(lcolor(navy))
+
+graph export "figures/placebo_twfe_college_attainment_baseline.png", replace
+restore
 
 
 
