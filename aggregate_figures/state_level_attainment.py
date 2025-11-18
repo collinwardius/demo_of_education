@@ -55,8 +55,8 @@ class CensusDataLoader:
             A chunk of the census data with approximately chunksize rows, filtered to year_filter
         """
         try:
-            # Read columns needed for state-level analysis including income and employment
-            cols_to_read = ['YEAR', 'EDUC', 'BIRTHYR', 'BPL', 'INCWAGE', 'EMPSTAT']
+            # Read columns needed for state-level analysis including income, employment, and occupation
+            cols_to_read = ['YEAR', 'EDUC', 'BIRTHYR', 'BPL', 'INCWAGE', 'EMPSTAT', 'OCC1950']
             for chunk in pd.read_csv(self.file_path, chunksize=self.chunksize, usecols=cols_to_read):
                 chunk_filtered = chunk[chunk['YEAR'] == self.year_filter]
                 if len(chunk_filtered) > 0:
@@ -133,6 +133,47 @@ def map_bpl_to_state(bpl_code):
     return state_map.get(state_code, 'Other')
 
 
+def map_occ1950_to_category(occ_code):
+    """
+    Map OCC1950 codes to occupation categories.
+
+    Parameters:
+    -----------
+    occ_code : int
+        OCC1950 code from IPUMS
+
+    Returns:
+    --------
+    str
+        Occupation category name
+    """
+    if pd.isna(occ_code):
+        return 'Other'
+
+    occ_code = int(occ_code)
+
+    if 0 <= occ_code <= 99:
+        return 'Professionals'
+    elif 100 <= occ_code <= 123:
+        return 'Farmers'
+    elif 200 <= occ_code <= 290:
+        return 'Managers'
+    elif 300 <= occ_code <= 390:
+        return 'Clerical'
+    elif 400 <= occ_code <= 490:
+        return 'Sales'
+    elif 500 <= occ_code <= 595:
+        return 'Craftsmen'
+    elif 600 <= occ_code <= 690:
+        return 'Operatives'
+    elif 700 <= occ_code <= 790:
+        return 'Service Workers'
+    elif 810 <= occ_code <= 970:
+        return 'Laborers'
+    else:
+        return 'Other'
+
+
 def process_chunk_state_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
     """
     Process a chunk to calculate education attainment and income by cohort and state.
@@ -153,6 +194,9 @@ def process_chunk_state_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
 
     # Map BPL to state
     chunk['state'] = chunk['BPL'].apply(map_bpl_to_state)
+
+    # Map occupation to category
+    chunk['occ_category'] = chunk['OCC1950'].apply(map_occ1950_to_category)
 
     # Create college attainment variable (EDUC between 7 and 11)
     chunk['college'] = ((chunk['EDUC'] >= 7) & (chunk['EDUC'] <= 11)).astype(int)
@@ -179,18 +223,43 @@ def process_chunk_state_attainment(chunk: pd.DataFrame) -> pd.DataFrame:
     chunk['valid_income_hs'] = chunk['valid_income'] & (chunk['hs_only'] == 1)
     chunk['income_for_calc_hs'] = chunk['INCWAGE'].where(chunk['valid_income_hs'], 0)
 
+    # Create binary columns for each occupation category
+    occ_categories = ['Professionals', 'Farmers', 'Managers', 'Clerical', 'Sales',
+                      'Craftsmen', 'Operatives', 'Service Workers', 'Laborers', 'Other']
+    for cat in occ_categories:
+        chunk[f'occ_{cat}'] = (chunk['occ_category'] == cat).astype(int)
+
     # Aggregate by cohort and state
-    cohort_stats = chunk.groupby(['hs_cohort', 'state']).agg(
-        college_count=('college', 'sum'),
-        hs_or_more_count=('hs_attainment', 'sum'),
-        total_count=('college', 'size'),
-        income_sum=('income_for_calc', 'sum'),
-        employed_count=('valid_income', 'sum'),
-        college_income_sum=('income_for_calc_college', 'sum'),
-        college_employed_count=('valid_income_college', 'sum'),
-        hs_income_sum=('income_for_calc_hs', 'sum'),
-        hs_employed_count=('valid_income_hs', 'sum')
-    ).reset_index()
+    agg_dict = {
+        'college': 'sum',
+        'hs_attainment': 'sum',
+        'occ_category': 'size',  # total_count
+        'income_for_calc': 'sum',
+        'valid_income': 'sum',
+        'income_for_calc_college': 'sum',
+        'valid_income_college': 'sum',
+        'income_for_calc_hs': 'sum',
+        'valid_income_hs': 'sum'
+    }
+
+    # Add occupation counts to aggregation
+    for cat in occ_categories:
+        agg_dict[f'occ_{cat}'] = 'sum'
+
+    cohort_stats = chunk.groupby(['hs_cohort', 'state']).agg(agg_dict).reset_index()
+
+    # Rename columns to match expected names
+    cohort_stats = cohort_stats.rename(columns={
+        'college': 'college_count',
+        'hs_attainment': 'hs_or_more_count',
+        'occ_category': 'total_count',
+        'income_for_calc': 'income_sum',
+        'valid_income': 'employed_count',
+        'income_for_calc_college': 'college_income_sum',
+        'valid_income_college': 'college_employed_count',
+        'income_for_calc_hs': 'hs_income_sum',
+        'valid_income_hs': 'hs_employed_count'
+    })
 
     return cohort_stats
 
@@ -212,18 +281,29 @@ def combine_state_results(results: list) -> pd.DataFrame:
     # Concatenate all results
     combined = pd.concat(results, ignore_index=True)
 
+    # Define occupation categories
+    occ_categories = ['Professionals', 'Farmers', 'Managers', 'Clerical', 'Sales',
+                      'Craftsmen', 'Operatives', 'Service Workers', 'Laborers', 'Other']
+
+    # Build aggregation dictionary
+    agg_dict = {
+        'college_count': 'sum',
+        'hs_or_more_count': 'sum',
+        'total_count': 'sum',
+        'income_sum': 'sum',
+        'employed_count': 'sum',
+        'college_income_sum': 'sum',
+        'college_employed_count': 'sum',
+        'hs_income_sum': 'sum',
+        'hs_employed_count': 'sum'
+    }
+
+    # Add occupation counts to aggregation
+    for cat in occ_categories:
+        agg_dict[f'occ_{cat}'] = ('sum')
+
     # Re-aggregate across all chunks
-    final = combined.groupby(['hs_cohort', 'state']).agg(
-        college_count=('college_count', 'sum'),
-        hs_or_more_count=('hs_or_more_count', 'sum'),
-        total_count=('total_count', 'sum'),
-        income_sum=('income_sum', 'sum'),
-        employed_count=('employed_count', 'sum'),
-        college_income_sum=('college_income_sum', 'sum'),
-        college_employed_count=('college_employed_count', 'sum'),
-        hs_income_sum=('hs_income_sum', 'sum'),
-        hs_employed_count=('hs_employed_count', 'sum')
-    ).reset_index()
+    final = combined.groupby(['hs_cohort', 'state']).agg(agg_dict).reset_index()
 
     # Filter to cohorts between 1890 and 1935
     final = final[(final['hs_cohort'] >= 1890) & (final['hs_cohort'] <= 1935)]
@@ -231,18 +311,25 @@ def combine_state_results(results: list) -> pd.DataFrame:
     # Create 5-year bins
     final['cohort_5year'] = (final['hs_cohort'] // 5) * 5
 
+    # Build aggregation dictionary for 5-year bins
+    agg_dict_binned = {
+        'college_count': 'sum',
+        'hs_or_more_count': 'sum',
+        'total_count': 'sum',
+        'income_sum': 'sum',
+        'employed_count': 'sum',
+        'college_income_sum': 'sum',
+        'college_employed_count': 'sum',
+        'hs_income_sum': 'sum',
+        'hs_employed_count': 'sum'
+    }
+
+    # Add occupation counts to aggregation
+    for cat in occ_categories:
+        agg_dict_binned[f'occ_{cat}'] = 'sum'
+
     # Aggregate by 5-year bins and state
-    final_binned = final.groupby(['cohort_5year', 'state']).agg(
-        college_count=('college_count', 'sum'),
-        hs_or_more_count=('hs_or_more_count', 'sum'),
-        total_count=('total_count', 'sum'),
-        income_sum=('income_sum', 'sum'),
-        employed_count=('employed_count', 'sum'),
-        college_income_sum=('college_income_sum', 'sum'),
-        college_employed_count=('college_employed_count', 'sum'),
-        hs_income_sum=('hs_income_sum', 'sum'),
-        hs_employed_count=('hs_employed_count', 'sum')
-    ).reset_index()
+    final_binned = final.groupby(['cohort_5year', 'state']).agg(agg_dict_binned).reset_index()
 
     # Calculate attainment rates
     final_binned['college_rate'] = (final_binned['college_count'] / final_binned['total_count']) * 100
@@ -333,10 +420,20 @@ if __name__ == "__main__":
     output_csv = os.path.join(args.output, "state_cohort_attainment_income.csv")
 
     # Select and order columns for output
+    occ_columns = ['occ_Professionals', 'occ_Farmers', 'occ_Managers', 'occ_Clerical', 'occ_Sales',
+                   'occ_Craftsmen', 'occ_Operatives', 'occ_Service Workers', 'occ_Laborers', 'occ_Other']
     output_columns = ['state', 'cohort_5year', 'hs_or_more_rate', 'college_rate', 'college_given_hs_rate',
                       'mean_incwage', 'mean_incwage_college', 'mean_incwage_hs', 'total_count', 'employed_count',
-                      'college_employed_count', 'hs_employed_count', 'college_count', 'hs_or_more_count']
+                      'college_employed_count', 'hs_employed_count', 'college_count', 'hs_or_more_count'] + occ_columns
     state_data[output_columns].to_csv(output_csv, index=False)
 
     print(f"\nCSV saved to: {output_csv}")
     print(f"Columns: {', '.join(output_columns)}")
+
+    # Print occupation statistics
+    print(f"\nOccupation distribution:")
+    for occ_col in occ_columns:
+        occ_name = occ_col.replace('occ_', '')
+        total = state_data[occ_col].sum()
+        percentage = (total / state_data['total_count'].sum()) * 100
+        print(f"  {occ_name}: {total:,} ({percentage:.2f}%)")

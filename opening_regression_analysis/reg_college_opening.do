@@ -14,6 +14,16 @@ cd "/Users/cjwardius/Library/CloudStorage/OneDrive-UCSanDiego/demo of education/
 
 g has_new_college = (year_founding <= year_at_18) // year founding is going to depend on the county of the person and year_at_18 is essentially just an age cohort.
 
+* define region labels
+
+replace region_pre_18 = 1 if inrange(region_pre_18, 11,13)
+replace region_pre_18 = 2 if inrange(region_pre_18 , 21, 23)
+replace region_pre_18 = 3 if inrange(region_pre_18, 31, 34)
+replace region_pre_18 = 4 if inrange(region_pre_18, 41, 43)
+
+lab def reg_lab 1 "Northeast" 2 "Midwest" 3 "South" 4 "West"
+lab val region_pre_18 reg_lab
+
 * prakash's recommendation is to recode people that are well older / younger to the max / min age. This is allegedley a well founded thing to do based on Schmidheiny and Siegloch (2023)
 
 replace age_at_founding = 25 if age_at_founding > 25
@@ -65,13 +75,6 @@ Compare regions to see if it is clear whether certain regions experience stronge
 */
 
 
-replace region_pre_18 = 1 if inrange(region_pre_18, 11,13)
-replace region_pre_18 = 2 if inrange(region_pre_18 , 21, 23)
-replace region_pre_18 = 3 if inrange(region_pre_18, 31, 34)
-replace region_pre_18 = 4 if inrange(region_pre_18, 41, 43)
-
-lab def reg_lab 1 "Northeast" 2 "Midwest" 3 "South" 4 "West"
-lab val region_pre_18 reg_lab
 
 levelsof region_pre_18, l(regions)
 
@@ -226,6 +229,7 @@ restore
 levelsof region_pre_18, l(regions)
 
 foreach region of local regions{
+    preserve
     loc help_lab: label reg_lab `region'    
     drop if inlist(incwage, 999998, 999999)
     keep if region_pre_18 ==`region'
@@ -267,6 +271,7 @@ foreach region of local regions{
         xscale(reverse) ///
         mcolor(navy) ciopts(lcolor(navy))
     graph export "figures/twfe_wages_baseline_`help_lab'.png", replace
+    restore
 }
 
 
