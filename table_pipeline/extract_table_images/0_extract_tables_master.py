@@ -70,7 +70,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Example usage:
-  python3 extract_tables_master.py \\
+  python3 0_extract_tables_master.py \\
     /path/to/document.pdf \\
     /path/to/output/directory \\
     historical-education-college-tables \\
@@ -152,7 +152,7 @@ This will create:
     if not args.skip_bbox:
         cmd = [
             'python3',
-            str(script_dir / 'extract_table_bboxes_simple.py'),
+            str(script_dir / '1_extract_table_bboxes_simple.py'),
             args.pdf_file,
             args.bucket_name,
             '--output', str(json_path),
@@ -173,7 +173,7 @@ This will create:
     if not args.skip_png:
         cmd = [
             'python3',
-            str(script_dir / 'extract_tables_from_bboxes.py'),
+            str(script_dir / '2_extract_tables_from_bboxes.py'),
             args.pdf_file,
             str(json_path),
             str(subdirs['png'])
@@ -190,7 +190,7 @@ This will create:
     if not args.skip_csv:
         cmd = [
             'python3',
-            str(script_dir / 'extract_table_text_to_csv.py'),
+            str(script_dir / '3_extract_table_text_to_csv.py'),
             str(json_path),
             str(subdirs['csv'])
         ]

@@ -8,7 +8,7 @@ All outputs are organized into a clean directory structure: `json/`, `png/`, and
 
 ## What Was Created
 
-### 1. `extract_tables_master.py` ⭐ **MAIN PROGRAM**
+### 1. `0_extract_tables_master.py` ⭐ **MAIN PROGRAM**
 Master program that orchestrates the complete workflow.
 
 **Features:**
@@ -20,7 +20,7 @@ Master program that orchestrates the complete workflow.
 
 **This is the primary program you should use for most workflows.**
 
-### 2. `extract_table_bboxes_simple.py`
+### 2. `1_extract_table_bboxes_simple.py`
 Extracts table bounding boxes and metadata from PDFs using AWS Textract.
 
 **Features:**
@@ -41,7 +41,7 @@ Extracts table bounding boxes and metadata from PDFs using AWS Textract.
 - **All CELL blocks** with RowIndex, ColumnIndex, and text content
 - **All WORD blocks** for detailed text extraction
 
-### 3. `extract_tables_from_bboxes.py`
+### 3. `2_extract_tables_from_bboxes.py`
 Extracts table images from PDFs using bounding box coordinates.
 
 **Features:**
@@ -52,7 +52,7 @@ Extracts table images from PDFs using bounding box coordinates.
 - Handles duplicate titles by adding counters (`_1`, `_2`, etc.)
 - Sanitizes titles for filesystem compatibility
 
-### 4. `extract_table_text_to_csv.py`
+### 4. `3_extract_table_text_to_csv.py`
 Extracts table text content and exports to CSV files.
 
 **Features:**
@@ -61,6 +61,22 @@ Extracts table text content and exports to CSV files.
 - Handles merged cells (RowSpan, ColumnSpan)
 - Creates CSV files with same naming convention as PNG files
 - Preserves table structure and reading order
+
+### 5. `4_identify_college_tables.py` 🎓 **FILTER TOOL**
+Identifies and filters college-related tables from extracted results.
+
+**Features:**
+- Keyword-based identification with continuation detection
+- Two filter levels: strict, medium
+- Exports filtered table list as JSON and CSV
+- Optional: copies college table files to separate directory
+- Generates statistics report
+
+**Identification Methods:**
+- **Keyword matching**: Detects "college", "university", "professor", "graduate", "Ph.D", "normal school", etc.
+- **Continuation tables**: Identifies untitled tables following college-titled tables
+
+**This tool is useful for isolating higher education data from mixed-level education documents.**
 
 ## AWS Textract Metadata Available
 
@@ -96,7 +112,7 @@ Textract provides extensive metadata, **all of which is now captured**:
 This is the simplest way to extract all table data:
 
 ```bash
-python3 extract_tables_master.py \
+python3 0_extract_tables_master.py \
   <pdf_file> \
   <output_directory> \
   <s3_bucket_name> \
@@ -106,7 +122,7 @@ python3 extract_tables_master.py \
 
 **Example:**
 ```bash
-python3 extract_tables_master.py \
+python3 0_extract_tables_master.py \
   "/path/to/biennial_20_22.pdf" \
   "/path/to/output/biennial_20_22" \
   historical-education-college-tables \
@@ -158,7 +174,7 @@ You can also run the programs individually for more control:
 ### Step 1: Extract Table Bounding Boxes and Metadata
 
 ```bash
-python3 extract_table_bboxes_simple.py \
+python3 1_extract_table_bboxes_simple.py \
   "<pdf_path>" \
   <s3_bucket_name> \
   --output <output_json> \
@@ -168,7 +184,7 @@ python3 extract_table_bboxes_simple.py \
 
 **Example:**
 ```bash
-python3 extract_table_bboxes_simple.py \
+python3 1_extract_table_bboxes_simple.py \
   "/path/to/biennial_20_22.pdf" \
   historical-education-college-tables \
   --output biennial_20_22_textract.json \
@@ -218,7 +234,7 @@ python3 extract_table_bboxes_simple.py \
 ### Step 2: Extract Table Images
 
 ```bash
-python3 extract_tables_from_bboxes.py \
+python3 2_extract_tables_from_bboxes.py \
   "<pdf_path>" \
   <bbox_json> \
   <output_directory> \
@@ -227,7 +243,7 @@ python3 extract_tables_from_bboxes.py \
 
 **Example:**
 ```bash
-python3 extract_tables_from_bboxes.py \
+python3 2_extract_tables_from_bboxes.py \
   "/path/to/biennial_20_22.pdf" \
   biennial_20_22_textract.json \
   "/path/to/output/png" \
@@ -237,17 +253,51 @@ python3 extract_tables_from_bboxes.py \
 ### Step 3: Extract Table Text to CSV
 
 ```bash
-python3 extract_table_text_to_csv.py \
+python3 3_extract_table_text_to_csv.py \
   <bbox_json> \
   <output_directory>
 ```
 
 **Example:**
 ```bash
-python3 extract_table_text_to_csv.py \
+python3 3_extract_table_text_to_csv.py \
   biennial_20_22_textract.json \
   "/path/to/output/csv"
 ```
+
+### Step 4: Identify College-Related Tables (Optional)
+
+```bash
+python3 4_identify_college_tables.py \
+  <textract_json> \
+  <output_directory> \
+  --filter <strict|medium> \
+  --copy-files \
+  --source-png-dir <png_directory> \
+  --source-csv-dir <csv_directory>
+```
+
+**Example:**
+```bash
+python3 4_identify_college_tables.py \
+  "/path/to/output/json/biennial_20_22_textract.json" \
+  "/path/to/output/college_analysis" \
+  --filter medium \
+  --copy-files \
+  --source-png-dir "/path/to/output/png" \
+  --source-csv-dir "/path/to/output/csv"
+```
+
+**This creates:**
+- `college_tables.json` - List of college tables with metadata
+- `college_tables.csv` - Spreadsheet for easy review
+- `college_statistics.txt` - Summary statistics
+- `college_tables/png/` - PNG files for college tables only
+- `college_tables/csv/` - CSV files for college tables only
+
+**Filter Levels:**
+- `strict` - Only keyword matches (123 tables from biennial_20_22)
+- `medium` - Keywords + continuation tables (257 tables) **[Recommended]**
 
 ## Requirements
 
@@ -403,7 +453,7 @@ This allows you to **visually compare** the PNG against the extracted CSV data t
 
 ### Issue: "This JSON file doesn't contain 'all_blocks'"
 **Cause**: JSON file created with old version of script
-**Solution**: Re-run `extract_table_bboxes_simple.py` to generate new JSON with all blocks
+**Solution**: Re-run `1_extract_table_bboxes_simple.py` to generate new JSON with all blocks
 
 ### Issue: Empty CSV cells
 **Cause**: Textract couldn't read text in that cell
