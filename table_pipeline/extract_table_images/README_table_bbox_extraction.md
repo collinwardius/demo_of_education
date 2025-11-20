@@ -78,6 +78,51 @@ Identifies and filters college-related tables from extracted results.
 
 **This tool is useful for isolating higher education data from mixed-level education documents.**
 
+### 6. `5_annotate_college_tables.py` 📝 **ANNOTATION TOOL**
+Web-based interface for manually annotating college table images with rotation and column names.
+
+**Features:**
+- Browser-based annotation interface with image preview
+- Input rotation degrees for image alignment correction
+- Enter column names for each table
+- One-click inheritance from previous table (for multi-page tables)
+- Continuous auto-save to JSON file
+- Keyboard shortcuts for fast navigation
+- Progress tracking
+
+**Interface Components:**
+- **Image Display**: Shows current table image for reference
+- **Rotation Input**: Enter decimal degrees (e.g., -2.5 for counter-clockwise, 1.0 for clockwise)
+- **Column Names**: Comma-separated list of column headers
+- **Copy from Previous**: Button to inherit rotation and columns from previous table
+- **Navigation**: Previous/Skip/Save & Next buttons, plus arrow key shortcuts
+
+**Usage:**
+```bash
+python 5_annotate_college_tables.py --input-dir /path/to/college_tables/png
+```
+
+**Output Format:**
+Saves to `college_table_annotations.json`:
+```json
+{
+  "page_011_table.png": {
+    "rotation_degrees": -1.5,
+    "column_names": ["Institution", "State", "Enrollment"],
+    "inherited_from": null,
+    "annotated_date": "2025-11-19T..."
+  }
+}
+```
+
+**Options:**
+- `--input-dir`: Directory containing PNG images (required)
+- `--output-file`: Custom JSON output path (default: college_table_annotations.json)
+- `--port`: Web server port (default: 8080)
+- `--no-browser`: Don't automatically open browser
+
+**This tool is essential for creating ground truth data for table structure analysis and training data for automated column detection.**
+
 ## AWS Textract Metadata Available
 
 Textract provides extensive metadata, **all of which is now captured**:

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Table Annotation Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #ecf0f1;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 0;
+            min-height: calc(100vh - 140px);
+        }
+
+        .image-panel {
+            padding: 30px;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .image-container {
+            width: 100%;
+            max-height: calc(100vh - 250px);
+            overflow: auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .image-container img {
+            max-width: none;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .filename {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-panel {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .previous-info {
+            background: #e8f4f8;
+            border-left: 3px solid #3498db;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .previous-info strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2980b9;
+            font-size: 13px;
+        }
+
+        .previous-info div {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 3px;
+        }
+
+        .button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-primary {
+            background: #27ae60;
+            color: white;
+        }
+
+        .button-primary:hover:not(:disabled) {
+            background: #229954;
+        }
+
+        .button-secondary {
+            background: #3498db;
+            color: white;
+        }
+
+        .button-secondary:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        .button-ghost {
+            background: transparent;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .button-ghost:hover:not(:disabled) {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .button-full {
+            width: 100%;
+        }
+
+        .inherit-button {
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .status {
+            padding: 8px 12px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #856404;
+            margin-bottom: 20px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .keyboard-hint {
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>College Table Annotation Tool</h1>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div class="progress" id="progress">Loading...</div>
+                <a href="/directory" class="button button-secondary" style="padding: 8px 16px; font-size: 13px;">View Directory</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="image-panel">
+                <div class="image-container" id="imageContainer">
+                    <p style="color: #999;">Loading image...</p>
+                </div>
+                <div class="filename" id="filename">No image loaded</div>
+            </div>
+
+            <div class="form-panel">
+                <div id="status" class="status" style="display: none;"></div>
+
+                <div id="previousInfo" style="display: none;"></div>
+
+                <div class="form-group">
+                    <label for="rotation">Rotation Degrees</label>
+                    <input
+                        type="number"
+                        id="rotation"
+                        step="0.1"
+                        placeholder="0"
+                        autocomplete="off"
+                    >
+                    <div class="helper-text">Positive = clockwise, Negative = counter-clockwise</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="columns">Column Names</label>
+                    <textarea
+                        id="columns"
+                        placeholder="Institution, State, Enrollment, Year"
+                    ></textarea>
+                    <div class="helper-text">Enter column names separated by commas</div>
+                </div>
+
+                <button
+                    id="inheritButton"
+                    class="button button-secondary button-full inherit-button"
+                    style="display: none;"
+                >
+                    Copy from Previous Table
+                </button>
+
+                <div class="button-group">
+                    <button id="prevButton" class="button button-ghost">Previous</button>
+                    <button id="skipButton" class="button button-ghost">Skip</button>
+                    <button id="saveButton" class="button button-primary" style="flex: 1;">
+                        Save & Next
+                    </button>
+                </div>
+
+                <div class="navigation">
+                    <button id="exemptButton" class="button button-ghost button-full" style="margin-bottom: 10px;">
+                        Mark as Exempt (No Annotation Needed)
+                    </button>
+                    <button id="clearButton" class="button button-ghost button-full">
+                        Clear Annotation
+                    </button>
+                </div>
+
+                <div class="keyboard-hint">
+                    Press Enter to save & continue | Tab to navigate fields
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let totalImages = 0;
+        let currentImageData = null;
+        let inheritedFrom = null;
+
+        // Load image data
+        async function loadImage(index) {
+            try {
+                const response = await fetch(`/api/image/${index}`);
+                const data = await response.json();
+
+                currentImageData = data;
+                currentIndex = index;
+                totalImages = data.total;
+
+                // Update image
+                const imageContainer = document.getElementById('imageContainer');
+                imageContainer.innerHTML = `<img src="/images/${data.filename}" alt="${data.filename}">`;
+
+                // Update filename
+                document.getElementById('filename').textContent = data.filename;
+
+                // Update progress
+                updateProgress();
+
+                // Load annotation if exists
+                if (data.annotation && Object.keys(data.annotation).length > 0) {
+                    document.getElementById('rotation').value = data.annotation.rotation_degrees || 0;
+                    document.getElementById('columns').value = (data.annotation.column_names || []).join(', ');
+                    inheritedFrom = data.annotation.inherited_from || null;
+                } else {
+                    document.getElementById('rotation').value = '';
+                    document.getElementById('columns').value = '';
+                    inheritedFrom = null;
+                }
+
+                // Update previous info and inherit button
+                updatePreviousInfo(data.previous);
+
+                // Update button states
+                document.getElementById('prevButton').disabled = index === 0;
+                document.getElementById('saveButton').disabled = false;
+
+            } catch (error) {
+                showStatus('Error loading image: ' + error.message, false);
+            }
+        }
+
+        function updatePreviousInfo(previous) {
+            const previousInfo = document.getElementById('previousInfo');
+            const inheritButton = document.getElementById('inheritButton');
+
+            if (previous && previous.column_names && previous.column_names.length > 0) {
+                previousInfo.style.display = 'block';
+                previousInfo.innerHTML = `
+                    <strong>Previous Table:</strong>
+                    <div>Rotation: ${previous.rotation_degrees}°</div>
+                    <div>Columns: ${previous.column_names.join(', ')}</div>
+                `;
+                inheritButton.style.display = 'block';
+            } else {
+                previousInfo.style.display = 'none';
+                inheritButton.style.display = 'none';
+            }
+        }
+
+        async function saveAnnotation() {
+            const rotation = parseFloat(document.getElementById('rotation').value) || 0;
+            const columnsText = document.getElementById('columns').value.trim();
+
+            if (!columnsText) {
+                showStatus('Please enter column names', false);
+                return;
+            }
+
+            const columnNames = columnsText.split(',').map(c => c.trim()).filter(c => c);
+
+            try {
+                const response = await fetch('/api/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: currentImageData.filename,
+                        rotation_degrees: rotation,
+                        column_names: columnNames,
+                        inherited_from: inheritedFrom
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus(`Saved! (${result.annotated_count}/${result.total} annotated)`, true);
+                    inheritedFrom = null;
+
+                    // Move to next image
+                    setTimeout(() => {
+                        if (currentIndex < totalImages - 1) {
+                            loadImage(currentIndex + 1);
+                        } else {
+                            showStatus('All images annotated!', true);
+                        }
+                    }, 500);
+                } else {
+                    showStatus('Error saving annotation', false);
+                }
+            } catch (error) {
+                showStatus('Error: ' + error.message, false);
+            }
+        }
+
+        async function clearAnnotation() {
+            if (!confirm('Clear this annotation?')) return;
+
+            try {
+                await fetch(`/api/delete/${currentImageData.filename}`, {
+                    method: 'DELETE'
+                });
+                showStatus('Annotation cleared', true);
+                loadImage(currentIndex);
+            } catch (error) {
+                showStatus('Error: ' + error.message, false);
+            }
+        }
+
+        function inheritFromPrevious() {
+            if (!currentImageData.previous) return;
+
+            document.getElementById('rotation').value = currentImageData.previous.rotation_degrees || 0;
+            document.getElementById('columns').value = currentImageData.previous.column_names.join(', ');
+            inheritedFrom = currentImageData.previous.filename;
+
+            showStatus('Copied from previous table', true);
+        }
+
+        async function markExempt() {
+            try {
+                const response = await fetch('/api/exempt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: currentImageData.filename
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showStatus(`Marked as exempt! (${result.annotated_count}/${result.total})`, true);
+
+                    // Move to next image
+                    setTimeout(() => {
+                        if (currentIndex < totalImages - 1) {
+                            loadImage(currentIndex + 1);
+                        } else {
+                            showStatus('All images processed!', true);
+                        }
+                    }, 500);
+                } else {
+                    showStatus('Error marking as exempt', false);
+                }
+            } catch (error) {
+                showStatus('Error: ' + error.message, false);
+            }
+        }
+
+        function showStatus(message, isSuccess) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = isSuccess ? 'status success' : 'status';
+            status.style.display = 'block';
+
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        async function updateProgress() {
+            try {
+                const response = await fetch('/api/images');
+                const data = await response.json();
+                document.getElementById('progress').textContent =
+                    `${data.annotated_count}/${data.total} annotated | Image ${currentIndex + 1}/${data.total}`;
+            } catch (error) {
+                console.error('Error updating progress:', error);
+            }
+        }
+
+        // Event listeners
+        document.getElementById('saveButton').addEventListener('click', saveAnnotation);
+        document.getElementById('prevButton').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                loadImage(currentIndex - 1);
+            }
+        });
+        document.getElementById('skipButton').addEventListener('click', () => {
+            if (currentIndex < totalImages - 1) {
+                loadImage(currentIndex + 1);
+            }
+        });
+        document.getElementById('clearButton').addEventListener('click', clearAnnotation);
+        document.getElementById('exemptButton').addEventListener('click', markExempt);
+        document.getElementById('inheritButton').addEventListener('click', inheritFromPrevious);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Enter to save (not from textarea)
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                saveAnnotation();
+            }
+            // Arrow keys for navigation
+            if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                loadImage(currentIndex - 1);
+            }
+            if (e.key === 'ArrowRight' && currentIndex < totalImages - 1) {
+                loadImage(currentIndex + 1);
+            }
+        });
+
+        // Load first image on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if there's an index parameter in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const indexParam = urlParams.get('index');
+            const startIndex = indexParam ? parseInt(indexParam, 10) : 0;
+            loadImage(startIndex);
+        });
+    </script>
+</body>
+</html>
