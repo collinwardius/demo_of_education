@@ -1,0 +1,7 @@
+{
+    "stata-vscode.stataPath": "/Applications/StataNow",
+    "stata-vscode.stataEdition": "se",
+    "stata-vscode.autoStartServer": true,
+    "stata-vscode.mcpServerPort": 4000,
+    "stata-vscode.debugMode": false
+}
