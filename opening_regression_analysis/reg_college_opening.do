@@ -124,7 +124,7 @@ levelsof region_pre_18, l(regions)
 
 foreach region of local regions{
 loc help_lab: label reg_lab `region'    
-eststo: reghdfe occscore  ib19.age_at_founding if region_pre_18 == `region', absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+eststo: reghdfe occscore  ib20.age_at_founding if region_pre_18 == `region', absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
 sum occscore if e(sample) & age_at_founding >= 18
@@ -172,7 +172,7 @@ Look at the reduced form on occupation.
 
 est clear
 preserve
-eststo: reghdfe occscore ib19.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
+eststo: reghdfe occscore ib20.age_at_founding, absorb(g_state_county_pre_18 birthyr nativity race hispan mbpl fbpl sex moved_pre_18 state_moved_pre_18) vce(cl g_state_county_pre_18)
 estadd ysumm
 estadd scalar N_counties=e(N_clust)
 sum occscore if e(sample) & age_at_founding > 18
